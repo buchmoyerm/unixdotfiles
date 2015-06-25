@@ -1,0 +1,50 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<?artifactRepository version='1.1.0'?>
+<repository name='update site: file:/opt/swt/source/archive/eclipse-3.7.1/org.epic.updatesite/' type='org.eclipse.equinox.p2.artifact.repository.simpleRepository' version='1'>
+  <properties size='2'>
+    <property name='p2.timestamp' value='1429363647297'/>
+    <property name='site.checksum' value='2933476279'/>
+  </properties>
+  <mappings size='3'>
+    <rule filter='(&amp; (classifier=osgi.bundle))' output='${repoUrl}/plugins/${id}_${version}.jar'/>
+    <rule filter='(&amp; (classifier=binary))' output='${repoUrl}/binary/${id}_${version}'/>
+    <rule filter='(&amp; (classifier=org.eclipse.update.feature))' output='${repoUrl}/features/${id}_${version}.jar'/>
+  </mappings>
+  <artifacts size='7'>
+    <artifact classifier='osgi.bundle' id='org.epic.regexp' version='0.6.1'>
+      <repositoryProperties size='1'>
+        <property name='artifact.reference' value='file:/opt/swt/source/archive/eclipse-3.7.1/org.epic.updatesite/plugins/org.epic.regexp_0.6.1.jar'/>
+      </repositoryProperties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.epic.perleditor' version='0.6.24'>
+      <repositoryProperties size='1'>
+        <property name='artifact.reference' value='file:/opt/swt/source/archive/eclipse-3.7.1/org.epic.updatesite/plugins/org.epic.perleditor_0.6.24.jar'/>
+      </repositoryProperties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.epic.debug' version='0.6.27'>
+      <repositoryProperties size='1'>
+        <property name='artifact.reference' value='file:/opt/swt/source/archive/eclipse-3.7.1/org.epic.updatesite/plugins/org.epic.debug_0.6.27.jar'/>
+      </repositoryProperties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.epic.source' version='0.6.35'>
+      <repositoryProperties size='1'>
+        <property name='artifact.reference' value='file:/opt/swt/source/archive/eclipse-3.7.1/org.epic.updatesite/plugins/org.epic.source_0.6.35.jar'/>
+      </repositoryProperties>
+    </artifact>
+    <artifact classifier='org.eclipse.update.feature' id='org.epic.feature.main' version='0.6.35'>
+      <repositoryProperties size='1'>
+        <property name='artifact.reference' value='file:/opt/swt/source/archive/eclipse-3.7.1/org.epic.updatesite/features/org.epic.feature.main_0.6.35.jar'/>
+      </repositoryProperties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.epic.lib' version='0.6.1'>
+      <repositoryProperties size='1'>
+        <property name='artifact.reference' value='file:/opt/swt/source/archive/eclipse-3.7.1/org.epic.updatesite/plugins/org.epic.lib_0.6.1.jar'/>
+      </repositoryProperties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.epic.doc' version='0.6.2'>
+      <repositoryProperties size='1'>
+        <property name='artifact.reference' value='file:/opt/swt/source/archive/eclipse-3.7.1/org.epic.updatesite/plugins/org.epic.doc_0.6.2.jar'/>
+      </repositoryProperties>
+    </artifact>
+  </artifacts>
+</repository>

@@ -1,0 +1,28 @@
+[user]
+	name = Mark Buchmoyer
+  email = MBUCHMOYER@bloomberg.net
+
+[alias]
+  graph = log --graph --abbrev-commit --decorate --date=relative --format=format:'%C(bold blue)%h%C(reset) - %C(green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(auto)%d%C(reset)' --all
+  graphtwolines =log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(white)%s%C(reset)%C(auto)%d%C(reset)%n''          %C(dim cyan)%aD%C(reset) %C(green)(%ar)%C(reset)%C(dim white) - %an%C(reset)' --all
+  lg = !"git graph"
+  basename = !"basename $(git rev-parse --abbrev-ref HEAD)"
+  phabbase = !"git checkout -b \"r/master/$(git basename)\""
+  arcyd = !"b_name=$(git rev-parse --abbrev-ref HEAD);\
+            git push origin \"HEAD:r/master/$(git basename)\";\
+            git checkout \"r/master/$(git basename)\";\
+            git branch $b_name -D"
+  whois = !"sh -c 'git log -i -1 --pretty=\"format:%an <%ae>\n\" --author=\"$1\"' -"
+  whatis = show -s --pretty='tformat:%h (%s, %ad)' --date=short
+  changes=diff --name-status -r
+  diffstat=diff --stat -r
+  gitkconflict = !"gitk --left-right HEAD...MERGE_HEAD"
+#  funcdiff = '!sh -c "git show \"\$0:\$2\" | sed -n \"/^[^ \t].*\$3[ \t]*(/,/^}/p\" > .tmp1 && git show \"\$1:\$2\" | sed -n \"/^[^ \t].*\$3[ \t]*(/,/^}/p\" > .tmp2 &&  git diff --no-index .tmp1 .tmp2"' -
+  graphviz = "!f() { echo 'digraph git {' ; git log --pretty='format:  %h -> { %p }' \"$@\" | sed 's/[0-9a-f][0-9a-f]*/\"&\"/g' ; echo '}'; }; f"
+
+[color]
+	ui = true
+[commit]
+  template = /home/mbuchmoyer/.gitcommit
+[push]
+	default = current

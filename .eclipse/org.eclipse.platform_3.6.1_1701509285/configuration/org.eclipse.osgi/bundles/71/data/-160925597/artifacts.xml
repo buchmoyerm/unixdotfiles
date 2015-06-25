@@ -1,0 +1,146 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<?artifactRepository version='1.1.0'?>
+<repository name='/opt/swt/install/eclipse-subclipse-1.6.17/.eclipseextension' type='org.eclipse.equinox.p2.artifact.repository.simpleRepository' version='1.0.0'>
+  <properties size='3'>
+    <property name='p2.timestamp' value='1427403853954'/>
+    <property name='org.eclipse.update.site.list' value=''/>
+    <property name='org.eclipse.update.site.policy' value='USER-EXCLUDE'/>
+  </properties>
+  <mappings size='3'>
+    <rule filter='(&amp; (classifier=osgi.bundle))' output='${repoUrl}/plugins/${id}_${version}.jar'/>
+    <rule filter='(&amp; (classifier=binary))' output='${repoUrl}/binary/${id}_${version}'/>
+    <rule filter='(&amp; (classifier=org.eclipse.update.feature))' output='${repoUrl}/features/${id}_${version}.jar'/>
+  </mappings>
+  <artifacts size='13'>
+    <artifact classifier='osgi.bundle' id='org.tigris.subversion.subclipse.mylyn' version='3.0.0'>
+      <properties size='2'>
+        <property name='artifact.size' value='17722'/>
+        <property name='download.size' value='17722'/>
+      </properties>
+      <repositoryProperties size='2'>
+        <property name='file.name' value='/opt/swt/install/eclipse-subclipse-1.6.17/plugins/org.tigris.subversion.subclipse.mylyn_3.0.0.jar'/>
+        <property name='artifact.reference' value='file:/opt/swt/install/eclipse-subclipse-1.6.17/plugins/org.tigris.subversion.subclipse.mylyn_3.0.0.jar'/>
+      </repositoryProperties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.tigris.subversion.clientadapter' version='1.6.12'>
+      <properties size='2'>
+        <property name='artifact.size' value='82086'/>
+        <property name='download.size' value='82086'/>
+      </properties>
+      <repositoryProperties size='2'>
+        <property name='file.name' value='/opt/swt/install/eclipse-subclipse-1.6.17/plugins/org.tigris.subversion.clientadapter_1.6.12.jar'/>
+        <property name='artifact.reference' value='file:/opt/swt/install/eclipse-subclipse-1.6.17/plugins/org.tigris.subversion.clientadapter_1.6.12.jar'/>
+      </repositoryProperties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.tigris.subversion.subclipse.ui' version='1.6.17'>
+      <properties size='2'>
+        <property name='artifact.size' value='1928100'/>
+        <property name='download.size' value='1928100'/>
+      </properties>
+      <repositoryProperties size='2'>
+        <property name='file.name' value='/opt/swt/install/eclipse-subclipse-1.6.17/plugins/org.tigris.subversion.subclipse.ui_1.6.17.jar'/>
+        <property name='artifact.reference' value='file:/opt/swt/install/eclipse-subclipse-1.6.17/plugins/org.tigris.subversion.subclipse.ui_1.6.17.jar'/>
+      </repositoryProperties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.tigris.subversion.subclipse.tools.usage' version='1.0.1'>
+      <properties size='2'>
+        <property name='artifact.size' value='78419'/>
+        <property name='download.size' value='78419'/>
+      </properties>
+      <repositoryProperties size='2'>
+        <property name='file.name' value='/opt/swt/install/eclipse-subclipse-1.6.17/plugins/org.tigris.subversion.subclipse.tools.usage_1.0.1.jar'/>
+        <property name='artifact.reference' value='file:/opt/swt/install/eclipse-subclipse-1.6.17/plugins/org.tigris.subversion.subclipse.tools.usage_1.0.1.jar'/>
+      </repositoryProperties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.tigris.subversion.clientadapter.javahl' version='1.6.15'>
+      <properties size='2'>
+        <property name='artifact.size' value='163124'/>
+        <property name='download.size' value='163124'/>
+      </properties>
+      <repositoryProperties size='2'>
+        <property name='file.name' value='/opt/swt/install/eclipse-subclipse-1.6.17/plugins/org.tigris.subversion.clientadapter.javahl_1.6.15.jar'/>
+        <property name='artifact.reference' value='file:/opt/swt/install/eclipse-subclipse-1.6.17/plugins/org.tigris.subversion.clientadapter.javahl_1.6.15.jar'/>
+      </repositoryProperties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='com.collabnet.subversion.merge' version='2.2.3'>
+      <properties size='2'>
+        <property name='artifact.size' value='449954'/>
+        <property name='download.size' value='449954'/>
+      </properties>
+      <repositoryProperties size='2'>
+        <property name='file.name' value='/opt/swt/install/eclipse-subclipse-1.6.17/plugins/com.collabnet.subversion.merge_2.2.3.jar'/>
+        <property name='artifact.reference' value='file:/opt/swt/install/eclipse-subclipse-1.6.17/plugins/com.collabnet.subversion.merge_2.2.3.jar'/>
+      </repositoryProperties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.tigris.subversion.clientadapter.javahl.win32' version='1.6.15'>
+      <properties size='2'>
+        <property name='artifact.size' value='2399023'/>
+        <property name='download.size' value='2399023'/>
+      </properties>
+      <repositoryProperties size='2'>
+        <property name='file.name' value='/opt/swt/install/eclipse-subclipse-1.6.17/plugins/org.tigris.subversion.clientadapter.javahl.win32_1.6.15.jar'/>
+        <property name='artifact.reference' value='file:/opt/swt/install/eclipse-subclipse-1.6.17/plugins/org.tigris.subversion.clientadapter.javahl.win32_1.6.15.jar'/>
+      </repositoryProperties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.tigris.subversion.subclipse.doc' version='1.3.0'>
+      <properties size='2'>
+        <property name='artifact.size' value='2342937'/>
+        <property name='download.size' value='2342937'/>
+      </properties>
+      <repositoryProperties size='2'>
+        <property name='file.name' value='/opt/swt/install/eclipse-subclipse-1.6.17/plugins/org.tigris.subversion.subclipse.doc_1.3.0.jar'/>
+        <property name='artifact.reference' value='file:/opt/swt/install/eclipse-subclipse-1.6.17/plugins/org.tigris.subversion.subclipse.doc_1.3.0.jar'/>
+      </repositoryProperties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='com.sun.jna' version='3.2.7'>
+      <properties size='2'>
+        <property name='artifact.size' value='948587'/>
+        <property name='download.size' value='948587'/>
+      </properties>
+      <repositoryProperties size='2'>
+        <property name='file.name' value='/opt/swt/install/eclipse-subclipse-1.6.17/plugins/com.sun.jna_3.2.7.jar'/>
+        <property name='artifact.reference' value='file:/opt/swt/install/eclipse-subclipse-1.6.17/plugins/com.sun.jna_3.2.7.jar'/>
+      </repositoryProperties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.tigris.subversion.subclipse.core' version='1.6.17'>
+      <properties size='2'>
+        <property name='artifact.size' value='297927'/>
+        <property name='download.size' value='297927'/>
+      </properties>
+      <repositoryProperties size='2'>
+        <property name='file.name' value='/opt/swt/install/eclipse-subclipse-1.6.17/plugins/org.tigris.subversion.subclipse.core_1.6.17.jar'/>
+        <property name='artifact.reference' value='file:/opt/swt/install/eclipse-subclipse-1.6.17/plugins/org.tigris.subversion.subclipse.core_1.6.17.jar'/>
+      </repositoryProperties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.tmatesoft.svnkit' version='1.3.5.7406'>
+      <properties size='2'>
+        <property name='artifact.size' value='4318106'/>
+        <property name='download.size' value='4318106'/>
+      </properties>
+      <repositoryProperties size='2'>
+        <property name='file.name' value='/opt/swt/install/eclipse-subclipse-1.6.17/plugins/org.tmatesoft.svnkit_1.3.5.7406.jar'/>
+        <property name='artifact.reference' value='file:/opt/swt/install/eclipse-subclipse-1.6.17/plugins/org.tmatesoft.svnkit_1.3.5.7406.jar'/>
+      </repositoryProperties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.tigris.subversion.clientadapter.svnkit' version='1.6.15'>
+      <properties size='2'>
+        <property name='artifact.size' value='83083'/>
+        <property name='download.size' value='83083'/>
+      </properties>
+      <repositoryProperties size='2'>
+        <property name='file.name' value='/opt/swt/install/eclipse-subclipse-1.6.17/plugins/org.tigris.subversion.clientadapter.svnkit_1.6.15.jar'/>
+        <property name='artifact.reference' value='file:/opt/swt/install/eclipse-subclipse-1.6.17/plugins/org.tigris.subversion.clientadapter.svnkit_1.6.15.jar'/>
+      </repositoryProperties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.tigris.subversion.subclipse.graph' version='1.0.9'>
+      <properties size='2'>
+        <property name='artifact.size' value='124037'/>
+        <property name='download.size' value='124037'/>
+      </properties>
+      <repositoryProperties size='2'>
+        <property name='file.name' value='/opt/swt/install/eclipse-subclipse-1.6.17/plugins/org.tigris.subversion.subclipse.graph_1.0.9.jar'/>
+        <property name='artifact.reference' value='file:/opt/swt/install/eclipse-subclipse-1.6.17/plugins/org.tigris.subversion.subclipse.graph_1.0.9.jar'/>
+      </repositoryProperties>
+    </artifact>
+  </artifacts>
+</repository>
