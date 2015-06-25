@@ -162,10 +162,18 @@ prompt
 # export GIT_PS1_SHOWUNTRACKEDFILES=true
 
 
+function lless() {
+  if [ $# -eq 0 ]; then
+    command ls -lart | less -i
+  else
+    command ls -lart "$@" | less -i
+  fi
+}
+complete -o default -o nospace  lless
+
 alias findtsk='find . -name "*.tsk" -exec ls -l {} \;'
 alias ls="ls --color"
 alias ll="ls -lrt --color"
-alias lless="ls -lart | less -i"
 alias less="less -i"
 alias op1="/bb/admin/ngetprdwin.py -u op1 -d'op1' -i -s"
 
