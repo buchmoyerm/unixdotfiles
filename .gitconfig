@@ -10,7 +10,7 @@
   phabbase = !"git checkout -b \"r/master/$(git basename)\""
   arcyd = !"b_name=$(git rev-parse --abbrev-ref HEAD);\
             git push origin \"HEAD:r/master/$(git basename)\";\
-            git checkout \"r/master/$(git basename)\";\
+            git checkout -b \"r/master/$(git basename)\";\
             git branch $b_name -D"
   whois = !"sh -c 'git log -i -1 --pretty=\"format:%an <%ae>\n\" --author=\"$1\"' -"
   whatis = show -s --pretty='tformat:%h (%s, %ad)' --date=short
