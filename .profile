@@ -165,6 +165,8 @@ prompt
 alias findtsk='find . -name "*.tsk" -exec ls -l {} \;'
 alias ls="ls --color"
 alias ll="ls -lrt --color"
+alias lless="ls -lart | less -i"
+alias less="less -i"
 alias op1="/bb/admin/ngetprdwin.py -u op1 -d'op1' -i -s"
 
 # git types
