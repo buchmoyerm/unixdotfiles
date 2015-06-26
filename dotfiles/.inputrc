@@ -1,4 +1,4 @@
 $include /etc/inputrc
 
-"\e[C": forward-word
-"\e[D": backward-word
+"\eOC": forward-word
+"\eOD": backward-word
