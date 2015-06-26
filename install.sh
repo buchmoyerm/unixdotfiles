@@ -38,8 +38,8 @@ should_install() {
 }
 
 # Install dotfiles
-for f in `ls -A $DOTFILES`; do
+for f in `ls -A $DOTFILES/dotfiles`; do
   if should_install $f; then
-    link "$DOTFILES/$f"
+    link "$DOTFILES/dotfiles/$f"
   fi
 done

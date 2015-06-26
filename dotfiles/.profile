@@ -161,21 +161,20 @@ prompt
 # export GIT_PS1_SHOWDIRTYSTATE=true
 # export GIT_PS1_SHOWUNTRACKEDFILES=true
 
-
-function lless() {
-  if [ $# -eq 0 ]; then
-    command ls -lart | less -i
-  else
-    command ls -lart "$@" | less -i
-  fi
-}
-complete -o default -o nospace  lless
-
 alias findtsk='find . -name "*.tsk" -exec ls -l {} \;'
 alias ls="ls --color"
 alias ll="ls -lrt --color"
-alias less="less -i"
+alias less="less -i -R"
 alias op1="/bb/admin/ngetprdwin.py -u op1 -d'op1' -i -s"
+
+function tcless() {
+  if [ $# -eq 0 ]; then
+    echo "Usage: tcless [filename]"
+  else
+    command tail -f "$@" | bblc | less
+  fi
+}
+complete -o default -o nospace  tcless
 
 # git types
 alias g="git"
@@ -215,3 +214,23 @@ bind 'set show-all-if-ambiguous On'
 source ./.bashrc
 
 echo -en "\033]0;$HOSTNAME\a"
+
+# Start TMUX
+# [ -z "$TMUX" ] && command -v tmux attach > /dev/null && TERM=xterm-256color && exec tmux attach
+
+# if [ -z "$TMUX" ]; then
+#    base_session='session'
+#    # Create a new session if it doesn't exist
+#    tmux has-session -t $base_session || tmux new-session -d -s $base_session
+#    # Are there any clients connected already?
+#    client_cnt=$(tmux list-clients | wc -l)
+#    if [ $client_cnt -ge 1 ]; then
+#       session_name=$base_session"-"$client_cnt
+#       tmux new-session -d -t $base_session -s $session_name
+#       tmux -2 attach-session -t $session_name \; set-option destroy-unattached
+#    else
+#       tmux -2 attach-session -t $base_session
+#    fi
+# fi
+
+# (tmux ls | grep -vq attached && tmux at) || tmux
