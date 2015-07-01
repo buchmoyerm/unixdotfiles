@@ -63,6 +63,8 @@ call vundle#begin()
   Plugin 'gorkunov/smartpairs.vim'
   Plugin 'nathanaelkane/vim-indent-guides'
 
+  Plugin 'AnsiEsc.vim'
+
   " Bloomberg
   " ---------
   Plugin 'file:///home/mbuchmoyer/mbig/dev/vim/projmake.vim'

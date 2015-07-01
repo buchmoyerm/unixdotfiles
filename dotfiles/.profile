@@ -124,9 +124,11 @@ function git_color {
   if [[ ! $git_status =~ "working directory clean" ]]; then
     echo -e $Red
   elif [[ $git_status =~ "Your branch is ahead of" ]]; then
+    echo -e $Green
+  elif [[ $git_status =~ "Your branch is behind" ]]; then
     echo -e $Yellow
   elif [[ $git_status =~ "nothing to commit" ]]; then
-    echo -e $Green
+    echo -e $Cyan
   else
     echo -e $Ochre
   fi
@@ -188,6 +190,7 @@ alias work="cd ~/workspace"
 export HTTP_PROXY="http://devproxy.bloomberg.com:82/"
 export HTTPS_PROXY="http://devproxy.bloomberg.com:82/"
 export NO_PROXY="localhost,.dev.bloomberg.com,127.0.0.0/8,10.0.0.0/8,172.16.0.0/12,192.168.0.0/16"
+export GIT_SSL_NO_VERIFY=1
 
 # use vim compatible with YCM
 alias vim="/opt/swt/bin/vim"
