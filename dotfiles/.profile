@@ -38,6 +38,8 @@ then
      fi
 fi
 
+stty erase ^?
+
 # don't have the buffer get overwritten after window size changes
 shopt -s checkwinsize
 
@@ -142,7 +144,7 @@ function git_branch {
   if [[ $git_status =~ $on_branch ]]; then
     local branch=${BASH_REMATCH[1]}
     echo $" ($branch)"
-  elif [[ $git_status =~ $on_branch ]]; then
+  elif [[ $git_status =~ $on_commit ]]; then
     local commit=${BASH_REMATCH[1]}
     echo $" ($commit)"
   fi
@@ -193,9 +195,9 @@ export NO_PROXY="localhost,.dev.bloomberg.com,127.0.0.0/8,10.0.0.0/8,172.16.0.0/
 export GIT_SSL_NO_VERIFY=1
 
 # use vim compatible with YCM
-alias vim="/opt/swt/bin/vim"
+alias vim="/opt/swt/bin/gvim -v"
 alias gvim="/opt/swt/bin/gvim"
-export VISUAL="/opt/swt/bin/vim"
+export VISUAL="/opt/swt/bin/gvim -v"
 export EDITOR="$VISUAL"
 
 export TERM=xterm-256color
