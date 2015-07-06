@@ -8,7 +8,7 @@ if [ -d ${BUILD_DIR} ]; then
   echo "Removing *.a from ${BUILD_DIR}"
   find ${BUILD_DIR} -name '*.a' -delete
 
-  echo "Removeing *.tsk from ${BUILD_DIR}"
+  echo "Removing *.tsk from ${BUILD_DIR}"
   find ${BUILD_DIR} -name '*.tsk' -delete
 else
   echo "Cannot find ${BUILD_DIR}"
