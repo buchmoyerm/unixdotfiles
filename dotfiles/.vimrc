@@ -46,6 +46,10 @@ call vundle#begin()
   Plugin 'kien/tabman.vim'
   Plugin 'a.vim'
 
+  " Split navigation with tmux
+  " --------------------------
+  Plugin 'christoomey/vim-tmux-navigator'
+
   " syntax
   " ------
   Plugin 'tpope/vim-git'
@@ -156,13 +160,19 @@ endif
 " => Hack to get alt-alpha keys to work in terminal
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+function! Alt_hack_char(ch) abort
+  exec "set <A-".a:ch.">=\e".a:ch
+  exec "imap \e".a:ch." <A-".a:ch.">"
+endfunction
+
 " alt+alpha
 let c='a'
 while c <= 'z'
-  exec "set <A-".c.">=\e".c
-  exec "imap \e".c." <A-".c.">"
+  call Alt_hack_char(c)
   let c = nr2char(1+char2nr(c))
 endw
+
+call Alt_hack_char('\')
 
 " " ctrl+alt+alpha
 " let c='a'
@@ -302,10 +312,18 @@ nnoremap <M-right> <C-w><right>
 nnoremap <M-up> <C-w><up>
 nnoremap <M-down> <C-w><down>
 
-nnoremap <M-j> <C-w>j
-nnoremap <M-k> <C-w>k
-nnoremap <M-l> <C-w>l
-nnoremap <M-h> <C-w>h
+" nnoremap <M-j> <C-w>j
+" nnoremap <M-k> <C-w>k
+" nnoremap <M-l> <C-w>l
+" nnoremap <M-h> <C-w>h
+
+let g:tmux_navigator_no_mappings = 1
+let g:tmux_navigator_save_on_switch = 1
+nnoremap <silent> <M-h> :TmuxNavigateLeft<cr>
+nnoremap <silent> <M-j> :TmuxNavigateDown<cr>
+nnoremap <silent> <M-k> :TmuxNavigateUp<cr>
+nnoremap <silent> <M-l> :TmuxNavigateRight<cr>
+nnoremap <silent> <M-\> :TmuxNavigatePrevious<cr>
 
 " Windows-like find all
 nnoremap <C-F> :Ack!<Space>
@@ -564,7 +582,7 @@ elseif useLightLine
       \   'fileformat': 0,
       \ },
     \ 'component_function': {
-      \   'fugitive': 'LightlineFugitive',
+      \   'fugitive': 'LightlineFugitive'
       \ },
     \ }
 
@@ -593,7 +611,33 @@ elseif useLightLine
       \ 'S' : 'S',
       \ "\<C-s>": 'S',
       \ '?': ' ' }
+" Light line functions
+" --------------------
 
+" function! LightLineFilename() abort
+"   return expand('%')
+" endfunction
+
+function! LightlineFugitive() abort
+  if &filetype ==# 'help'
+    return ''
+  endif
+  if has_key(b:, 'lightline_fugitive') && reltimestr(reltime(b:lightline_fugitive_)) =~# '^\s*0\.[0-5]'
+    return b:lightline_fugitive
+  endif
+  try
+    if exists('*fugitive#head')
+      let head = fnamemodify(fugitive#head(), ":t")
+    else
+      return ''
+    endif
+    let b:lightline_fugitive = head
+    let b:lightline_fugitive_ = reltime()
+    return b:lightline_fugitive
+  catch
+  endtry
+  return ''
+endfunction
 endif
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => settings for improving CtrlP functionality
@@ -737,23 +781,3 @@ function! ToggleRelative()
     endif
 endfunction
 
-function! LightlineFugitive() abort
-  if &filetype ==# 'help'
-    return ''
-  endif
-  if has_key(b:, 'lightline_fugitive') && reltimestr(reltime(b:lightline_fugitive_)) =~# '^\s*0\.[0-5]'
-    return b:lightline_fugitive
-  endif
-  try
-    if exists('*fugitive#head')
-      let head = fnamemodify(fugitive#head(), ":t")
-    else
-      return ''
-    endif
-    let b:lightline_fugitive = head
-    let b:lightline_fugitive_ = reltime()
-    return b:lightline_fugitive
-  catch
-  endtry
-  return ''
-endfunction

@@ -36,13 +36,4 @@ then
 fi
 
 
-function tm() {
-    if [ "$#" -ge 1 ] && [ "$1" = -z ]; then
-        shift
-        command tmux detach 2>/dev/null
-        command tmux attach "$@" || command tmux new-session "$@"
-    else
-        command tmux "$@"
-    fi
-}
 
