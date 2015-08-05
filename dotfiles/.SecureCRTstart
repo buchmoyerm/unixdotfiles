@@ -12,13 +12,12 @@
 ####
 ## Append the PATH variable to make sure the X command are found:
 ####
+
 if echo ":${PATH}:" | grep -v ":/usr/bin/X11:" > /dev/null
 then
   PATH=${PATH}:/usr/bin/X11
   export PATH
 fi
-
-# PATH=$PATH:/opt/swt/bin
 
 ####
 ## Load user resources into the server:
@@ -33,6 +32,9 @@ fi
 ## Set up X-only Environment variables...
 ####
 XTERM="/usr/bin/X11/xterm -ls -sb -sl 4000 -display ${DISPLAY}"
+
+URXVT="urxvt -tn rxvt-256color -ls -sb -sl 20000 -bg Black -fg Gray -fn 9x15 -display ${DISPLAY}"
+export URXVT
 
 if [ -z "${HOSTNAME}" ]
 then
@@ -81,33 +83,39 @@ RXAdapt ()
 	fi
 }
 
-# XSize=101
-# YSize=29
-# Xmax=$(xrandr --current | grep '* ' | uniq | awk '{print $1}' |  cut -d 'x' -f1)
-# Ymax=$(xrandr --current | grep '* ' | uniq | awk '{print $1}' |  cut -d 'x' -f2)
-# Xloc=$((Xmax < 2618 ? Xmax - XSize : 2618))
-# Yloc=$((Ymax < 139 ? Ymax - YSize : 139))
-
-####
-## Start xterm clients
-####
-#RXCmd ${HOSTNAME}				#Local xterm
-
-GNOME_TERMINAL=/usr/bin/gnome-terminal
-if [ -r $GNOME_TERMINAL ]; then
-    if [ -r ~/.fontconfig ]; then
-        rm -r ~/.fontconfig
+TERMINFO=/home/jmahood/ARCH/`uname -s`/terminfo
+export TERMINFO
+XTARGS_EXT=""
+XTERM_BIN=/opt/swt/bin/mrxvt
+if [[ -x $XTERM_BIN ]]; then
+  XTARGS_EXT="-stt"
+else
+  XTERM_BIN=/home/jmahood/ARCH/"`uname -s`"/bin/xterm
+  if [ ! -x $XTERM_BIN ]; then
+    XTERM_BIN=/usr/bin/X11/xterm
+    if [[ ! -x $XTERM_BIN ]]; then
+      echo "Uhoh.. really can't find an xterm, trying env..."
+      XTERM_BIN=`env xterm`
     fi
-    $GNOME_TERMINAL --geometry 101x29+2618+139
-  else
-#     RXAdapt ${HOSTNAME}
+  fi
+fi
+echo "XTERM_BIN: ${XTERM_BIN}"
+echo "XTERM_BIN: $(ls -l ${XTERM_BIN})"
+echo "XTERM_BIN (real): $(ls -l $(realpath ${XTERM_BIN}))"
 
-#     sleep 10
-#     RXCmd ${HOSTNAME} -fg white -bg darkblue
+# GNOME_TERMINAL=/usr/bin/gnome-terminal
+# if [ -r $GNOME_TERMINAL ]; then
+#     if [ -r ~/.fontconfig ]; then
+#         rm -r ~/.fontconfig
+#     fi
+#     $GNOME_TERMINAL --geometry 101x29+2618+139
+#   else
     RXCmd ${HOSTNAME} -geometry 101x29+2618+139
-#   From Derek
-#     RXCmd ${HOSTNAME} -geometry 92x16+100+100 -fg white -bg black				#Local xterm
-#     RXCmd ${HOSTNAME} -geometry 92x50+200+200 -fg white -bg black #Local xterm
+# fi
+
+Xauthority=$HOME/.XAuthority
+if [ -r $Xauthority ]; then
+  rm $Xauthority
 fi
 
 ## Additional clients should be added below this line.

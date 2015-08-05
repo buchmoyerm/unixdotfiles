@@ -3,7 +3,7 @@
 ROOT_DIR=${PROJMAKE_ROOT_DIR:-~/workspace/}
 
 BUILD_DIR=${ROOT_DIR%%/}/build
-INSTALL_DIR=${ROOT_DIR%%/}install
+INSTALL_DIR=${ROOT_DIR%%/}/install
 
 if [ -d ${BUILD_DIR} ]; then
   echo "Removing ${BUILD_DIR}"

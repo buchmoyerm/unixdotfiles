@@ -32,7 +32,7 @@ call vundle#begin()
 
   " colorscheme support for command line
   " ------------------------------------
-  Plugin 'colorsupport.vim'
+"   Plugin 'colorsupport.vim'
 
   " file navigation
   " ---------------
@@ -53,7 +53,7 @@ call vundle#begin()
   " syntax
   " ------
   Plugin 'tpope/vim-git'
-  Plugin 'scrooloose/syntastic'
+"   Plugin 'scrooloose/syntastic'
 
   " source control
   " --------------
@@ -190,19 +190,19 @@ set encoding=utf-8
 
 "Coloring for xterm
 if has("terminfo")
-"    set t_Co=256
-    set t_Co=256
+   set t_Co=256
     set t_Sf=[3%p1%dm
     set t_Sb=[4%p1%dm
 "     set t_AB=^[[%?%p1%{8}%<%t%p1%{40}%+%e%p1%{92}%+%;%dm
 "     set t_AF=^[[%?%p1%{8}%<%t%p1%{30}%+%e%p1%{82}%+%;%dm
 else
-    set t_Co=256
+"     set t_Co=256
     set t_Sf=[3%dm
     set t_Sb=[4%dm
 endif
 
 if !has("gui_running")
+  " disables background color erase
   set t_ut=
 endif
 colorscheme molokai
@@ -231,6 +231,9 @@ set whichwrap+=<,>,h,l
 "set visualbell
 " Uncomment below to make screen not flash on error
 set vb t_vb=""
+
+" removes 'press ENTER or type a command to continue'
+set shortmess=atI
 
 "My settings
 set guioptions-=T  "remove toolbar from gui
@@ -282,7 +285,7 @@ set expandtab
 " Height of the command bar
 set cmdheight=2
 
-" set ttyfast
+set ttyfast
 
 "how to display whitespace
 set list listchars=tab:>-,trail:.
@@ -319,24 +322,24 @@ nnoremap <M-down> <C-w><down>
 
 let g:tmux_navigator_no_mappings = 1
 let g:tmux_navigator_save_on_switch = 1
-nnoremap <silent> <M-h> :TmuxNavigateLeft<cr>
-nnoremap <silent> <M-j> :TmuxNavigateDown<cr>
-nnoremap <silent> <M-k> :TmuxNavigateUp<cr>
-nnoremap <silent> <M-l> :TmuxNavigateRight<cr>
-nnoremap <silent> <M-\> :TmuxNavigatePrevious<cr>
+noremap <silent> <M-h> :TmuxNavigateLeft<cr>
+noremap <silent> <M-j> :TmuxNavigateDown<cr>
+noremap <silent> <M-k> :TmuxNavigateUp<cr>
+noremap <silent> <M-l> :TmuxNavigateRight<cr>
+noremap <silent> <M-\> :TmuxNavigatePrevious<cr>
 
 " Windows-like find all
 nnoremap <C-F> :Ack!<Space>
 
 " Faster navigation wit ctrl
-noremap <C-up> 10k
-noremap <C-down> 10j
+noremap <C-up> 10gk
+noremap <C-down> 10gj
 noremap <C-right> 5l
 noremap <C-left> 5h
 
 " Faster navigation witn ctrl
-noremap <C-k> 10k
-noremap <C-j> 10j
+noremap <C-k> 10gk
+noremap <C-j> 10gj
 noremap <C-h> 5h
 noremap <C-l> 5l
 
@@ -376,8 +379,14 @@ noremap <leader><F2> :call StripTrailingWhitespace()<CR>
 noremap <silent> <C-TAB> :tabn<CR>
 noremap <silent> <C-S-TAB> :tabp<CR>
 
-" us Win+alt+P to open this file
-nnoremap ê :split ~/.vimrc<CR>
+" quickly exit insert mode without esc
+inoremap wj <Esc>
+vnoremap wj <Esc>
+snoremap wj <Esc>
+
+" more natural navigation of log lines with word wrap
+nnoremap j gj
+nnoremap k gk
 
 " switch between tab modes
 nnoremap <leader><leader>t :set expandtab tabstop=4 shiftwidth=4 softtabstop=4<CR>
@@ -658,12 +667,12 @@ endif
 "let g:syntastic_check_on_open = 1
 "let g:syntastic_check_on_wq = 0
 
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_cpp_check_header = 1
-let g:syntastic_cpp_checkers=['gcc']
-let g:syntastic_full_redraws=0
-let g:syntastic_cpp_include_dirs = ['/bb/build/Linux-x86_64-64/release/robolibs/prod/lib/dpkgroot/opt/bb/include/', '/bb/build/Linux-x86_64-64/release/robolibs/weekly/share/include/00depbuild/', '/bb/build/Linux-x86_64-64/release/robolibs/weekly/share/include/00deployed/', '/bb/build/Linux-x86_64-64/release/robolibs/weekly/share/include/00offlonly/', '/bb/build/share/stp/include/00depbuild/', '/bb/build/share/stp/include/00deployed/', '/bb/build/share/stp/include/00offlonly/']
-
+" let g:syntastic_always_populate_loc_list = 1
+" let g:syntastic_cpp_check_header = 1
+" let g:syntastic_cpp_checkers=['gcc']
+" let g:syntastic_full_redraws=0
+" let g:syntastic_cpp_include_dirs = ['/bb/build/Linux-x86_64-64/release/robolibs/prod/lib/dpkgroot/opt/bb/include/', '/bb/build/Linux-x86_64-64/release/robolibs/weekly/share/include/00depbuild/', '/bb/build/Linux-x86_64-64/release/robolibs/weekly/share/include/00deployed/', '/bb/build/Linux-x86_64-64/release/robolibs/weekly/share/include/00offlonly/', '/bb/build/share/stp/include/00depbuild/', '/bb/build/share/stp/include/00deployed/', '/bb/build/share/stp/include/00offlonly/']
+ 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Auto commands
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""

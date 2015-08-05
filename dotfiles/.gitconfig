@@ -3,18 +3,25 @@
   email = MBUCHMOYER@bloomberg.net
 
 [alias]
+  # list all aliases
+  la = "!git config -l | grep alias | cut -c 7-"
+
+  # show what I did today
+  day = "!sh -c 'git log --reverse --no-merges --branches=* --date=local --after=\"yesterday 11:59PM\" --author=\"`git config --get user.name`\"'"
+
   graph = log --graph --abbrev-commit --decorate --date=relative --color=always --format=format:'%C(bold blue)%h%C(reset) - %C(green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(auto)%d%C(reset)' --all
   graphtwolines =log --graph --abbrev-commit --decorate --color=always --format=format:'%C(bold blue)%h%C(reset) - %C(white)%s%C(reset)%C(auto)%d%C(reset)%n''          %C(dim cyan)%aD%C(reset) %C(green)(%ar)%C(reset)%C(dim white) - %an%C(reset)' --all
   lg = !"git graph"
   basename = !"basename $(git rev-parse --abbrev-ref HEAD)"
   phabbase = !"git checkout -b \"r/master/$(git basename)\""
   arcyd = !"b_name=$(git rev-parse --abbrev-ref HEAD);\
-            git push origin \"HEAD:r/master/$(git basename)\";\
-            git checkout -b \"r/master/$(git basename)\";\
+            git push -u origin \"HEAD:r/master/$(git basename)\";\
+            git checkout --track \"origin/r/master/$(git basename)\";\
             git branch $b_name -D"
   whois = !"sh -c 'git log -i -1 --pretty=\"format:%an <%ae>\n\" --author=\"$1\"' -"
   whatis = show -s --pretty='tformat:%h (%s, %ad)' --date=short
   changes=diff --name-status -r
+  branchdiff="diff origin/master...HEAD"
   diffstat=diff --stat -r
   gitkconflict = !"gitk --left-right HEAD...MERGE_HEAD"
 #  funcdiff = '!sh -c "git show \"\$0:\$2\" | sed -n \"/^[^ \t].*\$3[ \t]*(/,/^}/p\" > .tmp1 && git show \"\$1:\$2\" | sed -n \"/^[^ \t].*\$3[ \t]*(/,/^}/p\" > .tmp2 &&  git diff --no-index .tmp1 .tmp2"' -
@@ -33,9 +40,15 @@
   logda  = log --color --date-order --date=local --graph --format=\"%C(yellow bold)%h%Creset %C(blue bold)%ad%Creset %C(auto)%d%Creset %s\" --all
   logd   = log --color --date-order --date=local --graph --format=\"%C(yellow bold)%h%Creset %C(blue bold)%ad%Creset %C(auto)%d%Creset %s\"        
   #Look with relative date
-  logdra = log --color --date-order --graph --format=\"%C(yellow bold)%h%Creset %C(blue bold)%ar%Creset %C(auto)%d%Creset %s\" --all
-  logdr = log --color --date-order --graph --format=\"%C(yellow bold)%h%Creset %C(blue bold)%ar%Creset %C(auto)%d%Creset %s\"  
+  logdra = log --color --date-order --graph --decorate --format=\"%C(yellow bold)%h%Creset %C(blue bold)%ar%Creset %C(auto)%d%Creset %s - %a\" --all
+  logdr = log --color --date-order --graph --decorate --format=\"%C(yellow bold)%h%Creset %C(blue bold)%ar%Creset %C(auto)%d%Creset %s - %a\"  
 
+  #pretty log
+  logp = log --color --date-order --format=\"%C(yellow)%h %Cblue%>(25)%ad %Cgreen%<(15)  %aN%C(auto)%d %Creset%s\"
+  logpr = log --color --date=relative --date-order --format=\"%C(yellow)%h %Cblue%>(12)%ad %Cgreen%<(15)  %aN%C(auto)%d %Creset%s\"
+
+  # show number of commits per contributer, sorted
+  count = shortlog -sn
 
 # from http://stackoverflow.com/a/22481650/351028
   tree = log --all --graph --decorate=short --color --format=format:'%C(bold blue)%h%C(reset) %C(auto)%d%C(reset)\n         %C(black)[%cr]%C(reset)  %x09%C(black)%an: %s %C(reset)'
@@ -47,4 +60,8 @@
 [push]
 	default = current
 [core]
-	pager = "less -i -R -S -# 4"
+  pager = "less -i -R -S -# 4"
+[log]
+  date=local
+[mailmap]
+  file=/home/mbuchmoyer/.gitmailmap

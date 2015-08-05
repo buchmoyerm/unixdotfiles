@@ -1,5 +1,7 @@
 $include /etc/inputrc
 
+# no beeping
+set bell-style none
 
-"\eOC": forward-word
-"\eOD": backward-word
+"\e[1;5C": forward-word
+"\e[1;5D": backward-word

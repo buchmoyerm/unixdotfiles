@@ -1,9 +1,9 @@
 #!/bin/ksh
 
 IBHIWRITER_TASK=ibhiwrt
-IBHIWRITER_BIN_DIR=~/workspace/build/arbiters/Linux-x86_64-64/ibhistwr/m_ibhistwr
-IBHIWRITER_LOG_DIR=~/workspace/data/tmp_logs
-IBHIWRITER_CFG_DIR=~/workspace/arbiters/ibhistwr/m_ibhistwr
+IBHIWRITER_BIN_DIR=$HOME/workspace/build/arbiters/Linux-x86_64-64/ibhistwr/m_ibhistwr
+IBHIWRITER_LOG_DIR=$HOME/workspace/data/tmp_logs
+IBHIWRITER_CFG_DIR=$HOME/workspace/arbiters/ibhistwr/m_ibhistwr
 IBHIWRITER_EXECUTABLE=ibhistwr.linux_64
 
 export IBHIWRITER_BIN_DIR

@@ -40,9 +40,33 @@ fi
 
 stty erase ^?
 
+# Set up terminal type
+if [ ${TERM} = xterm ]
+then
+    case ${SYSTYPE} in
+        SunOS)
+            export TERM=xtermc ;;
+        AIX)
+            export TERM=xterm-new ;;
+        Linux)
+#             export TERMINFO=/opt/bb/share/terminfo
+            export TERM=xterm-256color ;;
+    esac
+fi
+
+if [ ${TMUX} ]
+then
+  if [ ${TERM} = xterm-256color ]
+  then
+    export TERM=screen-256color
+  fi
+fi
+
 # don't have the buffer get overwritten after window size changes
 shopt -s checkwinsize
 
+# no beeping
+set bell-style none
 
 # Reset
 Color_Off='\e[0m'       # Text Reset
@@ -140,6 +164,7 @@ function git_branch {
   local git_status="$(git status 2> /dev/null)"
   local on_branch="On branch ([^${IFS}]*)"
   local on_commit="HEAD detached at ([^${IFS}]*)"
+  local in_rebase="rebase in progress;"
 
   if [[ $git_status =~ $on_branch ]]; then
     local branch=${BASH_REMATCH[1]}
@@ -147,6 +172,9 @@ function git_branch {
   elif [[ $git_status =~ $on_commit ]]; then
     local commit=${BASH_REMATCH[1]}
     echo $" ($commit)"
+  elif [[ $git_status =~ $in_rebase ]]; then
+    local rebase="~rebasing~"
+    echo $" ($rebase)"
   fi
 }
 
@@ -169,6 +197,8 @@ alias findtsk='find . -name "*.tsk" -exec ls -l {} \;'
 alias ls="ls --color"
 alias ll="ls -lrt --color"
 alias less="less -i -R"
+alias ssh="ssh -x"
+alias bbhost="bbhost -u -P"
 alias op1="/bb/admin/ngetprdwin.py -u op1 -d'op1' -i -s"
 
 function tcless() {
@@ -189,18 +219,18 @@ __git_complete gi _git
 alias work="cd ~/workspace"
 
 # set up proxy so that github will work (needed for vundle)
-export HTTP_PROXY="http://devproxy.bloomberg.com:82/"
-export HTTPS_PROXY="http://devproxy.bloomberg.com:82/"
-export NO_PROXY="localhost,.dev.bloomberg.com,127.0.0.0/8,10.0.0.0/8,172.16.0.0/12,192.168.0.0/16"
+# no longer needed with contrib/devproxy in .bbprofile
+# export HTTP_PROXY="http://devproxy.bloomberg.com:82/"
+# export HTTPS_PROXY="http://devproxy.bloomberg.com:82/"
+# export NO_PROXY="localhost,.dev.bloomberg.com,127.0.0.0/8,10.0.0.0/8,172.16.0.0/12,192.168.0.0/16"
 export GIT_SSL_NO_VERIFY=1
 
 # use vim compatible with YCM
+# alias gvimv="/opt/swt/bin/gvim -v"
 alias vim="/opt/swt/bin/gvim -v"
 alias gvim="/opt/swt/bin/gvim"
 export VISUAL="/opt/swt/bin/gvim -v"
 export EDITOR="$VISUAL"
-
-export TERM=xterm-256color
 
 # projmake auto complete
 function _projmake-completer {
@@ -212,7 +242,7 @@ complete -o default -o nospace -F _projmake-completer projmake.sh
 complete -o default -o nospace -F _projmake-completer projmake 
 
 # tab completion help
-bind 'set completetion-ignore-case On'
+bind 'set completion-ignore-case On'
 bind 'set show-all-if-ambiguous On'
 
 
@@ -220,22 +250,28 @@ source ./.bashrc
 
 echo -en "\033]0;$HOSTNAME\a"
 
-# Start TMUX
-# [ -z "$TMUX" ] && command -v tmux attach > /dev/null && TERM=xterm-256color && exec tmux attach
-
-# if [ -z "$TMUX" ]; then
-#    base_session='session'
-#    # Create a new session if it doesn't exist
-#    tmux has-session -t $base_session || tmux new-session -d -s $base_session
-#    # Are there any clients connected already?
-#    client_cnt=$(tmux list-clients | wc -l)
-#    if [ $client_cnt -ge 1 ]; then
-#       session_name=$base_session"-"$client_cnt
-#       tmux new-session -d -t $base_session -s $session_name
-#       tmux -2 attach-session -t $session_name \; set-option destroy-unattached
-#    else
-#       tmux -2 attach-session -t $base_session
-#    fi
-# fi
-
-# (tmux ls | grep -vq attached && tmux at) || tmux
+bash_colors() {
+  typeset -i PER_LINE=4
+  typeset -i inline=0
+  typeset -i COLORS=$(tput colors)
+  typeset CLEAR_COLORS=$(tput sgr0)
+  echo "tput colors: $COLORS"
+  typeset -i i=0
+  while [ $i -lt $COLORS ]; do
+    let i=$i+1
+    let inline=$i%2
+    typeset COLOR_ESC=$(tput setaf $i)
+    if [ ! $? ]; then
+      echo "error running 'tput setaf $i' with rc: $?"
+      continue
+    else
+      printf "${COLOR_ESC}This is color $i${CLEAR_COLORS}  "
+      if [ $inline -eq 0 ]; then
+        printf "\n"
+      fi
+    fi
+  done
+  if [ $inline -ne 0 ]; then
+    printf "\n"
+  fi
+}

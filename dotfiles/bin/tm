@@ -17,7 +17,12 @@ do
   case $opt in
     "New Session")
       read -p "Enter new session name: " SESSION_NAME
-      tmux new -s "$SESSION_NAME"
+      CONFIG_FILE="$HOME/.$SESSION_NAME.tmux.conf"
+      if [ -e "$CONFIG_FILE" ]; then
+        tmux -f "$CONFIG_FILE" new -s "$SESSION_NAME"
+      else
+        tmux new -s "$SESSION_NAME"
+      fi
       break
       ;;
     *)

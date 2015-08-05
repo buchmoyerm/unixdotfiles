@@ -20,20 +20,20 @@ uname=`uname`
 
 [[ ${TERM} == "screen" ]] && export TERM="screen-256color"
 
-if [ -d ${HOME}/.terminfo/${SYSTYPE} ]
-then
-    export TERMINFO=${HOME}/.terminfo/${SYSTYPE}
-    # Override 'xterm' -> 'xterm-256color'
-    if [ ${TERM} = xterm ]
-    then
-        export TERM=xterm-256color
-    fi
-    # Override 'rxvt-unicode' -> 'rxvt-unicode-256color'
-    if [ ${TERM} = rxvt-unicode ]
-    then
-        export TERM=rxvt-unicode-256color
-    fi
-fi
-
+# if [ -d ${HOME}/.terminfo/${SYSTYPE} ]
+# then
+#     export TERMINFO=${HOME}/.terminfo/${SYSTYPE}
+#     # Override 'xterm' -> 'xterm-256color'
+#     if [ ${TERM} = xterm ]
+#     then
+#         export TERM=xterm-256color
+#     fi
+#     # Override 'rxvt-unicode' -> 'rxvt-unicode-256color'
+#     if [ ${TERM} = rxvt-unicode ]
+#     then
+#         export TERM=rxvt-unicode-256color
+#     fi
+# fi
+# 
 
 
