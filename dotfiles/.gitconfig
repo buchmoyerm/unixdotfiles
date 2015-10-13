@@ -9,15 +9,12 @@
   # show what I did today
   day = "!sh -c 'git log --reverse --no-merges --branches=* --date=local --after=\"yesterday 11:59PM\" --author=\"`git config --get user.name`\"'"
 
-  graph = log --graph --abbrev-commit --decorate --date=relative --color=always --format=format:'%C(bold blue)%h%C(reset) - %C(green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(auto)%d%C(reset)' --all
-  graphtwolines =log --graph --abbrev-commit --decorate --color=always --format=format:'%C(bold blue)%h%C(reset) - %C(white)%s%C(reset)%C(auto)%d%C(reset)%n''          %C(dim cyan)%aD%C(reset) %C(green)(%ar)%C(reset)%C(dim white) - %an%C(reset)' --all
+  graph = log --graph --abbrev-commit --decorate --date=relative --color=always --format=format:'%C(bold blue)%h%C(reset) - %C(green)(%ar)%C(reset) %C(reset)%s%C(reset) %C(dim white)- %an%C(reset)%C(auto)%d%C(reset)' --all
+  graphtwolines =log --graph --abbrev-commit --decorate --color=always --format=format:'%C(bold blue)%h%C(reset) - %C(reset)%s%C(reset)%C(auto)%d%C(reset)%n''          %C(dim cyan)%aD%C(reset) %C(green)(%ar)%C(reset)%C(dim white) - %an%C(reset)' --all
   lg = !"git graph"
   basename = !"basename $(git rev-parse --abbrev-ref HEAD)"
-  phabbase = !"git checkout -b \"r/master/$(git basename)\""
-  arcyd = !"b_name=$(git rev-parse --abbrev-ref HEAD);\
-            git push -u origin \"HEAD:r/master/$(git basename)\";\
-            git checkout --track \"origin/r/master/$(git basename)\";\
-            git branch $b_name -D"
+  arcyd = !"sh -c 'git push -u origin \"HEAD:r/${1-master}/$(git basename)\";\
+                   git branch -m \"arcyd/${1-master}/$(git basename)\"' -"
   whois = !"sh -c 'git log -i -1 --pretty=\"format:%an <%ae>\n\" --author=\"$1\"' -"
   whatis = show -s --pretty='tformat:%h (%s, %ad)' --date=short
   changes=diff --name-status -r
@@ -25,7 +22,7 @@
   diffstat=diff --stat -r
   gitkconflict = !"gitk --left-right HEAD...MERGE_HEAD"
 #  funcdiff = '!sh -c "git show \"\$0:\$2\" | sed -n \"/^[^ \t].*\$3[ \t]*(/,/^}/p\" > .tmp1 && git show \"\$1:\$2\" | sed -n \"/^[^ \t].*\$3[ \t]*(/,/^}/p\" > .tmp2 &&  git diff --no-index .tmp1 .tmp2"' -
-  graphviz = "!f() { echo 'digraph git {' ; git log --pretty='format:  %h -> { %p }' \"$@\" | sed 's/[0-9a-f][0-9a-f]*/\"&\"/g' ; echo '}'; }; f"
+#  graphviz = "!f() { echo 'digraph git {' ; git log --pretty='format:  %h -> { %p }' \"$@\" | sed 's/[0-9a-f][0-9a-f]*/\"&\"/g' ; echo '}'; }; f"
 
 # from http://stackoverflow.com/a/22875140/351028
   #quick look at all repo
@@ -51,17 +48,48 @@
   count = shortlog -sn
 
 # from http://stackoverflow.com/a/22481650/351028
-  tree = log --all --graph --decorate=short --color --format=format:'%C(bold blue)%h%C(reset) %C(auto)%d%C(reset)\n         %C(black)[%cr]%C(reset)  %x09%C(black)%an: %s %C(reset)'
+  tree = log --all --graph --decorate=short --color --format=format:'%C(bold blue)%h%C(reset) %C(auto)%d%C(reset)\n         %C(white)[%cr]%C(reset)  %x09%C(white)%an: %s %C(reset)'
+  
+  # from http://blog.apiaxle.com/post/handy-git-tips-to-stop-you-getting-fired/
+  # assume file is unchanged git assume config.mk git unassume config.mk
+  assume   = update-index --assume-unchanged
+  unassume = update-index --no-assume-unchanged
+  assumed  = "!git ls-files -v | grep ^h | cut -c 3-"
+
+  # take a snapshot of your working changes without removing them
+  snapshot = !git stash save "snapshot: $(date)" && git stash apply "stash@{0}"
+
+  #help with merging (f() makes $@ work as expected)
+  ours   = "!f() { git checkout --ours $@ && git add $@; }; f"
+  theirs = "!f() { git checkout --theirs $@ && git add $@; }; f"
+
+  #arcyd creates a lot of branches and auto lands so you also end up with a lot
+  #of local branches that are old and git branch --merged doesn't work due to rebasing
+  #use this to clean up all remote tracking branches and local branches that
+  #have been removed from the remote (ie arcyd landed them on master)
+  #http://stackoverflow.com/a/28020809/351028
+  branchclean = !"git fetch --all --prune; \
+                  git branch -vv | grep \": gone]\" | awk '{print $1}' | xargs -n 1 git branch -D;" 
+
+  #work in progress commit (wip)
+  save-wip = !"git add --all; git commit -m \"[WIP] $(date)\";"
+  continue-wip = !"f() { while [[ \"$(git show --name-status --pretty=%s 2> /dev/null)\" =~ \"[WIP]\" ]]; do git reset HEAD~1 --mixed --quiet; done;}; f"
+
+[diff]
+  #algorithm=patience
+  algorithm=histogram
 
 [color]
 	ui = true
 [commit]
   template = /home/mbuchmoyer/.gitcommit
 [push]
-	default = current
+	default = upstream
 [core]
   pager = "less -i -R -S -# 4"
 [log]
   date=local
 [mailmap]
   file=/home/mbuchmoyer/.gitmailmap
+[help]
+  autocorrect=8

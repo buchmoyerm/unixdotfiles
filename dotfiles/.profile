@@ -54,19 +54,18 @@ then
     esac
 fi
 
-if [ ${TMUX} ]
-then
-  if [ ${TERM} = xterm-256color ]
-  then
-    export TERM=screen-256color
-  fi
-fi
+#this fixes vim inside tmux when using EOD
+#it also breaks vim inside tmux when using putty 
+# if [ ${TMUX} ]
+# then
+#   if [ ${TERM} = xterm-256color ]
+#   then
+#     export TERM=screen-256color
+#   fi
+# fi
 
 # don't have the buffer get overwritten after window size changes
 shopt -s checkwinsize
-
-# no beeping
-set bell-style none
 
 # Reset
 Color_Off='\e[0m'       # Text Reset
@@ -194,8 +193,8 @@ prompt
 # export GIT_PS1_SHOWUNTRACKEDFILES=true
 
 alias findtsk='find . -name "*.tsk" -exec ls -l {} \;'
-alias ls="ls --color"
-alias ll="ls -lrt --color"
+alias ls="ls --color=auto"
+alias ll="ls -lrt --color=auto"
 alias less="less -i -R"
 alias ssh="ssh -x"
 alias bbhost="bbhost -u -P"

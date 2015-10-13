@@ -45,6 +45,7 @@ call vundle#begin()
 "   Plugin 'Lokaltog/vim-easymotion'
   Plugin 'kien/tabman.vim'
   Plugin 'a.vim'
+  Plugin 'tpope/vim-unimpaired'
 
   " Split navigation with tmux
   " --------------------------
@@ -59,6 +60,8 @@ call vundle#begin()
   " --------------
   Plugin 'tpope/vim-fugitive'
   Plugin 'vim-scripts/diffchanges.vim'
+  Plugin 'buchmoyerm/vim-diff-enhanced'
+  Plugin 'airblade/vim-gitgutter'
 
   " other
   " ----
@@ -66,7 +69,12 @@ call vundle#begin()
   Plugin 'tpope/vim-dispatch'
   Plugin 'gorkunov/smartpairs.vim'
   Plugin 'nathanaelkane/vim-indent-guides'
+  Plugin 'tpope/vim-repeat'
 
+  " UNIX helpers
+  " ------------
+  Plugin 'tpope/vim-eunuch'
+  
   Plugin 'AnsiEsc.vim'
 
   " Bloomberg
@@ -291,8 +299,18 @@ set ttyfast
 set list listchars=tab:>-,trail:.
 set nolist
 
+"Set default diff
+let &diffexpr='EnhancedDiff#Diff("git diff", "--diff-algorithm=histogram")'
+
 " use mouse to select
 behave mswin
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Bloomberg
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" give .mcfg xml filetype
+au BufNewFile,BufRead *.mcfg set ft=xml
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Keyboard settings/key bindings
@@ -380,9 +398,12 @@ noremap <silent> <C-TAB> :tabn<CR>
 noremap <silent> <C-S-TAB> :tabp<CR>
 
 " quickly exit insert mode without esc
-inoremap wj <Esc>
-vnoremap wj <Esc>
-snoremap wj <Esc>
+inoremap fj <Esc>
+vnoremap fj <Esc>
+snoremap fj <Esc>
+
+" highlight all matched under cursor but don't jump to next match
+nnoremap * :keepjumps normal! mi*`i<CR>
 
 " more natural navigation of log lines with word wrap
 nnoremap j gj
@@ -428,6 +449,11 @@ let g:Cmd2_options = {
 " cmap <expr> <Tab> Cmd2#ext#complete#InContext() ? "\<Plug>(Cmd2Complete)" : "\<Tab>"
 
 set wildcharm=<Tab>
+
+" Projmake settings
+" -----------------
+
+let g:useDispatch = 1
 
 " Easy Motion settings
 " --------------------
@@ -499,9 +525,9 @@ endif
 " => Search settings
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
     " OpenGrok by pressing K (only works on linux)
-if isLinux
-    nnoremap <silent> K :!firefox code.dev.bloomberg.com/opengrok/search?q=<cword> &<CR><CR>
-endif
+" if isLinux
+"     nnoremap <silent> K :!firefox code.dev.bloomberg.com/opengrok/search?q=<cword> &<CR><CR>
+" endif
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Status line settings
@@ -714,6 +740,9 @@ augroup reload_vimrc " {
       autocmd BufWritePost $MYVIMRC execute 'AirlineRefresh'
     endif
 augroup END " }
+
+" cleanup vim-fugitive buffers
+autocmd BufReadPost fugitive://* set bufhidden=delete
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Commands for command line

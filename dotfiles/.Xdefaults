@@ -72,17 +72,46 @@ Mwm*iconPlacement:		bottom right
 ! rxvtop2*foreground:Green
 
 ! disable truetype
-XTerm*vt100.renderFont: false
+XTerm*renderFont: false
+XTerm.VT100.renderFont: false
+
+! XTerm*iconName:Terminal
+! XTerm*eightBitInput:    false
+! XTerm*cursorBlink:      false
+! XTerm*faceName: Monospace
+! XTerm*cursorOffTime:    300
+! XTerm*metaSendsEscape:  true
+! XTerm*faceSize: 14
+! XTerm*title:    Terminal
+! XTerm*cursorOnTime:     300
+! XTerm*cursorUnderLine:  true
+Xft.antialias: 0
+! Xft.autohint: 0
+! Xft.dpi: 96
+Xft.hinting: 0
+! Xft.hintstyle: hintfull
+! Xft.lcdfilter: lcddefault
+! Xft.rgba: rgb
 
 ! enable utf8
 XTerm*utf8: true
 
-! *font: -bitstream-terminal-medium-r-normal--18-140-100-100-c-110-iso8859-1
-?*font: -*-fixed-medium-r-*-*-*-140-*-*-*-*-*-*
-?*bondFont: -*-fixed-bold-r-*-*-*-140-*-*-*-*-*-*
-!*font: -microsoft-consolas-medium-r-normal--16-154-75-75-m-90-iso8859-1 ! works, but not antialiased
+! ?*font: -bitstream-terminal-medium-r-normal--18-140-100-100-c-110-iso8859-1
+! XTerm*font: -*-fixed-medium-r-*-*-*-140-*-*-*-*-*-*
+! XTerm*bondFont: -*-fixed-bold-r-*-*-*-140-*-*-*-*-*-*
+! XTerm*font: -*-clean-r-*-*-*-160-*-*-*-*-*-*
+! XTerm*boldFont: -*-clean-bold-r-*-*-*-160-*-*-*-*-*-*
+! ?*font: -microsoft-consolas-medium-r-normal--16-154-75-75-m-90-iso8859-1 ! works, but not antialiased
 ! XTerm*font:     fixed
 ! XTerm*boldFont: fixed
+
+! xft.hintstyle: hintstyle
+
+! Xterm*font: xft:Source Code Pro:style=Regular:size=14
+! Xterm*boldFont: xft:Source Code Pro:style=Bold:size=14
+
+XTerm*font: xft:Ttyp0:style=Regular:size=14
+XTerm*boldFont: xft:Ttyp0:style=Bold:size=14
 
 ! URxvt*font: xft:Terminess Powerline:size=12
 
@@ -101,7 +130,7 @@ urxvt*bordercolor:	grey4
 
 urxvt*perl-ext-common: default,matcher,searchable-scrollback,tabbed
 !XTerm*faceName: Bitstream Vera Serif Mono
-!xterm*faceSize: 11
+! xterm*faceSize: 14
 xterm*vt100*geometry: 80x60
 xterm*saveLines: 16384
 xterm*charClass: 33:48,35:48,37:48,43:48,45-47:48,64:48,95:48,126:48

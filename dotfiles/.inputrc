@@ -3,5 +3,10 @@ $include /etc/inputrc
 # no beeping
 set bell-style none
 
+# FastX
 "\e[1;5C": forward-word
 "\e[1;5D": backward-word
+
+#Putty
+"\eOC": forward-word
+"\eOD": backward-word
