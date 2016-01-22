@@ -110,8 +110,9 @@ XTerm*utf8: true
 ! Xterm*font: xft:Source Code Pro:style=Regular:size=14
 ! Xterm*boldFont: xft:Source Code Pro:style=Bold:size=14
 
-XTerm*font: xft:Ttyp0:style=Regular:size=14
-XTerm*boldFont: xft:Ttyp0:style=Bold:size=14
+*?.font: xft:Ttyp0:style=Regular:size=14
+!*vt100.font:xft:Ttyp0:style=Regular:size=20
+! XTerm*boldFont: xft:Ttyp0:style=Bold:size=14
 
 ! URxvt*font: xft:Terminess Powerline:size=12
 

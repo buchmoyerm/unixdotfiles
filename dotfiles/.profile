@@ -5,8 +5,8 @@ echo "~/.profile has run"
 
 # =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 # commandline editing
-set -o emacs    # emacs style command line mode (default)
-#set -o vi      # vi style command line mode
+#set -o emacs    # emacs style command line mode (default)
+set -o vi      # vi style command line mode
 
 # =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 # this variable needs to be set for pnewtask/pnewscript to function
@@ -40,6 +40,9 @@ fi
 
 stty erase ^?
 
+#add ib build tools to path
+PATH=$PATH:/bbshr/ib/bin/
+
 # Set up terminal type
 if [ ${TERM} = xterm ]
 then
@@ -66,6 +69,14 @@ fi
 
 # don't have the buffer get overwritten after window size changes
 shopt -s checkwinsize
+
+# Typo tolerance
+shopt -s cdspell
+
+# History fixes
+export HISTFILESIZE=5000          # Store 5000 commands in history
+export HISTCONTROL=ignoredups    # Don't put duplicate lines in the history.
+shopt -s histappend                 # Append history rather than overwrite
 
 # Reset
 Color_Off='\e[0m'       # Text Reset
@@ -143,6 +154,26 @@ On_IWhite='\e[0;107m'   # White
 
 Ochre='\e[38;5;95m'
 
+function vi_mode_color {
+  TEST=`bind -v | awk '/keymap/ {print $NF}'`
+
+  if [ "$TEST" = 'vi-insert' ]; then
+    echo -e $Green
+  else
+    echo -e $Blue
+  fi
+}
+
+function vi_mode {
+  TEST=`bind -v | awk '/keymap/ {print $NF}'`
+
+  if [ "$TEST" = 'vi-insert' ]; then
+    echo "(ins)"
+  else
+    echo "(cmd)"
+  fi
+}
+
 function git_color {
   local git_status="$(git status 2> /dev/null)"
   
@@ -179,18 +210,30 @@ function git_branch {
 
 function prompt {
 #     export PS1="$BLACKBOLD[\t]$GREEN \u@\h$RESET:$BLUEBOLD\w$RESET$RED"'$(__git_ps1)'"$RESET \\$ "
-  PS1="\[$Yellow\][\t]\[$Color_Off\]\n"
+  #PS1="\[$Yellow\][\t]\[$Color_Off\]\n"
+  PS1=" "
   PS1+="\[$IBlue\]\u\[$Color_Off\]"
   PS1+="@"
   PS1+="\[$Green\]\h\[$Color_Off\]"
   PS1+=":\w"
   PS1+="\[\$(git_color)\]\$(git_branch)\[$Color_Off\]"
+  #PS1+="\[\$(vi_mode_color)\]\$(vi_mode)\[$Color_Off\]"
   PS1+=" \\$ "
 }
 prompt
 
 # export GIT_PS1_SHOWDIRTYSTATE=true
 # export GIT_PS1_SHOWUNTRACKEDFILES=true
+
+# function ssh {
+#     if [ "$(ps -p $(ps -p $$ -o ppid=) -o comm=)" = "tmux" ]; then
+#             tmux rename-window "$*"
+#             command ssh "$@"
+#             tmux set-window-option automatic-rename "on" 1>/dev/null
+#     else
+#             command ssh "$@"
+#     fi
+# }
 
 alias findtsk='find . -name "*.tsk" -exec ls -l {} \;'
 alias ls="ls --color=auto"
@@ -219,17 +262,26 @@ alias work="cd ~/workspace"
 
 # set up proxy so that github will work (needed for vundle)
 # no longer needed with contrib/devproxy in .bbprofile
-# export HTTP_PROXY="http://devproxy.bloomberg.com:82/"
-# export HTTPS_PROXY="http://devproxy.bloomberg.com:82/"
-# export NO_PROXY="localhost,.dev.bloomberg.com,127.0.0.0/8,10.0.0.0/8,172.16.0.0/12,192.168.0.0/16"
+#export HTTP_PROXY="http://devproxy.bloomberg.com:82/"
+#export HTTPS_PROXY="http://devproxy.bloomberg.com:82/"
+#export NO_PROXY="localhost,.dev.bloomberg.com,127.0.0.0/8,10.0.0.0/8,172.16.0.0/12,192.168.0.0/16"
+#export http_proxy="http://devproxy.bloomberg.com:82/"
+#export https_proxy="http://devproxy.bloomberg.com:82/"
+#export no_proxy="localhost,.dev.bloomberg.com,127.0.0.0/8,10.0.0.0/8,172.16.0.0/12,192.168.0.0/16"
 export GIT_SSL_NO_VERIFY=1
 
 # use vim compatible with YCM
 # alias gvimv="/opt/swt/bin/gvim -v"
-alias vim="/opt/swt/bin/gvim -v"
-alias gvim="/opt/swt/bin/gvim"
-export VISUAL="/opt/swt/bin/gvim -v"
+# alias vim="/opt/swt/bin/gvim -v"
+# alias gvim="/opt/swt/bin/gvim"
+# export VISUAL="/opt/swt/bin/gvim -v"
+alias vim="/opt/bb/bin/gvim -v"
+alias gvim="/opt/bb/bin/gvim"
+export VISUAL="/opt/bb/bin/gvim -v"
 export EDITOR="$VISUAL"
+
+# projmake should build 64 bits by default when both options are present
+IS_64BIT=yes
 
 # projmake auto complete
 function _projmake-completer {
@@ -239,15 +291,23 @@ function _projmake-completer {
 
 complete -o default -o nospace -F _projmake-completer projmake.sh 
 complete -o default -o nospace -F _projmake-completer projmake 
+complete -o plusdirs -o nospace -F _projmake-completer mksub.pl 
 
 # tab completion help
 bind 'set completion-ignore-case On'
 bind 'set show-all-if-ambiguous On'
 
+# show vi mode on prompt
+bind 'set show-mode-in-prompt on'
+
 
 source ./.bashrc
 
-echo -en "\033]0;$HOSTNAME\a"
+if [ -z $TMUX ]; then
+  PROMPT_COMMAND='echo -en "\033]0;$HOSTNAME: $(pwd -P)\a"'
+else
+  PROMPT_COMMAND='echo -en "\033]0;$HOSTNAME: \a"'
+fi
 
 bash_colors() {
   typeset -i PER_LINE=4

@@ -41,8 +41,8 @@
   logdr = log --color --date-order --graph --decorate --format=\"%C(yellow bold)%h%Creset %C(blue bold)%ar%Creset %C(auto)%d%Creset %s - %a\"  
 
   #pretty log
-  logp = log --color --date-order --format=\"%C(yellow)%h %Cblue%>(25)%ad %Cgreen%<(15)  %aN%C(auto)%d %Creset%s\"
-  logpr = log --color --date=relative --date-order --format=\"%C(yellow)%h %Cblue%>(12)%ad %Cgreen%<(15)  %aN%C(auto)%d %Creset%s\"
+  logp = log --color --date-order --format=\"%C(yellow)%h %Cblue%>(25)%ad %Cgreen%<(15)  %aN %Creset%s %C(auto)%d\"
+  logpr = log --color --date=relative --date-order --format=\"%C(yellow)%h %Cblue%>(12)%ad %Cgreen%<(15)  %aN %Creset%s %C(auto)%d\"
 
   # show number of commits per contributer, sorted
   count = shortlog -sn

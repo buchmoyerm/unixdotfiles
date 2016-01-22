@@ -42,7 +42,7 @@ call vundle#begin()
   Plugin 'tpope/vim-vinegar'
   "Plugin 'majutsushi/tagbar'
   Plugin 'mileszs/ack.vim'
-"   Plugin 'Lokaltog/vim-easymotion'
+  Plugin 'Lokaltog/vim-easymotion'
   Plugin 'kien/tabman.vim'
   Plugin 'a.vim'
   Plugin 'tpope/vim-unimpaired'
@@ -54,7 +54,7 @@ call vundle#begin()
   " syntax
   " ------
   Plugin 'tpope/vim-git'
-"   Plugin 'scrooloose/syntastic'
+  " Plugin 'scrooloose/syntastic'
 
   " source control
   " --------------
@@ -75,8 +75,6 @@ call vundle#begin()
   " ------------
   Plugin 'tpope/vim-eunuch'
   
-  Plugin 'AnsiEsc.vim'
-
   " Bloomberg
   " ---------
   Plugin 'file:///home/mbuchmoyer/mbig/dev/vim/projmake.vim'
@@ -164,6 +162,15 @@ if has("unix")
   endif
 endif
 
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => syntastic settings
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_cpp_check_header = 1
+let g:syntastic_cpp_checkers=['gcc']
+
+let g:syntastic_cpp_include_dirs = ['/bb/build/Linux-x86_64-64/release/robolibs/prod/lib/dpkgroot/opt/bb/include/', '/bb/build/Linux-x86_64-64/release/robolibs/weekly/share/include/00depbuild/', '/bb/build/Linux-x86_64-64/release/robolibs/weekly/share/include/00deployed/', '/bb/build/Linux-x86_64-64/release/robolibs/weekly/share/include/00offlonly/', '/bb/build/share/stp/include/00depbuild/', '/bb/build/share/stp/include/00deployed/', '/bb/build/share/stp/include/00offlonly/']
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Hack to get alt-alpha keys to work in terminal
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -181,15 +188,6 @@ while c <= 'z'
 endw
 
 call Alt_hack_char('\')
-
-" " ctrl+alt+alpha
-" let c='a'
-" while c<= 'z'
-"   let C = nr2char(char2nr(c)-32)
-"   exec "set <C-A-".C.">=^[".C
-"   exec "imap ^[".C." <C-A-".C.">"
-"   let c = nr2char(1+char2nr(c))
-" endw
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => VIM settings
@@ -247,7 +245,6 @@ set shortmess=atI
 set guioptions-=T  "remove toolbar from gui
 set nowrap
 set mouse=a
-set noswapfile
 set ignorecase
 set smartcase
 set showmatch
@@ -299,8 +296,20 @@ set ttyfast
 set list listchars=tab:>-,trail:.
 set nolist
 
+" set splitbelow
+set splitright
+
+" prefer diffs to be vertical
+set diffopt=filler,vertical
+
 "Set default diff
 let &diffexpr='EnhancedDiff#Diff("git diff", "--diff-algorithm=histogram")'
+
+"set indent guide colors
+let g:indent_guides_auto_colors = 0
+hi IndentGuidesOdd  ctermbg=darkblue
+hi IndentGuidesEven ctermbg=lightgrey
+" let g:indent_guides_guide_size = 1
 
 " use mouse to select
 behave mswin
@@ -310,7 +319,12 @@ behave mswin
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " give .mcfg xml filetype
-au BufNewFile,BufRead *.mcfg set ft=xml
+au BufNewFile,BufRead *.mcfg,*.cfg set ft=xml
+
+" Projmake settings
+" -----------------
+
+let g:useDispatch = 1
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Keyboard settings/key bindings
@@ -346,6 +360,14 @@ noremap <silent> <M-k> :TmuxNavigateUp<cr>
 noremap <silent> <M-l> :TmuxNavigateRight<cr>
 noremap <silent> <M-\> :TmuxNavigatePrevious<cr>
 
+" git gutter mappings
+let g:gitgutter_map_keys = 0
+nmap <leader>gs <Plug>GitGutterStageHunk
+nmap <leader>gu <Plug>GitGutterRevertHunk
+nmap <leader>gv <Plug>GitGutterPreviewHunk
+nmap ]c <Plug>GitGutterNextHunk
+nmap [c <Plug>GitGutterPrevHunk
+
 " Windows-like find all
 nnoremap <C-F> :Ack!<Space>
 
@@ -361,7 +383,7 @@ noremap <C-j> 10gj
 noremap <C-h> 5h
 noremap <C-l> 5l
 
-" Toggle tagba;
+" Toggle tagbar;
 nnoremap <silent> <F8> :TagbarToggle<CR>
 
 " 0 jumps to first non black char in line
@@ -381,21 +403,11 @@ vnoremap <C-v> c<ESC>"*p
 inoremap <C-v> <ESC>"*pa
 "nnoremap <C-v> "*p
 
-" windows style file saving
-nnoremap <C-s> :w<CR>
-nnoremap <S-C-s> :wa<CR>
-inoremap <C-s> <Esc>:w<CR>i
-inoremap <S-C-s> <Esc>:wa<CR>i
-
 " Move to next resent and put it in the middle of the split
 noremap <silent> n nzz
 noremap <silent> N Nzz
 
 noremap <leader><F2> :call StripTrailingWhitespace()<CR>
-
-" windows style tab navigation
-noremap <silent> <C-TAB> :tabn<CR>
-noremap <silent> <C-S-TAB> :tabp<CR>
 
 " quickly exit insert mode without esc
 inoremap fj <Esc>
@@ -417,6 +429,15 @@ nnoremap <leader><leader>m :set expandtab tabstop=2 shiftwidth=2 softtabstop=2<C
 
 " switch between wrap modes
 nnoremap \w :setlocal wrap!<CR>:setlocal wrap?<CR>
+
+" switch between paste modes (use unimpaired co* style)
+" event though tpope disagrees with paste mode having shortcut
+" tpope probably doesn't use putty like I am.
+nnoremap cop :set paste!<CR>
+
+"more co-* commands
+nnoremap cog :IndentGuidesToggle<CR>
+nnoremap coe :call ToggleList("Quickfix List", 'c')<CR>
 
 "Map F4 to toggle search results highlights
 nnoremap <silent> <F4> :set hlsearch!<CR>
@@ -449,11 +470,6 @@ let g:Cmd2_options = {
 " cmap <expr> <Tab> Cmd2#ext#complete#InContext() ? "\<Plug>(Cmd2Complete)" : "\<Tab>"
 
 set wildcharm=<Tab>
-
-" Projmake settings
-" -----------------
-
-let g:useDispatch = 1
 
 " Easy Motion settings
 " --------------------
@@ -683,21 +699,6 @@ if !has('python')
 else
   let g:ctrlp_match_func = { 'match': 'pymatcher#PyMatch' }
 endif
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Syntax validation settings
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-"let g:syntastic_always_populate_loc_list = 1
-"let g:syntastic_auto_loc_list = 1
-"let g:syntastic_check_on_open = 1
-"let g:syntastic_check_on_wq = 0
-
-" let g:syntastic_always_populate_loc_list = 1
-" let g:syntastic_cpp_check_header = 1
-" let g:syntastic_cpp_checkers=['gcc']
-" let g:syntastic_full_redraws=0
-" let g:syntastic_cpp_include_dirs = ['/bb/build/Linux-x86_64-64/release/robolibs/prod/lib/dpkgroot/opt/bb/include/', '/bb/build/Linux-x86_64-64/release/robolibs/weekly/share/include/00depbuild/', '/bb/build/Linux-x86_64-64/release/robolibs/weekly/share/include/00deployed/', '/bb/build/Linux-x86_64-64/release/robolibs/weekly/share/include/00offlonly/', '/bb/build/share/stp/include/00depbuild/', '/bb/build/share/stp/include/00deployed/', '/bb/build/share/stp/include/00offlonly/']
  
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Auto commands
@@ -750,6 +751,14 @@ autocmd BufReadPost fugitive://* set bufhidden=delete
 command! RemoveTrailingWhiteSpace call StripTrailingWhitespace()
 command! -nargs=1 -complete=file Vdiff call OpenDiffTab(<f-args>)
 command! ToggleScrollBind set scb! " I always forget this command. This should make it easier
+command! CommentConfig silent %s/^\(.\)/# \1/g | nohlsearch
+command! UncommentConfig silent %s/^# //g | nohlsearch
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Merge helpers
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+command! Mleft diffget //2 | diffup
+command! Mright diffget //3 | diffup
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Helper functions
@@ -798,6 +807,34 @@ function! VisualSelection(direction) range
     let @" = l:saved_reg
 endfunction
 
+" Used for toggling quick fix window
+function! GetBufferList()
+  redir =>buflist
+  silent! ls!
+  redir END
+  return buflist
+endfunction
+
+function! ToggleList(bufname, pfx)
+  let buflist = GetBufferList()
+  for bufnum in map(filter(split(buflist, '\n'), 'v:val =~ "'.a:bufname.'"'), 'str2nr(matchstr(v:val, "\\d\\+"))')
+    if bufwinnr(bufnum) != -1
+      exec(a:pfx.'close')
+      return
+    endif
+  endfor
+  if a:pfx == 'l' && len(getloclist(0)) == 0
+      echohl ErrorMsg
+      echo "Location List is Empty."
+      return
+  endif
+  " these commented winnr commands keep focus in original window
+  " let winnr = winnr()
+  exec('botright '.a:pfx.'open')
+  "  if winnr() != winnr
+  "    wincmd p
+  "  endif
+endfunction
 
 " Returns true if paste mode is enabled
 function! HasPaste()
