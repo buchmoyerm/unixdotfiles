@@ -1,8 +1,10 @@
 #!/bin/bash
 
-ROOT_DIR=${PROJMAKE_ROOT_DIR:-~/workspace/} 
+#ROOT_DIR=${PROJMAKE_ROOT_DIR:-~/workspace/} 
 
-INSTALL_DIR=${ROOT_DIR%%/}/install
+#INSTALL_DIR=${ROOT_DIR%%/}/install
+
+INSTALL_DIR=$(/home/slee601/bin/projmake --printenv PROJMAKE_INSTALL_BASE)
 
 if [ -d ${INSTALL_DIR} ]; then
   echo "Removing *.h from ${INSTALL_DIR}"

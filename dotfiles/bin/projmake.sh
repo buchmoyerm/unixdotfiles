@@ -6,7 +6,7 @@
 #   arg_string="$arg_string$arg "
 # done
 
-bld_cmd="/home/slee601/projmake/bin/projmake $@ -- -j10 -l32"
+bld_cmd="/home/slee601/bin/projmake $@ -- -j10 -l32"
 
 echo "Build Command:$bld_cmd"
 
