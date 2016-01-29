@@ -9,25 +9,34 @@
 # present menu for user to choose which workspace to open
 PS3="Please choose your session: "
 options=($(tmux list-sessions -F "#S") "New Session")
-echo "Available sessions"
-echo "------------------"
-echo " "
-select opt in "${options[@]}"
-do
-  case $opt in
-    "New Session")
-      read -p "Enter new session name: " SESSION_NAME
-      CONFIG_FILE="$HOME/.$SESSION_NAME.tmux.conf"
-      if [ -e "$CONFIG_FILE" ]; then
-        tmux -f "$CONFIG_FILE" new -s "$SESSION_NAME"
-      else
-        tmux new -s "$SESSION_NAME"
-      fi
-      break
-      ;;
-    *)
-      tmux attach-session -t $opt
-      break
-      ;;
-  esac
-done
+
+if [[ $1 ]]; then
+  if [[ " ${options[@]} " =~ "$@" ]]; then
+    choice="$@"
+    echo "attaching to $choice"
+  else
+    choice="$@"
+    echo "new session $choice"
+    tmux new -s "$choice"
+    exit
+  fi
+else
+  echo "Available sessions"
+  echo "------------------"
+  echo " "
+  select opt in "${options[@]}"
+  do 
+    choice=$opt 
+    break;
+  done
+fi
+
+case $choice in
+  "New Session")
+    read -p "Enter new session name: " SESSION_NAME
+    tmux new -s "$SESSION_NAME"
+    ;;
+  *)
+    tmux attach-session -t "$choice"
+    ;;
+esac
