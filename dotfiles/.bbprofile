@@ -5,8 +5,11 @@
 
 # enable bash shell
 + flag/bash
+#+ flag/zsh
 
-- flag/xterm256
++ flag/stty
+# + flag/xterm256
++ flag/optswt
 
 # ensure /bb/bin is not in path
 #- flag/bbbin
@@ -38,9 +41,11 @@
 + contrib/optbb
 
 # latest bash
-+ flag/optbbbash
+# + flag/optbbbash
 
-+contrib/bbgithub
++ contrib/colorls
++ contrib/bbgithub
++ contrib/bash_hist_flush
 
 # set up proxy vars for environment
 + contrib/devproxy

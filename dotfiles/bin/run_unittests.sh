@@ -16,7 +16,7 @@ INSTALL_DIR=${ROOT_DIR%%/}/install
     echo "attempting to run all available tests"
     for t in $tests; do
       echo "running $t"
-      echoe " "
+      echo " "
       $t
     done;
   else

@@ -9,13 +9,13 @@
   # show what I did today
   day = "!sh -c 'git log --reverse --no-merges --branches=* --date=local --after=\"yesterday 11:59PM\" --author=\"`git config --get user.name`\"'"
 
-  graph = log --graph --abbrev-commit --decorate --date=relative --color=always --format=format:'%C(bold blue)%h%C(reset) - %C(green)(%ar)%C(reset) %C(reset)%s%C(reset) %C(dim white)- %an%C(reset)%C(auto)%d%C(reset)' --all
-  graphtwolines =log --graph --abbrev-commit --decorate --color=always --format=format:'%C(bold blue)%h%C(reset) - %C(reset)%s%C(reset)%C(auto)%d%C(reset)%n''          %C(dim cyan)%aD%C(reset) %C(green)(%ar)%C(reset)%C(dim white) - %an%C(reset)' --all
+  graph = log --graph --abbrev-commit --decorate --date=relative --color=always --format=format:'%C(bold blue)%h%C(reset) - %C(green)(%ar)%C(reset) %C(reset)%s%C(reset) %C(dim white)- %aN%C(reset)%C(auto)%d%C(reset)' --all
+  graphtwolines =log --graph --abbrev-commit --decorate --color=always --format=format:'%C(bold blue)%h%C(reset) - %C(reset)%s%C(reset)%C(auto)%d%C(reset)%n''          %C(dim cyan)%aD%C(reset) %C(green)(%ar)%C(reset)%C(dim white) - %aN%C(reset)' --all
   lg = !"git graph"
   basename = !"basename $(git rev-parse --abbrev-ref HEAD)"
   arcyd = !"sh -c 'git push -u origin \"HEAD:r/${1-master}/$(git basename)\";\
                    git branch -m \"arcyd/${1-master}/$(git basename)\"' -"
-  whois = !"sh -c 'git log -i -1 --pretty=\"format:%an <%ae>\n\" --author=\"$1\"' -"
+  whois = !"sh -c 'git log -i -1 --pretty=\"format:%aN <%ae>\n\" --author=\"$1\"' -"
   whatis = show -s --pretty='tformat:%h (%s, %ad)' --date=short
   changes=diff --name-status -r
   branchdiff="diff origin/master...HEAD"
@@ -48,7 +48,7 @@
   count = shortlog -sn
 
 # from http://stackoverflow.com/a/22481650/351028
-  tree = log --all --graph --decorate=short --color --format=format:'%C(bold blue)%h%C(reset) %C(auto)%d%C(reset)\n         %C(white)[%cr]%C(reset)  %x09%C(white)%an: %s %C(reset)'
+  tree = log --all --graph --decorate=short --color --format=format:'%C(bold blue)%h%C(reset) %C(auto)%d%C(reset)\n         %C(white)[%cr]%C(reset)  %x09%C(white)%aN: %s %C(reset)'
   
   # from http://blog.apiaxle.com/post/handy-git-tips-to-stop-you-getting-fired/
   # assume file is unchanged git assume config.mk git unassume config.mk
@@ -93,3 +93,9 @@
   file=/home/mbuchmoyer/.gitmailmap
 [help]
   autocorrect=8
+[remote "*"]
+	prune = true
+[pull]
+	rebase = true
+[merge]
+	summary = true

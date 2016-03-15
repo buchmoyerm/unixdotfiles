@@ -1,9 +1,9 @@
 #!/bin/ksh
 
 IBINWR_TASK=ibinwr
-IBINWR_BIN_DIR=~/workspace/build/arbiters/Linux-x86_64-64/ibinwr/m_ibinwr
+IBINWR_BIN_DIR=~/workspace/build/ibinwr/Linux-x86_64-64/src/m_ibinwr
 IBINWR_LOG_DIR=~/workspace/data/tmp_logs
-IBINWR_CFG_DIR=~/workspace/arbiters/ibinwr/m_ibinwr
+IBINWR_CFG_DIR=~/workspace/ibinwr/src/m_ibinwr
 IBINWR_EXECUTABLE=ibinwr.linux_64
 
 export IBINWR_TASK

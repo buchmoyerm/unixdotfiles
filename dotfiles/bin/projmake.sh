@@ -6,8 +6,17 @@
 #   arg_string="$arg_string$arg "
 # done
 
-bld_cmd="/home/slee601/bin/projmake $@ -- -j10 -l32"
+bld_cmd="/home/slee601/bin/projmake $@ -- -j10 -l32'"
 
-echo "Build Command:$bld_cmd"
+if [ -f "x.mk" ]; then
 
-$bld_cmd
+  echo "setting config source"
+  echo "Build Command:$bld_cmd"
+  CONFIG_SRC=x.mk $bld_cmd
+
+else
+
+  echo "Build Command:$bld_cmd"
+  $bld_cmd
+
+fi

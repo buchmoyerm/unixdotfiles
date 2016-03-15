@@ -38,8 +38,6 @@ then
      fi
 fi
 
-stty erase ^?
-
 #add ib build tools to path
 PATH=$PATH:/bbshr/ib/bin/
 
@@ -236,11 +234,10 @@ prompt
 # }
 
 alias findtsk='find . -name "*.tsk" -exec ls -l {} \;'
-alias ls="ls --color=auto"
-alias ll="ls -lrt --color=auto"
+alias ll="ls -lrt"
 alias less="less -i -R"
 alias ssh="ssh -x"
-alias bbhost="bbhost -u -P"
+alias bbhost="/bb/bin/bbhost --cx -P"
 alias op1="/bb/admin/ngetprdwin.py -u op1 -d'op1' -i -s"
 
 function tcless() {

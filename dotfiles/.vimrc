@@ -74,6 +74,7 @@ call vundle#begin()
   " UNIX helpers
   " ------------
   Plugin 'tpope/vim-eunuch'
+  Plugin 'tpope/vim-commentary'
   
   " Bloomberg
   " ---------
@@ -301,6 +302,9 @@ set splitright
 
 " prefer diffs to be vertical
 set diffopt=filler,vertical
+
+" turn spell check on for git commit messages
+autocmd Filetype gitcommit setlocal spell
 
 "Set default diff
 let &diffexpr='EnhancedDiff#Diff("git diff", "--diff-algorithm=histogram")'
@@ -712,17 +716,17 @@ augroup CursorLine
 augroup END
 
 " Commenting blocks of code.
-augroup CommentLine
-  autocmd!
-  autocmd FileType c,cpp,java,scala let b:comment_leader = '// '
-  autocmd FileType sh,ruby,python   let b:comment_leader = '# '
-  autocmd FileType conf,fstab       let b:comment_leader = '# '
-  autocmd FileType tex              let b:comment_leader = '% '
-  autocmd FileType mail             let b:comment_leader = '> '
-  autocmd FileType vim              let b:comment_leader = '" '
-augroup END
-noremap <silent> <C-k><C-c> :<C-B>silent <C-E>s/^/<C-R>=escape(b:comment_leader,'\/')<CR>/<CR>:nohlsearch<CR>
-noremap <silent> <C-k><C-u> :<C-B>silent <C-E>s/^\V<C-R>=escape(b:comment_leader,'\/')<CR>//e<CR>:nohlsearch<CR>
+" augroup CommentLine
+"   autocmd!
+"   autocmd FileType c,cpp,java,scala let b:comment_leader = '// '
+"   autocmd FileType sh,ruby,python   let b:comment_leader = '# '
+"   autocmd FileType conf,fstab       let b:comment_leader = '# '
+"   autocmd FileType tex              let b:comment_leader = '% '
+"   autocmd FileType mail             let b:comment_leader = '> '
+"   autocmd FileType vim              let b:comment_leader = '" '
+" augroup END
+" noremap <silent> <C-k><C-c> :<C-B>silent <C-E>s/^/<C-R>=escape(b:comment_leader,'\/')<CR>/<CR>:nohlsearch<CR>
+" noremap <silent> <C-k><C-u> :<C-B>silent <C-E>s/^\V<C-R>=escape(b:comment_leader,'\/')<CR>//e<CR>:nohlsearch<CR>
 
 " Return to last edit position when opening files (You want this!)
 autocmd BufReadPost *
