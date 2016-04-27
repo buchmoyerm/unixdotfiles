@@ -1,0 +1,7 @@
+# ~/.bbrg.bash_complete to load some custom completions for bloomberg
+# =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+source $HOME/workspace/ib-build-tools/include/ib_bash_complete
+
+complete -F __ib_complete_projmake projmake 
+complete -o nospace -F __ib_complete_mksub mksub.pl 

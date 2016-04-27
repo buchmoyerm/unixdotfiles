@@ -1,0 +1,91 @@
+# ~/.bashrc.prompt set up bash prompt
+# =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+function vi_mode_color {
+  TEST=`bind -v | awk '/keymap/ {print $NF}'`
+
+  if [ "$TEST" = 'vi-insert' ]; then
+    echo -e $Green
+  else
+    echo -e $Blue
+  fi
+}
+
+function vi_mode {
+  TEST=`bind -v | awk '/keymap/ {print $NF}'`
+
+  if [ "$TEST" = 'vi-insert' ]; then
+    echo "(ins)"
+  else
+    echo "(cmd)"
+  fi
+}
+
+function git_color {
+  # local git_status="$(git status 2> /dev/null)"
+ 
+  local git_status=$1
+
+  if [[ ! $git_status =~ "working directory clean" ]]; then
+    echo $Red
+  elif [[ $git_status =~ "Your branch is ahead of" ]]; then
+    echo $Green
+  elif [[ $git_status =~ "Your branch is behind" ]]; then
+    echo $Yellow
+  elif [[ $git_status =~ "nothing to commit" ]]; then
+    echo $Cyan
+  else
+    echo $Ochre
+  fi
+
+}
+
+function git_branch {
+  local git_status="$(git status 2> /dev/null)"
+  local on_branch="On branch ([^${IFS}]*)"
+  local on_commit="HEAD detached at ([^${IFS}]*)"
+  local in_rebase="rebase in progress;"
+
+  # get the color
+  local col=$(git_color "$git_status")
+
+  if [[ $git_status =~ $on_branch ]]; then
+    local branch=${BASH_REMATCH[1]}
+    echo -e $" $col($branch)$Color_Off"
+  elif [[ $git_status =~ $on_commit ]]; then
+    local commit=${BASH_REMATCH[1]}
+    echo -e $" $col($commit)$Color_Off"
+  elif [[ $git_status =~ $in_rebase ]]; then
+    local rebase="~rebasing~"
+    echo -e $" $col($rebase)$Color_Off"
+  fi
+}
+
+# set PS1
+function prompt {
+  #PS1="\[$Yellow\][\t]\[$Color_Off\]\n"
+  PS1=" "
+  PS1+="\[$IBlue\]\u\[$Color_Off\]"
+  PS1+="@"
+  PS1+="\[$Green\]\h\[$Color_Off\]"
+  PS1+=":\w"
+  PS1+="\$(git_branch)"
+  #PS1+="\[\$(vi_mode_color)\]\$(vi_mode)\[$Color_Off\]"
+  PS1+=" \\$ "
+}
+prompt
+
+# put pwd in window title, but let tmux override it
+if [ -z $TMUX ]; then
+  PROMPT_COMMAND='echo -en "\033]0;$HOSTNAME: $(pwd -P)\a"'
+else
+  PROMPT_COMMAND='echo -en "\033]0;$HOSTNAME: \a"'
+fi
+
+# tab completion help
+bind 'set completion-ignore-case On'
+bind 'set show-all-if-ambiguous On'
+
+# show vi mode on prompt
+bind 'set show-mode-in-prompt on'
+

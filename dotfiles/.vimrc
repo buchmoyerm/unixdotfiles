@@ -397,15 +397,15 @@ noremap 0 ^
 noremap <C-F5> :checktime<CR>
 
 " Copy to clipboard
-vnoremap <C-c> "*y
+" vnoremap <C-c> "*y
 
 " Cut to clipboard
-vnoremap <C-x> "*c
+" vnoremap <C-x> "*c
 
 " Paste from the clipbaord
-vnoremap <C-v> c<ESC>"*p
-inoremap <C-v> <ESC>"*pa
-"nnoremap <C-v> "*p
+" vnoremap <C-v> c<ESC>"*p
+" inoremap <C-v> <ESC>"*pa
+" nnoremap <C-v> "*p
 
 " Move to next resent and put it in the middle of the split
 noremap <silent> n nzz
@@ -757,6 +757,9 @@ command! -nargs=1 -complete=file Vdiff call OpenDiffTab(<f-args>)
 command! ToggleScrollBind set scb! " I always forget this command. This should make it easier
 command! CommentConfig silent %s/^\(.\)/# \1/g | nohlsearch
 command! UncommentConfig silent %s/^# //g | nohlsearch
+
+" puts rcsid info in a file
+command! UpdateHeader !update_rcsid -a --nobackup %
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Merge helpers

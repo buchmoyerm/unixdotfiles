@@ -13,6 +13,11 @@
 ## Append the PATH variable to make sure the X command are found:
 ####
 
+# use XDM to know if login was from Exceed On Demand or putty
+export XDM=1
+
+echo "!!!!!!!RUNNING SECURE START!!!!!!"
+
 if echo ":${PATH}:" | grep -v ":/usr/bin/X11:" > /dev/null
 then
   PATH=${PATH}:/usr/bin/X11

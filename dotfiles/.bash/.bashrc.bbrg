@@ -1,0 +1,12 @@
+# ~/.bashrc.bbrg to load some bloomberg specific settings
+# =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+source $HOME/.bash/.bbrg.aliases
+
+# projmake should build 64 bits by default when both options are present
+export IS_64BIT=yes
+
+function mailme {
+  ($@ 2>&1) | uuencode mailme.txt | mailx -s "$(echo $@)" mbuchmoyer@bloomberg.net -- -f mbuchmoyer@bloomberg.net
+}
+

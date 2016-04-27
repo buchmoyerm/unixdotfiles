@@ -104,13 +104,14 @@ XTerm*utf8: true
 ! ?*font: -microsoft-consolas-medium-r-normal--16-154-75-75-m-90-iso8859-1 ! works, but not antialiased
 ! XTerm*font:     fixed
 ! XTerm*boldFont: fixed
+*font: -misc-fixed-medium-r-normal--18-120-100-100-c-90-iso8859-1
 
 ! xft.hintstyle: hintstyle
 
 ! Xterm*font: xft:Source Code Pro:style=Regular:size=14
 ! Xterm*boldFont: xft:Source Code Pro:style=Bold:size=14
 
-*?.font: xft:Ttyp0:style=Regular:size=14
+! *?.font: xft:Ttyp0:style=Regular:size=14
 !*vt100.font:xft:Ttyp0:style=Regular:size=20
 ! XTerm*boldFont: xft:Ttyp0:style=Bold:size=14
 

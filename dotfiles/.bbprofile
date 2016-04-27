@@ -41,11 +41,18 @@
 + contrib/optbb
 
 # latest bash
-# + flag/optbbbash
++ flag/optbbbash
 
 + contrib/colorls
 + contrib/bbgithub
 + contrib/bash_hist_flush
++ contrib/gnucore
 
 # set up proxy vars for environment
 + contrib/devproxy
+
+# ib flags
+# + flag/ib_autocomp
+
+# user verbose mode for chimera
++ flag/verbose
