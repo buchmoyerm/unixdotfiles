@@ -1,6 +1,7 @@
 # ~/.bbrg.alias to load some bloomberg specific aliases
 # =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
+alias projmake="$HOME/bin/projmake"
 alias bbhost="/bb/bin/bbhost --cx -P"
 alias role='xterm -T "ibbldbot Role Account" -bg darkgreen -e sudo su - ibbldbot &'
 alias projmake_clang='INSTRUMENT_CPP="/opt/bb/bin/clang++ --gcc-toolchain=/opt/bb/lib/gcc-4.8 -Xclang -fcolor-diagnostics" IS_GCC_WARNINGS_CLEAN= projmake'
