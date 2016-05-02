@@ -216,7 +216,8 @@ colorscheme molokai
 
 " Highlight the column at 80 chars (all code should be inside the column)
 highlight ColorColumn ctermbg=235 guibg=#2c2d27
-let &colorcolumn="80,".join(range(120,999),",")
+" let &colorcolumn="80,".join(range(120,999),",")
+let &colorcolumn="80"
 
 " augroup hilight_long_text
 "   autocmd BufEnter * highlight OverLength ctermbg=darkgrey guibg=#592929
