@@ -1,0 +1,19 @@
+# .bbrg.cmds some commands specific to bloomberg
+# =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+function __rbuilt_complete
+{
+  wksp="$HOME/workspace"
+  build="$wksp/build/$COMP_WORDS"
+  IFS=$'\n' tmp=( $(compgen -W "$(/opt/bb/bin/ls "$build")" -- "${COMP_WORDS[$COMP_CWORD]}" ))
+  COMPREPLY=( "${tmp[@]// /\ }" )
+}
+
+function rbuilt
+{
+  wksp="$HOME/workspace"
+  build="$wksp/build"
+  "$build/$@"
+}
+
+complete -F __rbuilt_complete rbuil:

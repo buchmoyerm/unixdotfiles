@@ -27,15 +27,15 @@ function git_color {
   local git_status=$1
 
   if [[ ! $git_status =~ "working directory clean" ]]; then
-    echo $Red
+    echo -e $Red
   elif [[ $git_status =~ "Your branch is ahead of" ]]; then
-    echo $Green
+    echo -e $Green
   elif [[ $git_status =~ "Your branch is behind" ]]; then
-    echo $Yellow
+    echo -e $Yellow
   elif [[ $git_status =~ "nothing to commit" ]]; then
-    echo $Cyan
+    echo -e $Cyan
   else
-    echo $Ochre
+    echo -e $Ochre
   fi
 
 }

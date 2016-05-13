@@ -1,0 +1,14 @@
+# ~/.bashrc.cmds to load some userful functions
+# =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+# well set the alias as well as add it to profile
+# for next login
+function add_alias
+{
+  input="$@"
+  c="${input[@]#*=}"
+  a="${input[@]%=*}"
+  echo "adding alias $a='$c'"
+  alias "$a=$c"
+  echo "alias $a='$c'" >> $HOME/.bash/.bashrc.aliases
+}

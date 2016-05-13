@@ -66,4 +66,7 @@ source $HOME/.bash/.bashrc.aliases
 source $HOME/.bash/.bashrc.prompt
 source $HOME/.bash/.bashrc.git
 source $HOME/.bash/.bashrc.bbrg
+source $HOME/.bash/.bashrc.cmds
 
+PATH="$HOME/workspace/git-ib:$PATH"
+source $HOME/workspace/git-ib/git-ib-autocomplete.sh

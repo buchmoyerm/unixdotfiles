@@ -2,13 +2,16 @@
 # set up some generic bash aliases
 # =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
-alias findtsk='find . -name "*.tsk" -exec ls -l {} \;'
-alias ls="ls --group-directories-first --color=always -F -1"
-alias ll="ls --group-directories-first -lhrt"
-alias less="less -i -R"
-alias ssh="ssh -x"
+alias findtsk='find . -name '*.tsk' -exec ls -l {} \;'
+alias ls='ls --group-directories-first --color=always -F -1'
+alias ll='ls --group-directories-first -lhrt'
+alias tree='tree -C'
+alias less='less -i -R'
+alias ssh='ssh -x'
 
-alias work="cd ~/workspace"
+alias work='cd ~/workspace'
 
-alias vim="/opt/bb/bin/gvim -v -p"
-alias gvim="/opt/bb/bin/gvim -p"
+alias vim='/opt/bb/bin/gvim -v -p'
+alias gvim='/opt/bb/bin/gvim -p'
+alias utc='date --utc'
+alias today='date +%F'

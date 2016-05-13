@@ -864,3 +864,8 @@ function! ToggleRelative()
     endif
 endfunction
 
+command! FreeLibs call AddFreeLibs()<cr>
+
+function! AddFreeLibs()
+    r~/free_libs.txt
+endfunction
