@@ -17,7 +17,7 @@ INSTALL_DIR=${ROOT_DIR%%/}/install
     for t in $tests; do
       echo "running $t"
       echo " "
-      $t
+      $t --gtest_color=yes
     done;
   else
     echo "No unit tests found"

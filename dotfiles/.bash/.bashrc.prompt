@@ -1,6 +1,11 @@
 # ~/.bashrc.prompt set up bash prompt
 # =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
+function __ps1_color {
+  local color=$1
+  [[ ! -z "$color" ]] && printf '\001%s\002' $color
+}
+
 function vi_mode_color {
   TEST=`bind -v | awk '/keymap/ {print $NF}'`
 
@@ -27,15 +32,15 @@ function git_color {
   local git_status=$1
 
   if [[ ! $git_status =~ "working directory clean" ]]; then
-    echo -e $Red
+    printf $Red
   elif [[ $git_status =~ "Your branch is ahead of" ]]; then
-    echo -e $Green
+    printf $Green
   elif [[ $git_status =~ "Your branch is behind" ]]; then
-    echo -e $Yellow
+    printf $Yellow
   elif [[ $git_status =~ "nothing to commit" ]]; then
-    echo -e $Cyan
+    printf $Cyan
   else
-    echo -e $Ochre
+    printf $Ochre
   fi
 
 }
@@ -48,16 +53,18 @@ function git_branch {
 
   # get the color
   local col=$(git_color "$git_status")
+  local col_on=$(__ps1_color $col)
+  local col_off=$(__ps1_color $Color_Off)
 
   if [[ $git_status =~ $on_branch ]]; then
     local branch=${BASH_REMATCH[1]}
-    echo -e $" $col($branch)$Color_Off"
+    printf ' %s(%s)%s' $col_on $branch $col_off
   elif [[ $git_status =~ $on_commit ]]; then
     local commit=${BASH_REMATCH[1]}
-    echo -e $" $col($commit)$Color_Off"
+    printf ' %s(%s)%s' $col_on $commit $col_off
   elif [[ $git_status =~ $in_rebase ]]; then
     local rebase="~rebasing~"
-    echo -e $" $col($rebase)$Color_Off"
+    printf ' %s(%s)%s' $col_on $rebase $col_off
   fi
 }
 

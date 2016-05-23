@@ -1,10 +1,7 @@
 let os = system("uname")
 let isLinux = (os == "Linux\n")
-let useAirline = has("gui_running") && isLinux
-" let useAirline = isLinux
 let useLightLine = !isLinux || !has("gui_running")
 " let useLightLine = 0
-" let useAirlineFont = has("gui_running")
 
 set nocompatible              " be iMproved, required
 filetype off                  " required
@@ -25,18 +22,10 @@ call vundle#begin()
 
   " colorschemes
   " -------------
-  Plugin 'nanotech/jellybeans.vim'
   Plugin 'tomasr/molokai'
-  Plugin 'altercation/vim-colors-solarized'
-  Plugin 'chriskempson/vim-tomorrow-theme'
-
-  " colorscheme support for command line
-  " ------------------------------------
-"   Plugin 'colorsupport.vim'
 
   " file navigation
   " ---------------
-  "Plugin 'scrooloose/nerdtree'
   Plugin 'kien/ctrlp.vim'
   Plugin 'FelikZ/ctrlp-py-matcher'
   Plugin 'tpope/vim-vinegar'
@@ -54,6 +43,7 @@ call vundle#begin()
   " syntax
   " ------
   Plugin 'tpope/vim-git'
+  Plugin 'octol/vim-cpp-enhanced-highlight'
   " Plugin 'scrooloose/syntastic'
 
   " source control
@@ -85,13 +75,9 @@ call vundle#begin()
   Plugin 'junegunn/vim-peekaboo'
   Plugin ('gelguy/Cmd2.vim')
 
-  " platform specific plugins
+  " status bar
   " -------------------------
-  if useAirline
-    Plugin 'bling/vim-airline'
-  elseif useLightLine
-    Plugin 'itchyny/lightline.vim'
-  endif
+  Plugin 'itchyny/lightline.vim'
 
   if has("unix")
     if !v:shell_error && isLinux
@@ -318,6 +304,10 @@ hi IndentGuidesEven ctermbg=lightgrey
 
 " use mouse to select
 behave mswin
+
+" C syntax highlight settings
+let g:cpp_class_scope_highlight = 1
+let g:cpp_experimental_template_highlight = 1
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Bloomberg
@@ -557,54 +547,8 @@ endif
 " Always show air-line (even when there isn't a split)
 set laststatus=2
 
-" set statusline+=[%{&fo}]
-" set statusline+=%#warningmsg#
-" set statusline+=%{SyntasticStatuslineFlag()}
-"   set statusline+=%*
-
-
-if useAirline
-
-"   "toggle showing whitespace or not
-  noremap <silent> <C-k><C-w> :AirlineToggleWhitespace<CR>
-
-  let g:airline_section_y = ''  " don't show file encoding
-  let g:airline#extensions#tabline#enabled = 1 "enable tabline
-  let g:airline#extensions#whitespace#enabled = 0  " don't show whitespace default
-  let g:airline#extensions#tabline#show_buffers = 0 " don't show buffer line
-"   let g:airline#extensions#bufferline#enabled = 0 " don't show buffer line
-  let g:airline#extensions#branch#format = 1 " show just the tail of the the branch
-
-  " load font for glyphs
-"   let g:airline_powerline_fonts = 1
-
-"   let g:Powerline_symbols = 'fancy'
-
-  if !exists('g:airline_symbols')
-      let g:airline_symbols = {}
-  endif
-  let g:airline_symbols.space = "\ua0"
-
-  let g:airline_left_sep=''
-  let g:airline_right_sep=''
-
-  " Set the text to display in each mode (take up less space)
-  let g:airline_mode_map = {
-      \ '__' : '-',
-      \ 'n'  : 'N',
-      \ 'i'  : 'I',
-      \ 'R'  : 'R',
-      \ 'c'  : 'C',
-      \ 'v'  : 'V',
-      \ 'V'  : 'V',
-      \ '' : 'V',
-      \ 's'  : 'S',
-      \ 'S'  : 'S',
-      \ '' : 'S',
-      \ }
-
-elseif useLightLine
-
+"-------------------------
+"  Lightline settings
   let g:lightline = {
     \ 'enable': {
       \     'statusline': 1,
@@ -694,7 +638,7 @@ function! LightlineFugitive() abort
   endtry
   return ''
 endfunction
-endif
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => settings for improving CtrlP functionality
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -742,9 +686,6 @@ set viminfo^=%
 augroup reload_vimrc " {
     autocmd!
     autocmd BufWritePost $MYVIMRC nested source $MYVIMRC
-    if useAirline
-      autocmd BufWritePost $MYVIMRC execute 'AirlineRefresh'
-    endif
 augroup END " }
 
 " cleanup vim-fugitive buffers
