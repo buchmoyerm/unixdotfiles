@@ -5,7 +5,6 @@
 # add lines here very carefully as this may execute when you don't
 # expect them to
 # =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
-echo "BASHRC has run"
 
 # =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 # if chimera generated aliases exist, pull them into the current ENV
@@ -41,21 +40,29 @@ uname=`uname`
 set -o vi      # vi style command line mode
 # =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
+# set -o notify
+
 # try to get backspace working correctly
 stty erase \^\h kill \^u intr \^c
 stty echoe echok ixon ixoff -ixany
 stty erase ^?
 
-# don't have the buffer get overwritten after window size changes
-shopt -s checkwinsize
+shopt -s checkwinsize # don't have the buffer get overwritten after window size changes
+shopt -s cdspell # Typo tolerance
+shopt -s autocd # just type dir name to cd
+shopt -s checkhash # check for command in hash table before looking it up in path
+shopt -s cdable_vars # cd can accept variabls that hold directory names
+shopt -s checkjobs # list status of any running jobs before exiting 
+shopt -s histappend # Append history rather than overwrite
+shopt -s cmdhist # save all lines of multi line command
+shopt -s extglob # extended pattern matching for bash completion
+shopt -s globstar # '**' matches all files and no directories
+shopt -s dirspell # typo tolerance when tab completing directories
 
-# Typo tolerance
-shopt -s cdspell
 
 # History fixes
 export HISTFILESIZE=5000          # Store 5000 commands in history
 export HISTCONTROL=ignoredups    # Don't put duplicate lines in the history.
-shopt -s histappend                 # Append history rather than overwrite
 
 export GREP_OPTIONS="--color=auto"
 export VISUAL="/opt/bb/bin/gvim -v"

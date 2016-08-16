@@ -9,8 +9,8 @@ fi
 # echo $((16#$1))
 
 BC_LINE_LENGTH=1000
-HEX=$(echo $1 | tr '[:lower:]' '[:upper:]')
-DEC=$(echo "ibase=16;obase=A;$HEX" | bc)
+DEC=$1
+HEX=$(echo "ibase=A;obase=16;$DEC" | bc)
 
-echo $DEC
+echo $HEX
 

@@ -87,6 +87,7 @@
 	default = upstream
 [core]
   pager = "less -i -R -S -# 4"
+	excludesfile = /home/mbuchmoyer/.gitignore_global
 [log]
   date=local
 [mailmap]

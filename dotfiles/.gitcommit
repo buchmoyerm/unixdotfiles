@@ -1,7 +1,7 @@
 <Title>
 
 Summary:
-https://ipm.bloomberg.com/jira/browse/<issue id>
+https://jira3.prod.bloomberg.com:8443/browse/<issue id>
 <Summary of changes>
  
 Test Plan: <Description of testing>

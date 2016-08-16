@@ -20,7 +20,7 @@
 #+ flag/dumpinfo
  
 # verbose login info & other stuff (if you like seeing what's up)
-#+ flag/verbose
++ flag/verbose
 
 # propagate chimera aliases to subshells
 # (should not be necessary if all shells are login shells)
@@ -53,6 +53,3 @@
 
 # ib flags
 # + flag/ib_autocomp
-
-# user verbose mode for chimera
-+ flag/verbose

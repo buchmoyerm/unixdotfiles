@@ -43,7 +43,7 @@ call vundle#begin()
   " syntax
   " ------
   Plugin 'tpope/vim-git'
-  Plugin 'octol/vim-cpp-enhanced-highlight'
+  " Plugin 'octol/vim-cpp-enhanced-highlight'
   " Plugin 'scrooloose/syntastic'
 
   " source control
@@ -233,6 +233,7 @@ set shortmess=atI
 set guioptions-=T  "remove toolbar from gui
 set nowrap
 set mouse=a
+set ttymouse=xterm2
 set ignorecase
 set smartcase
 set showmatch
