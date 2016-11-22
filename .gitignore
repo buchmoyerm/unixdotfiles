@@ -2,3 +2,6 @@ dotfiles/bin/build.sh
 dotfiles/bin/build_clean.sh
 multi-ssh
 multi-op1
+dotfiles/.vim/plugged
+dotfiles/.config/sublime-text-3
+dotfiles/.vim/.netrwhist

@@ -1,5 +1,4 @@
 #!/bin/bash
-
 # ~/.bashrc skeleton
 # ~/.bashrc runs ONLY on non-login subshells! (different from ksh)
 # add lines here very carefully as this may execute when you don't

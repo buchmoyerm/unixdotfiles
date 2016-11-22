@@ -4,91 +4,87 @@ let useLightLine = !isLinux || !has("gui_running")
 " let useLightLine = 0
 
 set nocompatible              " be iMproved, required
-filetype off                  " required
 
 " set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
+call plug#begin()
 
   " let Vundle manage Vundle, required
-  Plugin 'gmarik/Vundle.vim'
+  Plug 'gmarik/Vundle.vim'
 
   " Vundles
   " =======
   
   " sensible default settings
   " -------------------------
-  Plugin 'tpope/vim-sensible'
+  Plug 'tpope/vim-sensible'
 
   " colorschemes
   " -------------
-  Plugin 'tomasr/molokai'
+  Plug 'tomasr/molokai'
 
   " file navigation
   " ---------------
-  Plugin 'kien/ctrlp.vim'
-  Plugin 'FelikZ/ctrlp-py-matcher'
-  Plugin 'tpope/vim-vinegar'
-  "Plugin 'majutsushi/tagbar'
-  Plugin 'mileszs/ack.vim'
-  Plugin 'Lokaltog/vim-easymotion'
-  Plugin 'kien/tabman.vim'
-  Plugin 'a.vim'
-  Plugin 'tpope/vim-unimpaired'
-  Plugin 'tmhedberg/SimpylFold' "folds
+   Plug 'kien/ctrlp.vim' | Plug 'FelikZ/ctrlp-py-matcher' 
+
+  Plug 'tpope/vim-vinegar'
+  "Plug 'majutsushi/tagbar'
+  Plug 'mileszs/ack.vim'
+  Plug 'Lokaltog/vim-easymotion'
+  Plug 'kien/tabman.vim'
+  Plug 'a.vim'
+  Plug 'tpope/vim-unimpaired'
+  Plug 'tmhedberg/SimpylFold' "folds
 
   " Split navigation with tmux
   " --------------------------
-  Plugin 'christoomey/vim-tmux-navigator'
+  Plug 'christoomey/vim-tmux-navigator'
 
   " syntax
   " ------
-  Plugin 'tpope/vim-git'
-  " Plugin 'octol/vim-cpp-enhanced-highlight'
-  " Plugin 'scrooloose/syntastic'
+  Plug 'tpope/vim-git'
+  " Plug 'octol/vim-cpp-enhanced-highlight'
+  " Plug 'scrooloose/syntastic'
 
   " source control
   " --------------
-  Plugin 'tpope/vim-fugitive'
-  Plugin 'vim-scripts/diffchanges.vim'
-  Plugin 'buchmoyerm/vim-diff-enhanced'
-  Plugin 'airblade/vim-gitgutter'
+  Plug 'tpope/vim-fugitive'
+  Plug 'vim-scripts/diffchanges.vim'
+  Plug 'buchmoyerm/vim-diff-enhanced'
+  Plug 'airblade/vim-gitgutter'
 
   " other
   " ----
-"   Plugin 'closetag.vim'
-  Plugin 'tpope/vim-dispatch'
-  Plugin 'gorkunov/smartpairs.vim'
-  Plugin 'nathanaelkane/vim-indent-guides'
-  Plugin 'tpope/vim-repeat'
+"   Plug 'closetag.vim'
+  Plug 'tpope/vim-dispatch'
+  Plug 'gorkunov/smartpairs.vim'
+  Plug 'nathanaelkane/vim-indent-guides'
+  Plug 'tpope/vim-repeat'
 
   " UNIX helpers
   " ------------
-  Plugin 'tpope/vim-eunuch'
-  Plugin 'tpope/vim-commentary'
+  Plug 'tpope/vim-eunuch'
+  Plug 'tpope/vim-commentary'
   
   " Bloomberg
   " ---------
-  Plugin 'file:///home/mbuchmoyer/mbig/dev/vim/projmake.vim'
-"   Plugin 'ssh://bbgithub.dev.bloomberg.com/mbuchmoyer/bbprojmake.vim.git'
+  Plug 'file:///home/mbuchmoyer/mbig/dev/vim/projmake.vim'
+"   Plug 'ssh://bbgithub.dev.bloomberg.com/mbuchmoyer/bbprojmake.vim.git'
 
   " peekaboo needs Cmd2 hack to work on commandline
-  Plugin 'junegunn/vim-peekaboo'
-  Plugin ('gelguy/Cmd2.vim')
+  Plug 'gelguy/Cmd2.vim' | Plug 'junegunn/vim-peekaboo' 
 
   " status bar
   " -------------------------
-  Plugin 'itchyny/lightline.vim'
+  Plug 'itchyny/lightline.vim'
 
   if has("unix")
     if !v:shell_error && isLinux
-      Plugin 'Valloric/YouCompleteMe'
+      Plug 'Valloric/YouCompleteMe'
     endif
   endif
 
 " All of your Plugins must be added before the following line
-call vundle#end()            " required
-filetype plugin on    " required
+call plug#end()            " required
 
 " let comma be used as map leader
 let mapleader=","

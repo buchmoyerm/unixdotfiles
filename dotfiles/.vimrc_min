@@ -8,3 +8,7 @@ snoremap fj <Esc>
 " more natural navigation of log lines with word wrap
 nnoremap j gj
 nnoremap k gk
+
+set showcmd
+set cmdheight=2
+set laststatus=2
