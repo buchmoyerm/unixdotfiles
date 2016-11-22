@@ -35,6 +35,7 @@ call vundle#begin()
   Plugin 'kien/tabman.vim'
   Plugin 'a.vim'
   Plugin 'tpope/vim-unimpaired'
+  Plugin 'tmhedberg/SimpylFold' "folds
 
   " Split navigation with tmux
   " --------------------------
@@ -177,6 +178,16 @@ endw
 call Alt_hack_char('\')
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => SimplyFold settings
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+let g:SimpylFold_docstring_preview = 1
+let g:SimpylFold_fold_docstring = 0
+" let g:SimpylFold_fold_import = 0
+
+autocmd BufWinLeave *.py setlocal foldexpr< foldmethod<
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => VIM settings
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set encoding=utf-8
@@ -250,34 +261,26 @@ set hlsearch    "highlight the search results
 set virtualedit=block
 set comments=s1:/*,mb:\ *,elx:\ */
 "set term=dtterm
+set expandtab " Use spaces instead of tabs
+set cmdheight=2 " Height of the command bar
+set splitright " set splitbelow
+set nofoldenable " open vim without folds
+set ttimeoutlen=50 "set timeoutlen=50
+set wildmenu
+set wildmode=list:longest,full
+set wildignore=*.o,*~,*.gch,*.pyc,*.jpg,*.gif,*.png " Ignore compiled files
+set fo-=t " remove menu from gvim
 
 " ignore these suffixes when searching files with multiple matches
 set suffixes=.back,~,.o,.info,.swp,.obj
 " set suffixes=.back,~,.h,.o,.info,.swp,.obj
 
-set fo-=t
-
 let g:netrw_special_syntax=1
-
-"set timeoutlen=50
-set ttimeoutlen=50
-
-set wildmenu
-set wildmode=list:longest,full
-
-" Ignore compiled files
-set wildignore=*.o,*~,*.gch,*.pyc,*.jpg,*.gif,*.png
 
 " Turn backup off, since most stuff is in SVN, git et.c anyway...
 set nobackup
 set nowb
 set noswapfile
-
-" Use spaces instead of tabs
-set expandtab
-
-" Height of the command bar
-set cmdheight=2
 
 set ttyfast
 
@@ -285,8 +288,6 @@ set ttyfast
 set list listchars=tab:>-,trail:.
 set nolist
 
-" set splitbelow
-set splitright
 
 " prefer diffs to be vertical
 set diffopt=filler,vertical
@@ -442,10 +443,10 @@ nnoremap <silent> <F4> :set hlsearch!<CR>
 nnoremap <silent> <S-F4> :DiffChangesDiffToggle<CR>
 
 "Toggle for showing whitespace
-noremap <C-k>l :set list!<CR>
+" noremap <C-k>l :set list!<CR>
 
 "Toggle scrollbinding on all windows
-nnoremap <C-k>s :windo set scrollbind!<CR>
+" nnoremap <C-k>s :windo set scrollbind!<CR>
 
 "use cmd2 mode
 " nmap : :<F12>

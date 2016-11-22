@@ -3,6 +3,7 @@
 
 source $HOME/.bash/.bbrg.aliases
 source $HOME/.bash/.bbrg.bash_complete
+source $HOME/.bash/.bbrg.cmds
 
 # projmake should build 64 bits by default when both options are present
 # export IS_64BIT=yes

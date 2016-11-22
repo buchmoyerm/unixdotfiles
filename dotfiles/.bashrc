@@ -43,9 +43,8 @@ set -o vi      # vi style command line mode
 # set -o notify
 
 # try to get backspace working correctly
-stty erase \^\h kill \^u intr \^c
 stty echoe echok ixon ixoff -ixany
-stty erase ^?
+[[ $uname == "Linux" ]] && stty erase ^? ||  stty erase \^\h kill \^u intr \^c
 
 shopt -s checkwinsize # don't have the buffer get overwritten after window size changes
 shopt -s cdspell # Typo tolerance
@@ -65,7 +64,7 @@ export HISTFILESIZE=5000          # Store 5000 commands in history
 export HISTCONTROL=ignoredups    # Don't put duplicate lines in the history.
 
 export GREP_OPTIONS="--color=auto"
-export VISUAL="/opt/bb/bin/gvim -v"
+export VISUAL="vim -u ~/.vimrc_min"
 export EDITOR="$VISUAL"
 
 source $HOME/.bash/.bashrc.colors

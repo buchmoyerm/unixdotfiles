@@ -3,10 +3,10 @@
 
 function __rbuilt_complete
 {
-  wksp="$HOME/workspace"
-  build="$wksp/build/$COMP_WORDS"
-  IFS=$'\n' tmp=( $(compgen -W "$(/opt/bb/bin/ls "$build")" -- "${COMP_WORDS[$COMP_CWORD]}" ))
-  COMPREPLY=( "${tmp[@]// /\ }" )
+  local cur=${COMP_WORDS[COMP_CWORD]}
+  local wksp="$HOME/workspace"
+  local build="$wksp/build/"
+  COMPREPLY=( $(compgen -d -- $build ) )
 }
 
 function rbuilt
@@ -16,4 +16,4 @@ function rbuilt
   "$build/$@"
 }
 
-complete -F __rbuilt_complete rbuil:
+complete -F __rbuilt_complete rbuilt

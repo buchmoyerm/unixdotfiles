@@ -85,10 +85,12 @@ prompt
 
 # put pwd in window title, but let tmux override it
 if [ -z $TMUX ]; then
-  PROMPT_COMMAND='echo -en "\033]0;$HOSTNAME: $(pwd -P)\a"'
+  HOST_COMMAND='echo -en "\033]0;$HOSTNAME: $(pwd -P)\a"'
 else
-  PROMPT_COMMAND='echo -en "\033]0;$HOSTNAME: \a"'
+  HOST_COMMAND='echo -en "\033]0;$HOSTNAME: \a"'
 fi
+
+PROMPT_COMMAND="${PROMPT_COMMAND} ; ${HOST_COMMAND}"
 
 # tab completion help
 bind 'set completion-ignore-case On'

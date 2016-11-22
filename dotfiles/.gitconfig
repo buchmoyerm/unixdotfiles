@@ -87,6 +87,7 @@
 	default = upstream
 [core]
   pager = "less -i -R -S -# 4"
+  editor = "/opt/bb/bin/gvim -v"
 	excludesfile = /home/mbuchmoyer/.gitignore_global
 [log]
   date=local
@@ -94,9 +95,7 @@
   file=/home/mbuchmoyer/.gitmailmap
 [help]
   autocorrect=8
-[remote "*"]
+[remote]
 	prune = true
-[pull]
-	rebase = true
 [merge]
 	summary = true

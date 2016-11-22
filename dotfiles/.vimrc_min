@@ -1,0 +1,10 @@
+syntax on
+
+" quickly exit insert mode without esc
+inoremap fj <Esc>
+vnoremap fj <Esc>
+snoremap fj <Esc>
+
+" more natural navigation of log lines with word wrap
+nnoremap j gj
+nnoremap k gk

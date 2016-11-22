@@ -22,6 +22,8 @@
 # verbose login info & other stuff (if you like seeing what's up)
 + flag/verbose
 
++ flag/vastogit
+
 # propagate chimera aliases to subshells
 # (should not be necessary if all shells are login shells)
 # if your Xwindows are not login shells and you have alias issues
