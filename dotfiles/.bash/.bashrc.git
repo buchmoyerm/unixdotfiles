@@ -4,7 +4,7 @@
 # git types
 alias g="git"
 alias gi="git"
-__git_complete g _git
-__git_complete gi _git
+#__git_complete g _git
+#__git_complete gi _git
 
 export GIT_SSL_NO_VERIFY=1

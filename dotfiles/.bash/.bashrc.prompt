@@ -90,7 +90,11 @@ else
   HOST_COMMAND='echo -en "\033]0;$HOSTNAME: \a"'
 fi
 
-PROMPT_COMMAND="${PROMPT_COMMAND} ; ${HOST_COMMAND}"
+if [ -z $PROMPT_COMMAND ] ; then
+  PROMPT_COMMAND="${HOST_COMMAND}"
+else
+  PROMPT_COMMAND="${PROMPT_COMMAND} ; ${HOST_COMMAND}"
+fi
 
 # tab completion help
 bind 'set completion-ignore-case On'

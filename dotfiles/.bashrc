@@ -5,6 +5,9 @@
 # expect them to
 # =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
+# source default .bashrc
+source /etc/skel/.bashrc
+
 # =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 # if chimera generated aliases exist, pull them into the current ENV
 [ -f ~/.bbalias ] && . ~/.bbalias
@@ -70,8 +73,9 @@ source $HOME/.bash/.bashrc.colors
 source $HOME/.bash/.bashrc.aliases
 source $HOME/.bash/.bashrc.prompt
 source $HOME/.bash/.bashrc.git
-source $HOME/.bash/.bashrc.bbrg
+#source $HOME/.bash/.bashrc.bbrg
 source $HOME/.bash/.bashrc.cmds
 
-PATH="$HOME/workspace/git-ib:$PATH"
-source $HOME/workspace/git-ib/git-ib-autocomplete.sh
+PATH="${HOME}/bin:${PATH}"
+#PATH="$HOME/workspace/git-ib:$PATH"
+#source $HOME/workspace/git-ib/git-ib-autocomplete.sh
