@@ -8,5 +8,10 @@ set bell-style none
 "\e[1;5D": backward-word
 
 #Putty
-"\eOC": forward-word
-"\eOD": backward-word
+# "\eOC": forward-word
+# "\eOD": backward-word
+
+$if mode=vi
+  set keymap vi-insert
+  "fj": vi-movement-mode
+$endif

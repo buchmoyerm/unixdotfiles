@@ -1,19 +1,14 @@
 #!/bin/bash
-# export PATH=$PATH:/usr/local/bin
-
-# abort if we're already inside a TMUX session
-[ "$TMUX" == "" ] || exit 0
-# startup a "default" session if non currently exists
-# tmux has-session -t _default || tmux new-session -s _default -d
 
 # present menu for user to choose which workspace to open
 PS3="Please choose your session: "
-options=($(tmux list-sessions -F "#S") "New Session")
+[ "$TMUX" ] && options=($(tmux list-sessions -F "#S" 2> /dev/null)) \
+            || options=($(tmux list-sessions -F "#S" 2> /dev/null) "New Session")
 
 if [[ $1 ]]; then
   if [[ " ${options[@]} " =~ "$@" ]]; then
     choice="$@"
-    echo "attaching to $choice"
+    echo "attaching/switching to $choice"
   else
     choice="$@"
     echo "new session $choice"
@@ -24,19 +19,21 @@ else
   echo "Available sessions"
   echo "------------------"
   echo " "
-  select opt in "${options[@]}"
-  do 
-    choice=$opt 
+  select opt in "${options[@]}" ; do
+    choice=$opt
     break;
   done
 fi
 
-case $choice in
+echo "$choice"
+echo "$new"
+
+case "$choice" in
   "New Session")
     read -p "Enter new session name: " SESSION_NAME
-    tmux new -s "$SESSION_NAME"
+    tmux -u new -s "$SESSION_NAME"
     ;;
   *)
-    tmux attach-session -t "$choice"
+    [ "$TMUX" == "" ] &&  tmux attach-session -t "$choice" ||  tmux switch -t "$choice"
     ;;
 esac

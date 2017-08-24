@@ -1,4 +1,49 @@
+set nocompatible              " be iMproved, required
+
+" set the runtime path to include Vundle and initialize
+call plug#begin()
+  " Split navigation with tmux
+  " --------------------------
+  Plug 'christoomey/vim-tmux-navigator'
+
+  Plug 'tpope/vim-repeat'
+  Plug 'tpope/vim-unimpaired'
+  " peekaboo needs Cmd2 hack to work on commandline
+  Plug 'gelguy/Cmd2.vim' | Plug 'junegunn/vim-peekaboo'
+
+  " colorschemes
+  " -------------
+  Plug 'tomasr/molokai'
+" All of your Plugins must be added before the following line
+call plug#end()            " required
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => peekaboo command line hack
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+if !has("gui_running")
+  function! s:Peekaboo()
+    call peekaboo#peek(1, 'ctrl-r',  0)
+  endfunction
+
+  let g:Cmd2_cmd_mappings = {
+      \ 'Peekaboo': {'command': function('s:Peekaboo'), 'type': 'function'},
+      \ }
+
+  cmap <C-R> <Plug>(Cmd2)Peekaboo
+
+endif
+
 syntax on
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => min settings
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+colorscheme molokai
+
+" let comma be used as map leader
+let mapleader=","
+map \ ,
 
 " quickly exit insert mode without esc
 inoremap fj <Esc>
@@ -9,6 +54,63 @@ snoremap fj <Esc>
 nnoremap j gj
 nnoremap k gk
 
+" highlight all matched under cursor but don't jump to next match
+nnoremap * :keepjumps normal! mi*`i<CR>
+
+" switch between paste modes (use unimpaired co* style)
+" event though tpope disagrees with paste mode having shortcut
+" tpope probably doesn't use putty like I am.
+nnoremap cop :set paste!<CR>
+
+let g:tmux_navigator_no_mappings = 1
+let g:tmux_navigator_save_on_switch = 1
+noremap <silent> <M-h> :TmuxNavigateLeft<cr>
+noremap <silent> <M-j> :TmuxNavigateDown<cr>
+noremap <silent> <M-k> :TmuxNavigateUp<cr>
+noremap <silent> <M-l> :TmuxNavigateRight<cr>
+noremap <silent> <M-\> :TmuxNavigatePrevious<cr>
+
 set showcmd
 set cmdheight=2
 set laststatus=2
+set backspace=indent,eol,start
+set whichwrap+=<,>,h,l
+set ignorecase
+set smartcase
+set ruler
+set relativenumber "displays the relative number on the side
+set showmatch
+set incsearch   "move as we search
+set hlsearch    "highlight the search results
+set virtualedit=block
+set comments=s1:/*,mb:\ *,elx:\ */
+set wildmenu
+set wildmode=list:longest,full
+set wildignore=*.o,*~,*.gch,*.pyc,*.jpg,*.gif,*.png " Ignore compiled files
+set ttyfast
+set encoding=utf-8
+set nobackup
+set nowb
+set noswapfile
+" Uncomment below to make screen not flash on error
+set vb t_vb=""
+
+" use mouse to select
+behave mswin
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Auto commands
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" Highlight line
+augroup CursorLine
+  au!
+  au VimEnter,WinEnter,BufWinEnter * setlocal cursorline
+  au WinLeave * setlocal nocursorline
+augroup END
+
+" shell edit mode
+augroup ShellEdit " {
+  au!
+  au BufEnter /bb/data/tmp/bash-fc* set ft=sh
+augroup END "}

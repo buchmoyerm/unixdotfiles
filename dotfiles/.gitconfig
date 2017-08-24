@@ -21,8 +21,6 @@
   branchdiff="diff origin/master...HEAD"
   diffstat=diff --stat -r
   gitkconflict = !"gitk --left-right HEAD...MERGE_HEAD"
-#  funcdiff = '!sh -c "git show \"\$0:\$2\" | sed -n \"/^[^ \t].*\$3[ \t]*(/,/^}/p\" > .tmp1 && git show \"\$1:\$2\" | sed -n \"/^[^ \t].*\$3[ \t]*(/,/^}/p\" > .tmp2 &&  git diff --no-index .tmp1 .tmp2"' -
-#  graphviz = "!f() { echo 'digraph git {' ; git log --pretty='format:  %h -> { %p }' \"$@\" | sed 's/[0-9a-f][0-9a-f]*/\"&\"/g' ; echo '}'; }; f"
 
 # from http://stackoverflow.com/a/22875140/351028
   #quick look at all repo
@@ -35,10 +33,10 @@
   logg   = log --color --date-order --graph --oneline --decorate
   #Look with date
   logda  = log --color --date-order --date=local --graph --format=\"%C(yellow bold)%h%Creset %C(blue bold)%ad%Creset %C(auto)%d%Creset %s\" --all
-  logd   = log --color --date-order --date=local --graph --format=\"%C(yellow bold)%h%Creset %C(blue bold)%ad%Creset %C(auto)%d%Creset %s\"        
+  logd   = log --color --date-order --date=local --graph --format=\"%C(yellow bold)%h%Creset %C(blue bold)%ad%Creset %C(auto)%d%Creset %s\"
   #Look with relative date
   logdra = log --color --date-order --graph --decorate --format=\"%C(yellow bold)%h%Creset %C(blue bold)%ar%Creset %C(auto)%d%Creset %s - %a\" --all
-  logdr = log --color --date-order --graph --decorate --format=\"%C(yellow bold)%h%Creset %C(blue bold)%ar%Creset %C(auto)%d%Creset %s - %a\"  
+  logdr = log --color --date-order --graph --decorate --format=\"%C(yellow bold)%h%Creset %C(blue bold)%ar%Creset %C(auto)%d%Creset %s - %a\"
 
   #pretty log
   logp = log --color --date-order --format=\"%C(yellow)%h %Cblue%>(25)%ad %Cgreen%<(15)  %aN %Creset%s %C(auto)%d\"
@@ -49,7 +47,7 @@
 
 # from http://stackoverflow.com/a/22481650/351028
   tree = log --all --graph --decorate=short --color --format=format:'%C(bold blue)%h%C(reset) %C(auto)%d%C(reset)\n         %C(white)[%cr]%C(reset)  %x09%C(white)%aN: %s %C(reset)'
-  
+
   # from http://blog.apiaxle.com/post/handy-git-tips-to-stop-you-getting-fired/
   # assume file is unchanged git assume config.mk git unassume config.mk
   assume   = update-index --assume-unchanged
@@ -69,25 +67,21 @@
   #have been removed from the remote (ie arcyd landed them on master)
   #http://stackoverflow.com/a/28020809/351028
   branchclean = !"git fetch --all --prune; \
-                  git branch -vv | grep \": gone]\" | awk '{print $1}' | xargs -n 1 git branch -D;" 
+                  git branch -vv | grep \": gone]\" | awk '{print $1}' | xargs -n 1 git branch -D;"
 
   #work in progress commit (wip)
   save-wip = !"git add --all; git commit -m \"[WIP] $(date)\";"
   continue-wip = !"f() { while [[ \"$(git show --name-status --pretty=%s 2> /dev/null)\" =~ \"[WIP]\" ]]; do git reset HEAD~1 --mixed --quiet; done;}; f"
-
 [diff]
   #algorithm=patience
   algorithm=histogram
-
 [color]
 	ui = true
-[commit]
-  template = /home/mbuchmoyer/.gitcommit
 [push]
 	default = upstream
 [core]
   pager = "less -i -R -S -# 4"
-  editor = "/opt/bb/bin/gvim -v"
+  editor = "/opt/bb/bin/vim -v"
 	excludesfile = /home/mbuchmoyer/.gitignore_global
 [log]
   date=local

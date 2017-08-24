@@ -1,3 +1,11 @@
+" vim-plug (https://github.com/junegunn/vim-plug) settings
+" Automatically install vim-plug and run PlugInstall if vim-plug not found
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall | source $MYVIMRC
+endif
+
 let os = system("uname")
 let isLinux = (os == "Linux\n")
 let useLightLine = !isLinux || !has("gui_running")
@@ -8,12 +16,9 @@ set nocompatible              " be iMproved, required
 " set the runtime path to include Vundle and initialize
 call plug#begin()
 
-  " let Vundle manage Vundle, required
-  Plug 'gmarik/Vundle.vim'
-
   " Vundles
   " =======
-  
+
   " sensible default settings
   " -------------------------
   Plug 'tpope/vim-sensible'
@@ -24,16 +29,21 @@ call plug#begin()
 
   " file navigation
   " ---------------
-   Plug 'kien/ctrlp.vim' | Plug 'FelikZ/ctrlp-py-matcher' 
+  Plug 'kien/ctrlp.vim' | Plug 'FelikZ/ctrlp-py-matcher'
+  Plug 'benmills/vimux'
 
   Plug 'tpope/vim-vinegar'
-  "Plug 'majutsushi/tagbar'
+  "Plug 'majutsushi/tagbar' " awesome, but not greate for large files
   Plug 'mileszs/ack.vim'
   Plug 'Lokaltog/vim-easymotion'
   Plug 'kien/tabman.vim'
-  Plug 'a.vim'
+  Plug 'vim-scripts/a.vim'
   Plug 'tpope/vim-unimpaired'
   Plug 'tmhedberg/SimpylFold' "folds
+
+  " snippets
+  Plug 'SirVer/ultisnips'
+  Plug 'honza/vim-snippets'
 
   " Split navigation with tmux
   " --------------------------
@@ -44,6 +54,13 @@ call plug#begin()
   Plug 'tpope/vim-git'
   " Plug 'octol/vim-cpp-enhanced-highlight'
   " Plug 'scrooloose/syntastic'
+  Plug 'rhysd/vim-clang-format', { 'for': [ 'cpp',
+                                          \ 'c',
+                                          \ 'java',
+                                          \ 'javascript',
+                                          \ 'typescript',
+                                          \ 'protobuf' ] }
+  Plug 'kana/vim-operator-user'
 
   " source control
   " --------------
@@ -64,24 +81,24 @@ call plug#begin()
   " ------------
   Plug 'tpope/vim-eunuch'
   Plug 'tpope/vim-commentary'
-  
+
   " Bloomberg
   " ---------
-  Plug 'file:///home/mbuchmoyer/mbig/dev/vim/projmake.vim'
-"   Plug 'ssh://bbgithub.dev.bloomberg.com/mbuchmoyer/bbprojmake.vim.git'
+  Plug 'ssh://bbgithub.dev.bloomberg.com/mbuchmoyer/vim-grok.git'
+  Plug 'ssh://bbgithub.dev.bloomberg.com/ib-dev-tools/bbprojmake.vim.git'
+
+  " pkgcfg syntax highlighting
+  Plug 'ssh://bbgithub.dev.bloomberg.com/lkisskol/pkgcfg_plugin.git', {'for': ['pkgcfg'] }
+
+  " For building plugins
+  Plug 'tpope/vim-scriptease'
 
   " peekaboo needs Cmd2 hack to work on commandline
-  Plug 'gelguy/Cmd2.vim' | Plug 'junegunn/vim-peekaboo' 
+  Plug 'gelguy/Cmd2.vim' | Plug 'junegunn/vim-peekaboo'
 
   " status bar
   " -------------------------
   Plug 'itchyny/lightline.vim'
-
-  if has("unix")
-    if !v:shell_error && isLinux
-      Plug 'Valloric/YouCompleteMe'
-    endif
-  endif
 
 " All of your Plugins must be added before the following line
 call plug#end()            " required
@@ -89,7 +106,6 @@ call plug#end()            " required
 " let comma be used as map leader
 let mapleader=","
 map \ ,
-
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => peekaboo command line hack
@@ -186,20 +202,28 @@ autocmd BufWinLeave *.py setlocal foldexpr< foldmethod<
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => VIM settings
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-set encoding=utf-8
+" if has("multi_byte")
+"   if &termencoding == ""
+"     let &termencoding = &encoding
+"   endif
+"   set encoding=utf-8
+"   setglobal fileencoding=utf-8
+"   "setglobal bomb
+"   set fileencodings=ucs-bom,utf-8,latin1
+" endif
 
 "Coloring for xterm
-if has("terminfo")
-   set t_Co=256
-    set t_Sf=[3%p1%dm
-    set t_Sb=[4%p1%dm
-"     set t_AB=^[[%?%p1%{8}%<%t%p1%{40}%+%e%p1%{92}%+%;%dm
-"     set t_AF=^[[%?%p1%{8}%<%t%p1%{30}%+%e%p1%{82}%+%;%dm
-else
-"     set t_Co=256
-    set t_Sf=[3%dm
-    set t_Sb=[4%dm
-endif
+" if has("terminfo")
+" "   set t_Co=256
+"     set t_Sf=[3%p1%dm
+"     set t_Sb=[4%p1%dm
+" "     set t_AB=^[[%?%p1%{8}%<%t%p1%{40}%+%e%p1%{92}%+%;%dm
+" "     set t_AF=^[[%?%p1%{8}%<%t%p1%{30}%+%e%p1%{82}%+%;%dm
+" else
+" "     set t_Co=256
+"     set t_Sf=[3%dm
+"     set t_Sb=[4%dm
+" endif
 
 if !has("gui_running")
   " disables background color erase
@@ -237,7 +261,7 @@ set vb t_vb=""
 set shortmess=atI
 
 "My settings
-set guioptions-=T  "remove toolbar from gui
+set guioptions-=TaA  "remove toolbar from gui
 set nowrap
 set mouse=a
 set ttymouse=xterm2
@@ -298,7 +322,6 @@ let &diffexpr='EnhancedDiff#Diff("git diff", "--diff-algorithm=histogram")'
 let g:indent_guides_auto_colors = 0
 hi IndentGuidesOdd  ctermbg=darkblue
 hi IndentGuidesEven ctermbg=lightgrey
-" let g:indent_guides_guide_size = 1
 
 " use mouse to select
 behave mswin
@@ -306,6 +329,7 @@ behave mswin
 " C syntax highlight settings
 let g:cpp_class_scope_highlight = 1
 let g:cpp_experimental_template_highlight = 1
+let g:cpp_concepts_highlight = 1
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Bloomberg
@@ -340,11 +364,6 @@ nnoremap <M-right> <C-w><right>
 nnoremap <M-up> <C-w><up>
 nnoremap <M-down> <C-w><down>
 
-" nnoremap <M-j> <C-w>j
-" nnoremap <M-k> <C-w>k
-" nnoremap <M-l> <C-w>l
-" nnoremap <M-h> <C-w>h
-
 let g:tmux_navigator_no_mappings = 1
 let g:tmux_navigator_save_on_switch = 1
 noremap <silent> <M-h> :TmuxNavigateLeft<cr>
@@ -361,9 +380,6 @@ nmap <leader>gv <Plug>GitGutterPreviewHunk
 nmap ]c <Plug>GitGutterNextHunk
 nmap [c <Plug>GitGutterPrevHunk
 
-" Windows-like find all
-nnoremap <C-F> :Ack!<Space>
-
 " Faster navigation wit ctrl
 noremap <C-up> 10gk
 noremap <C-down> 10gj
@@ -376,14 +392,8 @@ noremap <C-j> 10gj
 noremap <C-h> 5h
 noremap <C-l> 5l
 
-" Toggle tagbar;
-nnoremap <silent> <F8> :TagbarToggle<CR>
-
 " 0 jumps to first non black char in line
 noremap 0 ^
-
-" refresh all open buffers based on file mod time
-noremap <C-F5> :checktime<CR>
 
 " Copy to clipboard
 " vnoremap <C-c> "*y
@@ -399,8 +409,6 @@ noremap <C-F5> :checktime<CR>
 " Move to next resent and put it in the middle of the split
 noremap <silent> n nzz
 noremap <silent> N Nzz
-
-noremap <leader><F2> :call StripTrailingWhitespace()<CR>
 
 " quickly exit insert mode without esc
 inoremap fj <Esc>
@@ -419,9 +427,8 @@ nnoremap <leader><leader>t :set expandtab tabstop=4 shiftwidth=4 softtabstop=4<C
 nnoremap <leader><leader>T :set expandtab tabstop=8 shiftwidth=8 softtabstop=4<CR>
 nnoremap <leader><leader>M :set noexpandtab tabstop=8 softtabstop=4 shiftwidth=4<CR>
 nnoremap <leader><leader>m :set expandtab tabstop=2 shiftwidth=2 softtabstop=2<CR>
-
-" switch between wrap modes
-nnoremap \w :setlocal wrap!<CR>:setlocal wrap?<CR>
+autocmd Filetype python setlocal ts=4 sts=4 sw=4
+autocmd Filetype make set noexpandtab
 
 " switch between paste modes (use unimpaired co* style)
 " event though tpope disagrees with paste mode having shortcut
@@ -431,6 +438,7 @@ nnoremap cop :set paste!<CR>
 "more co-* commands
 nnoremap cog :IndentGuidesToggle<CR>
 nnoremap coe :call ToggleList("Quickfix List", 'c')<CR>
+nnoremap coll :call ToggleList("Location List", 'l')<CR>
 
 "Map F4 to toggle search results highlights
 nnoremap <silent> <F4> :set hlsearch!<CR>
@@ -448,6 +456,73 @@ nnoremap <silent> <S-F4> :DiffChangesDiffToggle<CR>
 " nmap : :<F12>
 " nmap / /<F12>
 cmap <F12> <Plug>(Cmd2Suggest)
+
+" Clang format
+" ------------
+nnoremap <leader>cf <Plug>(operator-clang-format)
+
+let g:clang_format#style_options = {
+                                   \ "AccessModifierOffset": -1,
+                                   \ "AlignAfterOpenBracket": "true",
+                                   \ "AlignEscapedNewlinesLeft": "true",
+                                   \ "AlignOperands":   "true",
+                                   \ "AlignTrailingComments": "true",
+                                   \ "AllowAllParametersOfDeclarationOnNextLine": "false",
+                                   \ "AllowShortBlocksOnASingleLine": "false",
+                                   \ "AllowShortCaseLabelsOnASingleLine": "false",
+                                   \ "AllowShortIfStatementsOnASingleLine": "false",
+                                   \ "AllowShortLoopsOnASingleLine": "false",
+                                   \ "AllowShortFunctionsOnASingleLine": "Empty",
+                                   \ "AlwaysBreakAfterDefinitionReturnType": "false",
+                                   \ "AlwaysBreakTemplateDeclarations": "true",
+                                   \ "AlwaysBreakBeforeMultilineStrings": "true",
+                                   \ "BreakBeforeBinaryOperators": "All",
+                                   \ "BreakBeforeTernaryOperators": "true",
+                                   \ "BreakConstructorInitializersBeforeComma": "false",
+                                   \ "BinPackParameters": "false",
+                                   \ "BinPackArguments": "false",
+                                   \ "ColumnLimit":     79,
+                                   \ "ConstructorInitializerAllOnOneLineOrOnePerLine": "true",
+                                   \ "ConstructorInitializerIndentWidth": 4,
+                                   \ "DerivePointerAlignment": "false",
+                                   \ "ExperimentalAutoDetectBinPacking": "false",
+                                   \ "IndentCaseLabels": "true",
+                                   \ "IndentWrappedFunctionNames": "true",
+                                   \ "IndentFunctionDeclarationAfterType": "true",
+                                   \ "MaxEmptyLinesToKeep": 1,
+                                   \ "KeepEmptyLinesAtTheStartOfBlocks": "false",
+                                   \ "NamespaceIndentation": "None",
+                                   \ "ObjCBlockIndentWidth": 2,
+                                   \ "ObjCSpaceAfterProperty": "false",
+                                   \ "ObjCSpaceBeforeProtocolList": "false",
+                                   \ "PenaltyBreakBeforeFirstCallParameter": 500,
+                                   \ "PenaltyBreakComment": 300,
+                                   \ "PenaltyBreakString": 1000,
+                                   \ "PenaltyBreakFirstLessLess": 120,
+                                   \ "PenaltyExcessCharacter": 1000000,
+                                   \ "PenaltyReturnTypeOnItsOwnLine": 200,
+                                   \ "PointerAlignment": "Left",
+                                   \ "SpacesBeforeTrailingComments": 2,
+                                   \ "Cpp11BracedListStyle": "true",
+                                   \ "Standard":        "Cpp03",
+                                   \ "IndentWidth":     2,
+                                   \ "TabWidth":        8,
+                                   \ "UseTab":          "Never",
+                                   \ "BreakBeforeBraces": "Allman",
+                                   \ "SpacesInParentheses": "false",
+                                   \ "SpacesInSquareBrackets": "false",
+                                   \ "SpacesInAngles":  "false",
+                                   \ "SpaceInEmptyParentheses": "false",
+                                   \ "SpacesInCStyleCastParentheses": "false",
+                                   \ "SpaceAfterCStyleCast": "false",
+                                   \ "SpacesInContainerLiterals": "true",
+                                   \ "SpaceBeforeAssignmentOperators": "true",
+                                   \ "ContinuationIndentWidth": 4,
+                                   \ "CommentPragmas":  '"^ IWYU pragma:"',
+                                   \ "ForEachMacros":   "[ foreach, Q_FOREACH, BOOST_FOREACH ]",
+                                   \ "SpaceBeforeParens": "ControlStatements",
+                                   \ "DisableFormat":   "false"
+                                   \ }
 
 " Cmd2 settings
 " -------------
@@ -499,7 +574,7 @@ let g:EasyMotion_smartcase = 1
 
 let g:EasyMotion_wrapscan = 1 " enable search wrapping around end of file
 
-let g:EasyMotion_startofline = 0 " keep cursor colum when JK motion
+let g:EasyMotion_startofline = 1 " Disable keep cursor colum when JK motion
 
 let g:EasyMotion_do_mapping = 0 " Disable default mappings
 
@@ -584,19 +659,6 @@ set laststatus=2
       \ },
     \ }
 
-" 		let g:lightline.mode_map = {
-" 		    \ 'n' : 'NORMAL',
-" 		    \ 'i' : 'INSERT',
-" 		    \ 'R' : 'REPLACE',
-" 		    \ 'v' : 'VISUAL',
-" 		    \ 'V' : 'V-LINE',
-" 		    \ 'c' : 'COMMAND',
-" 		    \ "\<C-v>": 'V-BLOCK',
-" 		    \ 's' : 'SELECT',
-" 		    \ 'S' : 'S-LINE',
-" 		    \ "\<C-s>": 'S-BLOCK',
-" 		    \ '?': '      ' }
-
   let g:lightline.mode_map = {
       \ 'n' : 'N',
       \ 'i' : 'I',
@@ -611,10 +673,6 @@ set laststatus=2
       \ '?': ' ' }
 " Light line functions
 " --------------------
-
-" function! LightLineFilename() abort
-"   return expand('%')
-" endfunction
 
 function! LightlineFugitive() abort
   if &filetype ==# 'help'
@@ -646,7 +704,7 @@ if !has('python')
 else
   let g:ctrlp_match_func = { 'match': 'pymatcher#PyMatch' }
 endif
- 
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Auto commands
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -657,19 +715,6 @@ augroup CursorLine
   au VimEnter,WinEnter,BufWinEnter * setlocal cursorline
   au WinLeave * setlocal nocursorline
 augroup END
-
-" Commenting blocks of code.
-" augroup CommentLine
-"   autocmd!
-"   autocmd FileType c,cpp,java,scala let b:comment_leader = '// '
-"   autocmd FileType sh,ruby,python   let b:comment_leader = '# '
-"   autocmd FileType conf,fstab       let b:comment_leader = '# '
-"   autocmd FileType tex              let b:comment_leader = '% '
-"   autocmd FileType mail             let b:comment_leader = '> '
-"   autocmd FileType vim              let b:comment_leader = '" '
-" augroup END
-" noremap <silent> <C-k><C-c> :<C-B>silent <C-E>s/^/<C-R>=escape(b:comment_leader,'\/')<CR>/<CR>:nohlsearch<CR>
-" noremap <silent> <C-k><C-u> :<C-B>silent <C-E>s/^\V<C-R>=escape(b:comment_leader,'\/')<CR>//e<CR>:nohlsearch<CR>
 
 " Return to last edit position when opening files (You want this!)
 autocmd BufReadPost *
@@ -689,17 +734,32 @@ augroup END " }
 " cleanup vim-fugitive buffers
 autocmd BufReadPost fugitive://* set bufhidden=delete
 
+" cleanup whitespace when closing a file
+autocmd BufWritePre * call StripTrailingWhitespace()
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Commands for command line
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 command! RemoveTrailingWhiteSpace call StripTrailingWhitespace()
 command! -nargs=1 -complete=file Vdiff call OpenDiffTab(<f-args>)
-command! ToggleScrollBind set scb! " I always forget this command. This should make it easier
+command! ToggleScrollBind set scb! " I always forget this command. This shculd make it easier
 command! CommentConfig silent %s/^\(.\)/# \1/g | nohlsearch
 command! UncommentConfig silent %s/^# //g | nohlsearch
 
 " puts rcsid info in a file
 command! UpdateHeader !update_rcsid -a --nobackup %
+
+" Custom grok search commands
+command! -bang -nargs=1 Oib call vimgrok#search(<bang>0, '-p', "(bbgithub ib-*) || (bbgithub cc-*) || (devgit ib)", '-f', <f-args>)
+command! -bang -nargs=1 Olib call vimgrok#lsearch(<bang>0, '-p', "(bbgithub ib-*)  || (bbgithub cc-*) || (devgit ib)", '-f', <f-args>)
+command! -bang -nargs=1 Oibdef call vimgrok#search(<bang>0, '-p', "(bbgithub ib-*) || (bbgithub cc-*) || (devgit ib)", '-d', <f-args>)
+command! -bang -nargs=1 Olibdef call vimgrok#lsearch(<bang>0, '-p', "(bbgithub ib-*) || (bbgithub cc-*) || (devgit ib)", '-d', <f-args>)
+command! -bang -nargs=1 Occ call vimgrok#search(<bang>0, '-p', "(bbgithub ib-*) || (bbgithub cc-*) || (devgit ib)", '-f', <f-args>)
+command! -bang -nargs=1 Olcc call vimgrok#lsearch(<bang>0, '-p', "(bbgithub ib-*)  || (bbgithub cc-*) || (devgit ib)", '-f', <f-args>)
+command! -bang -nargs=1 Occdef call vimgrok#search(<bang>0, '-p', "(bbgithub ib-*) || (bbgithub cc-*) || (devgit ib)", '-d', <f-args>)
+command! -bang -nargs=1 Olccdef call vimgrok#lsearch(<bang>0, '-p', "(bbgithub ib-*) || (bbgithub cc-*) || (devgit ib)", '-d', <f-args>)
+
+nnoremap oga :call vimgrok#search(0, '-f', expand("<cword>"))<CR>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Merge helpers
@@ -724,7 +784,12 @@ function! OpenDiffTab(diffFile)
 endfunction
 
 function! StripTrailingWhitespace()
-  if !&binary && &filetype != 'diff'
+  let l:ignore = [ 'diff',
+                 \ 'qf',
+                 \ 'help',
+                 \ ]
+
+  if !&binary && !&readonly && (index(l:ignore, &filetype) < 0)
     normal mz
     normal Hmy
     %s/\s\+$//e
@@ -801,10 +866,4 @@ function! ToggleRelative()
         set nonu
         set rnu
     endif
-endfunction
-
-command! FreeLibs call AddFreeLibs()<cr>
-
-function! AddFreeLibs()
-    r~/free_libs.txt
 endfunction

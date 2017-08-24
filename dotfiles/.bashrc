@@ -15,7 +15,7 @@ uname=`uname`
 #    alias gvim="TERM=xterm-new gvim"
 #fi
 
-[[ ${TERM} == "screen" ]] && export TERM="screen-256color"
+#[[ ${TERM} == "screen" ]] && export TERM="screen-256color"
 
 # if [ -d ${HOME}/.terminfo/${SYSTYPE} ]
 # then
@@ -31,7 +31,7 @@ uname=`uname`
 #         export TERM=rxvt-unicode-256color
 #     fi
 # fi
-# 
+#
 
 # =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 # commandline editing
@@ -50,7 +50,7 @@ shopt -s cdspell # Typo tolerance
 shopt -s autocd # just type dir name to cd
 shopt -s checkhash # check for command in hash table before looking it up in path
 shopt -s cdable_vars # cd can accept variabls that hold directory names
-shopt -s checkjobs # list status of any running jobs before exiting 
+shopt -s checkjobs # list status of any running jobs before exiting
 shopt -s histappend # Append history rather than overwrite
 shopt -s cmdhist # save all lines of multi line command
 shopt -s extglob # extended pattern matching for bash completion
@@ -63,7 +63,7 @@ export HISTFILESIZE=5000          # Store 5000 commands in history
 export HISTCONTROL=ignoredups    # Don't put duplicate lines in the history.
 
 export GREP_OPTIONS="--color=auto"
-export VISUAL="vim -u ~/.vimrc_min"
+export VISUAL="/opt/bb/bin/vim -v -u ~/.vimrc_min"
 export EDITOR="$VISUAL"
 
 source $HOME/.bash/.bashrc.colors

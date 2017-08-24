@@ -89,8 +89,8 @@ RXAdapt ()
 	fi
 }
 
-TERMINFO=/home/jmahood/ARCH/`uname -s`/terminfo
-export TERMINFO
+# TERMINFO=/home/jmahood/ARCH/`uname -s`/terminfo
+# export TERMINFO
 XTARGS_EXT=""
 XTERM_BIN=/opt/swt/bin/mrxvt
 if [[ -x $XTERM_BIN ]]; then

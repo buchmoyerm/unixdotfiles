@@ -1,0 +1,14 @@
+priority 1
+
+snippet commit "Default commit template"
+${1:EN3CCSRE}-${2:###} ${3:commitTitle}
+
+Summary:
+https://jira3.prod.bloomberg.com:8443/browse/$1-$2
+
+${4:commit details}
+
+Test Plan: ${5:testPlan}
+
+Reviewers: ${6:unixIds}
+endsnippet

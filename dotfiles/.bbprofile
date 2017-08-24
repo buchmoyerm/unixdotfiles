@@ -8,37 +8,26 @@
 #+ flag/zsh
 
 + flag/stty
-# + flag/xterm256
-+ flag/optswt
-
-# ensure /bb/bin is not in path
-#- flag/bbbin
++ flag/xterm256
 
 # troubleshooting
 # this will send information to g146 and then comment itself
 # back out after a new shell is obtained only use if asked to
 #+ flag/dumpinfo
- 
+
 # verbose login info & other stuff (if you like seeing what's up)
 + flag/verbose
 
 + flag/vastogit
 
-# propagate chimera aliases to subshells
-# (should not be necessary if all shells are login shells)
-# if your Xwindows are not login shells and you have alias issues
-# uncomment
-#+ flag/aliasexport
-
 # adds extra compiler support
 + contrib/compilers
 
-# Bash Completion for standard commands + plink, metalink, send
+# Bash completion!
 + contrib/bash_complete
-# Completion for Arcanist (arc)
 + flag/arcanist
-# Completion for Git
 + contrib/gitshell
+
 # for tmux
 + contrib/optbb
 
@@ -49,6 +38,8 @@
 + contrib/bbgithub
 + contrib/bash_hist_flush
 + contrib/gnucore
++ contrib/mvn
++ contrib/dpkg
 
 # set up proxy vars for environment
 + contrib/devproxy

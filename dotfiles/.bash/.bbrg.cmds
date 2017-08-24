@@ -17,3 +17,15 @@ function rbuilt
 }
 
 complete -F __rbuilt_complete rbuilt
+
+function rand-op1
+{
+  machine=$(bbhost ${@} | awk '{print $1}' | sort -R | head -1)
+  /bb/bin/getprdwin -u op1 -d'op1' -i -s "${machine}"
+}
+
+function rand-ssh
+{
+  machine=$(bbhost ${@} | awk '{print $1}' | sort -R | head -1)
+  ssh -x "${machine}"
+}

@@ -28,7 +28,7 @@ function vi_mode {
 
 function git_color {
   # local git_status="$(git status 2> /dev/null)"
- 
+
   local git_status=$1
 
   if [[ ! $git_status =~ "working tree clean" &&
@@ -47,6 +47,10 @@ function git_color {
 }
 
 function git_branch {
+  if [[ $(basename ${PWD}) == 'prod_files' ]] ; then
+    return 0
+  fi
+
   local git_status="$(git status 2> /dev/null)"
   local on_branch="On branch ([^${IFS}]*)"
   local on_commit="HEAD detached at ([^${IFS}]*)"
@@ -78,7 +82,7 @@ function prompt {
   PS1+="\[$Green\]\h\[$Color_Off\]"
   PS1+=":\w"
   PS1+="\$(git_branch)"
-  #PS1+="\[\$(vi_mode_color)\]\$(vi_mode)\[$Color_Off\]"
+  # PS1+="\[\$(vi_mode_color)\]\$(vi_mode)\[$Color_Off\]"
   PS1+=" \\$ "
 }
 prompt
@@ -88,9 +92,10 @@ if [ -z $TMUX ]; then
   HOST_COMMAND='echo -en "\033]0;$HOSTNAME: $(pwd -P)\a"'
 else
   HOST_COMMAND='echo -en "\033]0;$HOSTNAME: \a"'
+  TMUX_NOTIFY='echo -en "\a"'
 fi
 
-PROMPT_COMMAND="${PROMPT_COMMAND} ; ${HOST_COMMAND}"
+PROMPT_COMMAND="${PROMPT_COMMAND} ; ${HOST_COMMAND} ; ${TMUX_NOTIFY}"
 
 # tab completion help
 bind 'set completion-ignore-case On'

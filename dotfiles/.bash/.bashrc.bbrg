@@ -1,6 +1,14 @@
 # ~/.bashrc.bbrg to load some bloomberg specific settings
 # =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
+# for interacting with hdfs remotely
+export HDFS_PRIMARY_NAMENODE="dnj2-bach-r1n11.bloomberg.com:50070"
+export HDFS_STANDBY_NAMENODE="dnj2-bach-r1n12.bloomberg.com:50070"
+export HDFS_USE_KERBEROS=1
+
+# bbrg ssl cert for git
+export GIT_SSL_CAINFO=$HOME/BBrootNEW.pem
+
 source $HOME/.bash/.bbrg.aliases
 source $HOME/.bash/.bbrg.bash_complete
 source $HOME/.bash/.bbrg.cmds

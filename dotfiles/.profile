@@ -10,11 +10,11 @@ echo "~/.profile has run"
 #GROUP=put_your_group_here
 
 # =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
-# chimera not present/didn't run, set some basic stuff up 
+# chimera not present/didn't run, set some basic stuff up
 # hope /etc/passwd is good enough
-if [ ! "$BBENV" ] 
+if [ ! "$BBENV" ]
 then
-     PS1="${HOSTNAME}:\${PWD} \$ " 
+     PS1="${HOSTNAME}:\${PWD} \$ "
      PATH=$PATH:/usr/sbin
      ##LPDEST=put_your_printer_here
      ##GROUP=put_your_group_here
@@ -32,31 +32,32 @@ then
           #echo "SunOS keys set"
      fi
 fi
-     
+
 # Set up terminal type
 if [ "${XTERM:-unset}" == unset ] ; then
   echo "putty!!"
   if [ ${TERM} = xterm ] ; then
       case ${SYSTYPE} in
-          SunOS)
-              export TERM=xtermc ;;
-          AIX)
-              export TERM=xterm-new ;;
+          # SunOS)
+          #     export TERM=xtermc ;;
+          # AIX)
+          #     export TERM=xterm-new ;;
           Linux)
   #             export TERMINFO=/opt/bb/share/terminfo
+              # export TERM=putty-256color ;;
               export TERM=xterm-256color ;;
       esac
-    fi
+  fi
 else
   echo "real xterm!!"
   #this fixes vim inside tmux when using EOD
-  #it also breaks vim inside tmux when using putty 
-  if [ ${TMUX:-unset} != unset ] ; then
-    if [ ${TERM} = xterm-256color ] ; then
-      export TERM=screen-256color
-    fi
-  fi
+  #it also breaks vim inside tmux when using putty
+  # if [ ${TMUX:-unset} != unset ] ; then
+  #   if [ ${TERM} = xterm-256color ] ; then
+  #     export TERM=screen-256color
+  #   fi
+  # fi
 fi
 
-source ./.bashrc
+source ${HOME}/.bashrc
 
