@@ -1,5 +1,5 @@
 [user]
-	name = Mark Buchmoyer
+  name = Mark Buchmoyer
   email = MBUCHMOYER@bloomberg.net
 
 [alias]
@@ -72,17 +72,22 @@
   #work in progress commit (wip)
   save-wip = !"git add --all; git commit -m \"[WIP] $(date)\";"
   continue-wip = !"f() { while [[ \"$(git show --name-status --pretty=%s 2> /dev/null)\" =~ \"[WIP]\" ]]; do git reset HEAD~1 --mixed --quiet; done;}; f"
+
+  # working with PRs
+  pr = "!f() { git fetch -fu ${2:-upstream} refs/pull/$1/head:pr/$1 && git checkout pr/$1; }; f"
+  pr-clean = "!git checkout master ; git for-each-ref refs/heads/pr/* --format='%(refname)' | while read ref ; do branch=${ref#refs/heads/} ; git branch -D $branch ; done"
 [diff]
   #algorithm=patience
   algorithm=histogram
 [color]
-	ui = true
+  ui = auto
 [push]
-	default = upstream
+  #default = upstream
+  default = tracking
 [core]
   pager = "less -i -R -S -# 4"
   editor = "/opt/bb/bin/vim -v"
-	excludesfile = /home/mbuchmoyer/.gitignore_global
+  excludesfile = /home/mbuchmoyer/.gitignore_global
 [log]
   date=local
 [mailmap]

@@ -1,0 +1,16 @@
+#!/opt/bb/bin/bash
+
+  # read t
+
+  [ ${1} ] && col=${1} || col=0
+
+  awk_string="BEGIN \
+  {c=0; s=0; min=100000000; max=0} \
+  {s += \$${col}} {c += 1} \
+  {if ( \$${col} < min) {min = \$${col}}} \
+  {if ( \$${col} > max ) {max = \$${col}}} \
+  END {a=s/c; print c, s, a, min, max}"
+
+  out=$(cat | awk "${awk_string}")
+
+  echo ${out}

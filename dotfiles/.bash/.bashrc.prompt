@@ -3,7 +3,7 @@
 
 function __ps1_color {
   local color=$1
-  [[ ! -z "$color" ]] && printf '\001%s\002' $color
+  [[ ! -z "$color" ]] && printf '\001%s\002' "$color"
 }
 
 function vi_mode_color {
@@ -47,7 +47,7 @@ function git_color {
 }
 
 function git_branch {
-  if [[ $(basename ${PWD}) == 'prod_files' ]] ; then
+  if [[ $(basename ${PWD}) == "prod_files" ]] ; then
     return 0
   fi
 
@@ -63,13 +63,13 @@ function git_branch {
 
   if [[ $git_status =~ $on_branch ]]; then
     local branch=${BASH_REMATCH[1]}
-    printf ' %s(%s)%s' $col_on $branch $col_off
+    printf ' %s(%s)%s' "$col_on" "$branch" "$col_off"
   elif [[ $git_status =~ $on_commit ]]; then
     local commit=${BASH_REMATCH[1]}
-    printf ' %s(%s)%s' $col_on $commit $col_off
+    printf ' %s(%s)%s' "$col_on" "$commit" "$col_off"
   elif [[ $git_status =~ $in_rebase ]]; then
     local rebase="~rebasing~"
-    printf ' %s(%s)%s' $col_on $rebase $col_off
+    printf ' %s(%s)%s' "$col_on" "$rebase" "$col_off"
   fi
 }
 

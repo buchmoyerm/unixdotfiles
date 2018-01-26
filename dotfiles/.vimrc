@@ -62,6 +62,10 @@ call plug#begin()
                                           \ 'protobuf' ] }
   Plug 'kana/vim-operator-user'
 
+  " Autocomplete
+  Plug 'vim-scripts/AutoComplPop'
+  " Plug 'vim-scripts/SuperTab'
+
   " source control
   " --------------
   Plug 'tpope/vim-fugitive'
@@ -86,6 +90,7 @@ call plug#begin()
   " ---------
   Plug 'ssh://bbgithub.dev.bloomberg.com/mbuchmoyer/vim-grok.git'
   Plug 'ssh://bbgithub.dev.bloomberg.com/ib-dev-tools/bbprojmake.vim.git'
+  Plug 'ssh://bbgithub.dev.bloomberg.com/mbuchmoyer/plynk.vim.git'
 
   " pkgcfg syntax highlighting
   Plug 'ssh://bbgithub.dev.bloomberg.com/lkisskol/pkgcfg_plugin.git', {'for': ['pkgcfg'] }
@@ -106,6 +111,30 @@ call plug#end()            " required
 " let comma be used as map leader
 let mapleader=","
 map \ ,
+
+" use command-line window for commands
+" nnoremap : q:i
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => autocomplete hacks
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" enter selects highlight in completion
+inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+
+" open completion and highlight first match
+inoremap <expr> <C-n> pumvisible() ? '<C-n>' :
+  \ '<C-n><C-r>=pumvisible() ? "\<lt>Down>" : ""<CR>'
+" open omnicomplete and highlight first match
+inoremap <expr> <M-,> pumvisible() ? '<C-n>' :
+  \ '<C-x><C-o><C-n><C-p><C-r>=pumvisible() ? "\<lt>Down>" : ""<CR>'
+
+" open omni completion menu closing previous if open and opening new menu without changing the text
+inoremap <expr> <C-Space> (pumvisible() ? (col('.') > 1 ? '<Esc>i<Right>' : '<Esc>i') : '') .
+            \ '<C-x><C-o><C-r>=pumvisible() ? "\<lt>C-n>\<lt>C-p>\<lt>Down>" : ""<CR>'
+" open user completion menu closing previous if open and opening new menu without changing the text
+inoremap <expr> <S-Space> (pumvisible() ? (col('.') > 1 ? '<Esc>i<Right>' : '<Esc>i') : '') .
+            \ '<C-x><C-u><C-r>=pumvisible() ? "\<lt>C-n>\<lt>C-p>\<lt>Down>" : ""<CR>'
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => peekaboo command line hack
@@ -290,6 +319,7 @@ set wildmenu
 set wildmode=list:longest,full
 set wildignore=*.o,*~,*.gch,*.pyc,*.jpg,*.gif,*.png " Ignore compiled files
 set fo-=t " remove menu from gvim
+set completeopt=longest,menuone
 
 " ignore these suffixes when searching files with multiple matches
 set suffixes=.back,~,.o,.info,.swp,.obj
@@ -308,6 +338,8 @@ set ttyfast
 set list listchars=tab:>-,trail:.
 set nolist
 
+" disable alt for windows menu
+set winaltkeys=no
 
 " prefer diffs to be vertical
 set diffopt=filler,vertical
@@ -346,9 +378,6 @@ let g:useDispatch = 1
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Keyboard settings/key bindings
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-" disable alt for windows menu
-set winaltkeys=no
 
 " Toggle relative numbers
 nnoremap <silent> <C-n> :call ToggleRelative()<CR>
@@ -670,7 +699,8 @@ set laststatus=2
       \ 's' : 's',
       \ 'S' : 'S',
       \ "\<C-s>": 'S',
-      \ '?': ' ' }
+      \ '?': ' ',
+      \ 't': 'T' }
 " Light line functions
 " --------------------
 

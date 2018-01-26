@@ -1,0 +1,25 @@
+#!/opt/bb/bin/python2.7
+
+"""
+Tool to print out a users mbig number
+"""
+
+from __future__ import print_function
+
+from argparse import ArgumentParser
+from subprocess import check_output, PIPE
+
+parser = ArgumentParser(description=__doc__)
+parser.add_argument("unixid", help="User name to get mbig number of")
+
+args = parser.parse_args()
+
+mbig_cmd = ['co', '-p', '/bbsrc/tools/data/devops/mbig.edt,v']
+mbigs = check_output(mbig_cmd, stderr=PIPE).strip().split('\n')
+
+user_mbig = filter(lambda mbig: args.unixid in mbig, mbigs)
+
+if len(user_mbig) == 1:
+    print(user_mbig[0].split()[0])
+else:
+    print('could not find mbig for %s' % args.unixid)
