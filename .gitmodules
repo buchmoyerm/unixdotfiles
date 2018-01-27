@@ -1,0 +1,3 @@
+[submodule "pydotfileinstaller"]
+	path = pydotfileinstaller
+	url = https://github.com/buchmoyerm/pydotfileinstaller
