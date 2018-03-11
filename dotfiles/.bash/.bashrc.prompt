@@ -95,7 +95,7 @@ else
   TMUX_NOTIFY='echo -en "\a"'
 fi
 
-PROMPT_COMMAND="${PROMPT_COMMAND} ; ${HOST_COMMAND} ; ${TMUX_NOTIFY}"
+PROMPT_COMMAND="${HOST_COMMAND} ; ${TMUX_NOTIFY}"
 
 # tab completion help
 bind 'set completion-ignore-case On'

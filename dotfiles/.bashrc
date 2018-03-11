@@ -8,6 +8,7 @@
 # =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 # if chimera generated aliases exist, pull them into the current ENV
 [ -f ~/.bbalias ] && . ~/.bbalias
+[ -d /opt/bb ] && IS_BBRG=1
 
 uname=`uname`
 #if [[ $uname == "AIX" ]] ; then
@@ -70,8 +71,10 @@ source $HOME/.bash/.bashrc.colors
 source $HOME/.bash/.bashrc.aliases
 source $HOME/.bash/.bashrc.prompt
 source $HOME/.bash/.bashrc.git
-source $HOME/.bash/.bashrc.bbrg
+[ $IS_BBRG ] && source $HOME/.bash/.bashrc.bbrg
 source $HOME/.bash/.bashrc.cmds
 
-PATH="$HOME/workspace/git-ib:$PATH"
-source $HOME/workspace/git-ib/git-ib-autocomplete.sh
+if [ $IS_BBRG ] ; then
+  PATH="$HOME/workspace/git-ib:$PATH"
+  source $HOME/workspace/git-ib/git-ib-autocomplete.sh
+fi

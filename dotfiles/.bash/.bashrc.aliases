@@ -11,8 +11,8 @@ alias ssh='ssh -X'
 
 alias work='cd ~/workspace'
 
-alias vim='/opt/bb/bin/vim -v'
-alias gvim='/opt/bb/bin/gvim'
+alias vim='vim -v'
+alias gvim='gvim'
 alias utc='date --utc'
 alias today='date +%F'
 alias utc_offset='date +%z'
