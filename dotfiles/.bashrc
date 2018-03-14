@@ -64,7 +64,7 @@ export HISTFILESIZE=5000          # Store 5000 commands in history
 export HISTCONTROL=ignoredups    # Don't put duplicate lines in the history.
 
 export GREP_OPTIONS="--color=auto"
-export VISUAL="/opt/bb/bin/vim -v -u ~/.vimrc_min"
+export VISUAL="vim -v -u ~/.vimrc_min"
 export EDITOR="$VISUAL"
 
 source $HOME/.bash/.bashrc.colors
