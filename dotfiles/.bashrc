@@ -8,7 +8,7 @@
 # =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 # if chimera generated aliases exist, pull them into the current ENV
 [ -f ~/.bbalias ] && . ~/.bbalias
-[ -d /opt/bb ] && IS_BBRG=1
+[ -d /opt/bb ] && export IS_BBRG=1
 
 uname=`uname`
 #if [[ $uname == "AIX" ]] ; then
@@ -58,6 +58,7 @@ shopt -s extglob # extended pattern matching for bash completion
 shopt -s globstar # '**' matches all files and no directories
 shopt -s dirspell # typo tolerance when tab completing directories
 
+export PATH=${HOME}/bin:${PATH}
 
 # History fixes
 export HISTFILESIZE=5000          # Store 5000 commands in history
