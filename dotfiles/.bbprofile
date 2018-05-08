@@ -27,6 +27,7 @@
 + contrib/bash_complete
 + flag/arcanist
 + contrib/gitshell
+- flag/git_prompt
 
 # for tmux
 + contrib/optbb

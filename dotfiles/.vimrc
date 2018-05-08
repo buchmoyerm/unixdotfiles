@@ -401,6 +401,12 @@ noremap <silent> <M-k> :TmuxNavigateUp<cr>
 noremap <silent> <M-l> :TmuxNavigateRight<cr>
 noremap <silent> <M-\> :TmuxNavigatePrevious<cr>
 
+tnoremap <silent> <M-h> <C-w>:TmuxNavigateLeft<cr>
+tnoremap <silent> <M-j> <C-w>:TmuxNavigateDown<cr>
+tnoremap <silent> <M-k> <C-w>:TmuxNavigateUp<cr>
+tnoremap <silent> <M-l> <C-w>:TmuxNavigateRight<cr>
+tnoremap <silent> <M-\> <C-w>:TmuxNavigatePrevious<cr>
+
 " git gutter mappings
 let g:gitgutter_map_keys = 0
 nmap <leader>gs <Plug>GitGutterStageHunk
@@ -765,7 +771,7 @@ augroup END " }
 autocmd BufReadPost fugitive://* set bufhidden=delete
 
 " cleanup whitespace when closing a file
-autocmd BufWritePre * call StripTrailingWhitespace()
+" autocmd BufWritePre * call StripTrailingWhitespace()
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Commands for command line
