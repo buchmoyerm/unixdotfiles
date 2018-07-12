@@ -1,7 +1,15 @@
 # ~/.profile skeleton
 # ~/.profile runs on interactive login shells if it exists
 # =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
-echo "~/.profile has run"
+function __print_debug
+{
+  tty -s
+  # if [ $? -eq 0 ] ; then
+  #   echo "$@"
+  # fi
+}
+
+__print_debug "~/.profile has run"
 
 
 # =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
@@ -12,7 +20,7 @@ echo "~/.profile has run"
 # =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 # chimera not present/didn't run, set some basic stuff up
 # hope /etc/passwd is good enough
-if [ ! "$BBENV" ]
+if [ ! "$BBENV" ] && [ -d /opt/bb ]
 then
      PS1="${HOSTNAME}:\${PWD} \$ "
      PATH=$PATH:/usr/sbin
@@ -35,8 +43,8 @@ fi
 
 # Set up terminal type
 if [ "${XTERM:-unset}" == unset ] ; then
-  echo "putty!!"
-  if [ ${TERM} = xterm ] ; then
+  __print_debug "putty!!"
+  if [ "${TERM:-unset}" == xterm ] ; then
       case ${SYSTYPE} in
           # SunOS)
           #     export TERM=xtermc ;;
@@ -49,7 +57,7 @@ if [ "${XTERM:-unset}" == unset ] ; then
       esac
   fi
 else
-  echo "real xterm!!"
+  __print_debug "real xterm!!"
   #this fixes vim inside tmux when using EOD
   #it also breaks vim inside tmux when using putty
   # if [ ${TMUX:-unset} != unset ] ; then
@@ -59,5 +67,5 @@ else
   # fi
 fi
 
-source ${HOME}/.bashrc
+# source ${HOME}/.bashrc
 

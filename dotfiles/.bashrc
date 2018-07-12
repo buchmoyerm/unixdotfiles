@@ -8,6 +8,7 @@
 # =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 # if chimera generated aliases exist, pull them into the current ENV
 [ -f ~/.bbalias ] && . ~/.bbalias
+[ -d /opt/bb ] && export IS_BBRG=1
 
 uname=`uname`
 #if [[ $uname == "AIX" ]] ; then
@@ -57,21 +58,24 @@ shopt -s extglob # extended pattern matching for bash completion
 shopt -s globstar # '**' matches all files and no directories
 shopt -s dirspell # typo tolerance when tab completing directories
 
+export PATH=${HOME}/bin:${PATH}
 
 # History fixes
 export HISTFILESIZE=5000          # Store 5000 commands in history
 export HISTCONTROL=ignoredups    # Don't put duplicate lines in the history.
 
 export GREP_OPTIONS="--color=auto"
-export VISUAL="/opt/bb/bin/vim -v -u ~/.vimrc_min"
+export VISUAL="vim -v -u ~/.vimrc_min"
 export EDITOR="$VISUAL"
 
 source $HOME/.bash/.bashrc.colors
 source $HOME/.bash/.bashrc.aliases
 source $HOME/.bash/.bashrc.prompt
 source $HOME/.bash/.bashrc.git
-source $HOME/.bash/.bashrc.bbrg
+[ $IS_BBRG ] && source $HOME/.bash/.bashrc.bbrg
 source $HOME/.bash/.bashrc.cmds
 
-PATH="$HOME/workspace/git-ib:$PATH"
-source $HOME/workspace/git-ib/git-ib-autocomplete.sh
+if [ $IS_BBRG ] ; then
+  PATH="$HOME/workspace/git-ib:$PATH"
+  source $HOME/workspace/git-ib/git-ib-autocomplete.sh
+fi

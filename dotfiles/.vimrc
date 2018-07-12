@@ -735,7 +735,7 @@ endfunction
 " => settings for improving CtrlP functionality
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " PyMatcher for CtrlP
-if !has('python')
+if !has('python') && !has('python3')
   echo 'In order to use pymatcher plugin, you need +python compiled vim'
 else
   let g:ctrlp_match_func = { 'match': 'pymatcher#PyMatch' }
