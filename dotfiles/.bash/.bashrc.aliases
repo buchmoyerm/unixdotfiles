@@ -2,7 +2,7 @@
 # set up some generic bash aliases
 # =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
-alias findtsk='find . -name '*.tsk' -exec ls -l {} \;'
+alias findtsk='find . -name "*.tsk" -exec ls -l {} \;'
 alias ls='ls --group-directories-first --color=always -F -1'
 alias ll='ls --group-directories-first -lhrt'
 alias tree='tree -C'

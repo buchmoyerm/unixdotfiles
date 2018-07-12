@@ -745,6 +745,10 @@ endif
 " => Auto commands
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+" Python pylint
+autocmd FileType python set makeprg=python3.6\ -m\ pylint\ --reports=n\ --msg-template=\"{path}:{line}:\ {msg_id}\ {symbol},\ {obj}\ {msg}\"\ %:p
+autocmd FileType python set errorformat=%f:%l:\ %m
+
 " Highlight line
 augroup CursorLine
   au!
