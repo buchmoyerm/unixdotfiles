@@ -2,12 +2,14 @@ set nocompatible              " be iMproved, required
 
 " set the runtime path to include Vundle and initialize
 call plug#begin()
+
   " Split navigation with tmux
   " --------------------------
   Plug 'christoomey/vim-tmux-navigator'
 
   Plug 'tpope/vim-repeat'
   Plug 'tpope/vim-unimpaired'
+  Plug 'tpope/vim-vinegar'
   " peekaboo needs Cmd2 hack to work on commandline
   Plug 'gelguy/Cmd2.vim' | Plug 'junegunn/vim-peekaboo'
 
@@ -16,6 +18,24 @@ call plug#begin()
   Plug 'tomasr/molokai'
 " All of your Plugins must be added before the following line
 call plug#end()            " required
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Hack to get alt-alpha keys to work in terminal
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+function! Alt_hack_char(ch) abort
+  exec "set <A-".a:ch.">=\e".a:ch
+  exec "imap \e".a:ch." <A-".a:ch.">"
+endfunction
+
+" alt+alpha
+let c='a'
+while c <= 'z'
+  call Alt_hack_char(c)
+  let c = nr2char(1+char2nr(c))
+endw
+
+call Alt_hack_char('\')
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => peekaboo command line hack
@@ -62,6 +82,7 @@ nnoremap * :keepjumps normal! mi*`i<CR>
 " tpope probably doesn't use putty like I am.
 nnoremap cop :set paste!<CR>
 
+let g:tmux_navigator_disable_when_zoomed = 1
 let g:tmux_navigator_no_mappings = 1
 let g:tmux_navigator_save_on_switch = 1
 noremap <silent> <M-h> :TmuxNavigateLeft<cr>
@@ -69,6 +90,12 @@ noremap <silent> <M-j> :TmuxNavigateDown<cr>
 noremap <silent> <M-k> :TmuxNavigateUp<cr>
 noremap <silent> <M-l> :TmuxNavigateRight<cr>
 noremap <silent> <M-\> :TmuxNavigatePrevious<cr>
+
+tnoremap <silent> <M-h> <C-w>:TmuxNavigateLeft<cr>
+tnoremap <silent> <M-j> <C-w>:TmuxNavigateDown<cr>
+tnoremap <silent> <M-k> <C-w>:TmuxNavigateUp<cr>
+tnoremap <silent> <M-l> <C-w>:TmuxNavigateRight<cr>
+tnoremap <silent> <M-\> <C-w>:TmuxNavigatePrevious<cr>
 
 set showcmd
 set cmdheight=2
@@ -94,6 +121,8 @@ set nowb
 set noswapfile
 " Uncomment below to make screen not flash on error
 set vb t_vb=""
+" removes 'press ENTER or type a command to continue'
+set shortmess=atI
 
 " use mouse to select
 behave mswin

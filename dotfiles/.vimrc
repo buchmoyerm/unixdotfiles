@@ -13,11 +13,14 @@ let useLightLine = !isLinux || !has("gui_running")
 
 set nocompatible              " be iMproved, required
 
+" Bundle configuration (Vundle).
+if filereadable(expand("~/.vimrc.plugins"))
+    source ~/.vimrc.plugins
+endif
+
+
 " set the runtime path to include Vundle and initialize
 call plug#begin()
-
-  " Vundles
-  " =======
 
   " sensible default settings
   " -------------------------
@@ -287,7 +290,9 @@ set whichwrap+=<,>,h,l
 set vb t_vb=""
 
 " removes 'press ENTER or type a command to continue'
-set shortmess=atI
+set shortmess=atToOI
+set report=0
+set noerrorbells
 
 "My settings
 set guioptions-=TaA  "remove toolbar from gui
@@ -321,6 +326,18 @@ set wildignore=*.o,*~,*.gch,*.pyc,*.jpg,*.gif,*.png " Ignore compiled files
 set fo-=t " remove menu from gvim
 set completeopt=longest,menuone
 
+set cinoptions=:0.5s,=0.5s,l1,g0.5s,h0.5s,N-s,t0,i0,(0,J1
+"              |     |     |  |     |     |   |  |  |  +-- don't confuse JS object decls with labels
+"              |     |     |  |     |     |   |  |  +-- indent from unclosed parens
+"              |     |     |  |     |     |   |  +-- C++ base class decls and initializations
+"              |     |     |  |     |     |   +-- indent function return type at margin
+"              |     |     |  |     |     +-- indent inside C++ namespace
+"              |     |     |  |     +-- places statements after C++ scope decls
+"              |     |     |  +--  place C++ scope declarations
+"              |     |     +-- align with case label instead of statement
+"              |     +-- place statements after case label
+"              +-- placement of case after switch statement
+
 " ignore these suffixes when searching files with multiple matches
 set suffixes=.back,~,.o,.info,.swp,.obj
 " set suffixes=.back,~,.h,.o,.info,.swp,.obj
@@ -335,7 +352,7 @@ set noswapfile
 set ttyfast
 
 "how to display whitespace
-set list listchars=tab:>-,trail:.
+set listchars=tab:»\ ,trail:·,extends:>,precedes:<
 set nolist
 
 " disable alt for windows menu
@@ -393,6 +410,7 @@ nnoremap <M-right> <C-w><right>
 nnoremap <M-up> <C-w><up>
 nnoremap <M-down> <C-w><down>
 
+let g:tmux_navigator_disable_when_zoomed = 1
 let g:tmux_navigator_no_mappings = 1
 let g:tmux_navigator_save_on_switch = 1
 noremap <silent> <M-h> :TmuxNavigateLeft<cr>
@@ -907,3 +925,8 @@ function! ToggleRelative()
         set rnu
     endif
 endfunction
+
+" Source local override file if one exists.
+if filereadable(expand("~/.vimrc.local"))
+    source ~/.vimrc.local
+endif
