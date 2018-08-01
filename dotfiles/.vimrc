@@ -352,7 +352,7 @@ set noswapfile
 set ttyfast
 
 "how to display whitespace
-set listchars=tab:»\ ,trail:·,extends:>,precedes:<
+set listchars=tab:_\ ,trail:_,extends:>,precedes:<
 set nolist
 
 " disable alt for windows menu
