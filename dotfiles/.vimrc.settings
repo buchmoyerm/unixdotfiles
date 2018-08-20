@@ -1,0 +1,432 @@
+
+" let comma be used as map leader
+let mapleader=","
+map \ ,
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Hack to get alt-alpha keys to work in terminal
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+function! Alt_hack_char(ch) abort
+  exec "set <A-".a:ch.">=\e".a:ch
+  exec "imap \e".a:ch." <A-".a:ch.">"
+endfunction
+
+" alt+alpha
+let c='a'
+while c <= 'z'
+  call Alt_hack_char(c)
+  let c = nr2char(1+char2nr(c))
+endw
+
+call Alt_hack_char('\')
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => VIM settings
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+if !has("gui_running")
+  " disables background color erase
+  set t_ut=
+endif
+colorscheme molokai
+
+" Highlight the column at 80 chars (all code should be inside the column)
+highlight ColorColumn ctermbg=235 guibg=#2c2d27
+" let &colorcolumn="80,".join(range(120,999),",")
+let &colorcolumn="80"
+
+syntax on
+
+"Information on the following setting can be found with
+":help set
+set tabstop=2
+set softtabstop=2
+set shiftwidth=2  "this is the level of autoindent, adjust to taste
+set ruler
+set relativenumber "displays the relative number on the side (Ctrl+n to toggle)
+set backspace=indent,eol,start
+set whichwrap+=<,>,h,l
+" Uncomment below to make screen not flash on error
+set vb t_vb=""
+
+" removes 'press ENTER or type a command to continue'
+set shortmess=atToOI
+set report=0
+set noerrorbells
+
+"My settings
+set guioptions-=TaA  "remove toolbar from gui
+set nowrap
+set mouse=a
+set ttymouse=xterm2
+set ignorecase
+set smartcase
+set showmatch
+set showcmd
+set autoread
+set lazyredraw
+set hidden
+set backup
+set cindent
+set notitle
+set incsearch   "move as we search
+set hlsearch    "highlight the search results
+set virtualedit=block
+set comments=s1:/*,mb:\ *,elx:\ */
+set expandtab " Use spaces instead of tabs
+set cmdheight=2 " Height of the command bar
+set splitright " set splitbelow
+set nofoldenable " open vim without folds
+set ttimeoutlen=50 "set timeoutlen=50
+set wildmenu
+set wildmode=list:longest,full
+set wildignore=*.o,*~,*.gch,*.pyc,*.jpg,*.gif,*.png " Ignore compiled files
+set fo-=t " remove menu from gvim
+set completeopt=longest,menuone
+set laststatus=2 "always show status line (even when there isn't a split)
+
+set cinoptions=:0.5s,=0.5s,l1,g0.5s,h0.5s,N-s,t0,i0,(0,J1
+"              |     |     |  |     |     |   |  |  |  +-- don't confuse JS object decls with labels
+"              |     |     |  |     |     |   |  |  +-- indent from unclosed parens
+"              |     |     |  |     |     |   |  +-- C++ base class decls and initializations
+"              |     |     |  |     |     |   +-- indent function return type at margin
+"              |     |     |  |     |     +-- indent inside C++ namespace
+"              |     |     |  |     +-- places statements after C++ scope decls
+"              |     |     |  +--  place C++ scope declarations
+"              |     |     +-- align with case label instead of statement
+"              |     +-- place statements after case label
+"              +-- placement of case after switch statement
+
+" ignore these suffixes when searching files with multiple matches
+set suffixes=.back,~,.o,.info,.swp,.obj
+
+let g:netrw_special_syntax=1
+
+" Turn backup off, since most stuff is in SVN, git et.c anyway...
+set nobackup
+set nowb
+set noswapfile
+
+set ttyfast
+
+"how to display whitespace
+" set listchars=tab:_\ ,trail:_,extends:>,precedes:<
+set listchars=tab:_\ ,trail:_
+set nolist
+
+" disable alt for windows menu
+set winaltkeys=no
+
+" prefer diffs to be vertical
+set diffopt=filler,vertical
+
+" turn spell check on for git commit messages
+autocmd Filetype gitcommit setlocal spell
+
+"Set default diff
+let &diffexpr='EnhancedDiff#Diff("git diff", "--diff-algorithm=histogram")'
+
+"set indent guide colors to be impossible to miss
+let g:indent_guides_auto_colors = 0
+hi IndentGuidesOdd  ctermbg=darkblue
+hi IndentGuidesEven ctermbg=lightgrey
+
+" use mouse to select
+behave mswin
+
+" C syntax highlight settings
+let g:cpp_class_scope_highlight = 1
+let g:cpp_experimental_template_highlight = 1
+let g:cpp_concepts_highlight = 1
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Keyboard settings/key bindings
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" Toggle relative numbers
+nnoremap <silent> <C-n> :call ToggleRelative()<CR>
+
+" Visual mode pressing * or # searches for the current selection
+" Super useful! From an idea by Michael Naumann
+vnoremap <silent> * :call VisualSelection('f')<CR>
+vnoremap <silent> # :call VisualSelection('b')<CR>
+
+" Pane navigation using Alt and arrow keys
+nnoremap <M-left> <C-w><Left>
+nnoremap <M-right> <C-w><right>
+nnoremap <M-up> <C-w><up>
+nnoremap <M-down> <C-w><down>
+
+let g:tmux_navigator_disable_when_zoomed = 1
+let g:tmux_navigator_no_mappings = 1
+let g:tmux_navigator_save_on_switch = 1
+noremap <silent> <M-h> :TmuxNavigateLeft<cr>
+noremap <silent> <M-j> :TmuxNavigateDown<cr>
+noremap <silent> <M-k> :TmuxNavigateUp<cr>
+noremap <silent> <M-l> :TmuxNavigateRight<cr>
+noremap <silent> <M-\> :TmuxNavigatePrevious<cr>
+
+tnoremap <silent> <M-h> <C-w>:TmuxNavigateLeft<cr>
+tnoremap <silent> <M-j> <C-w>:TmuxNavigateDown<cr>
+tnoremap <silent> <M-k> <C-w>:TmuxNavigateUp<cr>
+tnoremap <silent> <M-l> <C-w>:TmuxNavigateRight<cr>
+tnoremap <silent> <M-\> <C-w>:TmuxNavigatePrevious<cr>
+
+" git gutter mappings
+let g:gitgutter_map_keys = 0
+nmap <leader>gs <Plug>GitGutterStageHunk
+nmap <leader>gu <Plug>GitGutterRevertHunk
+nmap <leader>gv <Plug>GitGutterPreviewHunk
+nmap ]c <Plug>GitGutterNextHunk
+nmap [c <Plug>GitGutterPrevHunk
+
+" Faster navigation wit ctrl
+noremap <C-up> 10gk
+noremap <C-down> 10gj
+noremap <C-right> 5l
+noremap <C-left> 5h
+
+" Faster navigation witn ctrl
+noremap <C-k> 10gk
+noremap <C-j> 10gj
+noremap <C-h> 5h
+noremap <C-l> 5l
+
+" 0 jumps to first non black char in line
+noremap 0 ^
+
+" Move to next resent and put it in the middle of the split
+noremap <silent> n nzz
+noremap <silent> N Nzz
+
+" quickly exit insert mode without esc
+inoremap fj <Esc>
+vnoremap fj <Esc>
+snoremap fj <Esc>
+
+" highlight all matched under cursor but don't jump to next match
+nnoremap * :keepjumps normal! mi*`i<CR>
+
+" more natural navigation of log lines with word wrap
+nnoremap j gj
+nnoremap k gk
+
+" switch between tab modes
+nnoremap <leader><leader>t :set expandtab tabstop=4 shiftwidth=4 softtabstop=4<CR>
+nnoremap <leader><leader>T :set expandtab tabstop=8 shiftwidth=8 softtabstop=4<CR>
+nnoremap <leader><leader>M :set noexpandtab tabstop=8 softtabstop=4 shiftwidth=4<CR>
+nnoremap <leader><leader>m :set expandtab tabstop=2 shiftwidth=2 softtabstop=2<CR>
+autocmd Filetype python setlocal ts=4 sts=4 sw=4
+autocmd Filetype make set noexpandtab
+
+" switch between paste modes (use unimpaired co* style)
+" event though tpope disagrees with paste mode having shortcut
+" tpope probably doesn't use putty like I am.
+nnoremap cop :set paste!<CR>
+
+"more co-* commands
+nnoremap cog :IndentGuidesToggle<CR>
+nnoremap coe :call ToggleList("Quickfix List", 'c')<CR>
+nnoremap coll :call ToggleList("Location List", 'l')<CR>
+
+"Map F4 to toggle search results highlights
+nnoremap <silent> <F4> :set hlsearch!<CR>
+
+" Toggle a diff view comparing unsaved changes to saved version
+nnoremap <silent> <S-F4> :DiffChangesDiffToggle<CR>
+
+"use cmd2 mode
+" nmap : :<F12>
+" nmap / /<F12>
+cmap <F12> <Plug>(Cmd2Suggest)
+
+" Cmd2 settings
+" -------------
+
+cnoremap <key> <nop>
+
+let g:Cmd2_options = {
+          \ '_complete_ignorecase': 1,
+          \ '_complete_uniq_ignorecase': 0,
+          \ '_complete_fuzzy': 1,
+          \ }
+
+" cmap <expr> <Tab> Cmd2#ext#complete#InContext() ? "\<Plug>(Cmd2Complete)" : "\<Tab>"
+
+set wildcharm=<Tab>
+
+" Easy Motion settings
+" --------------------
+
+map <Leader> <Plug>(easymotion-prefix)
+
+" Line motions
+map <Leader>l <Plug>(easymotion-lineforward)
+map <Leader>j <Plug>(easymotion-j)
+map <Leader>k <Plug>(easymotion-k)
+map <Leader>h <Plug>(easymotion-linebackward)
+
+" Bi-directional find motion
+" Jump to anywhere you want with minimal keystrokes, with just one key binding.
+" `s{char}{label}`
+" nmap s <Plug>(easymotion-s)
+" or
+" `s{char}{char}{label}`
+" Need one more keystroke, but on average, it may be more comfortable.
+nmap s <Plug>(easymotion-s2)
+
+" use easy motion for searching and navigation
+" map  / <plug>(easymotion-sn)
+" omap / <plug>(easymotion-tn)
+
+" These `n` & `N` mappings are options. You do not have to map `n` & `N` to EasyMotion.
+" Without these mappings, `n` & `N` works fine. (These mappings just provide
+" different highlight method and have some other features )
+" map  n <Plug>(easymotion-next)
+" map  N <Plug>(easymotion-prev)
+
+" Turn on case insensitive feature
+let g:EasyMotion_smartcase = 1
+
+let g:EasyMotion_wrapscan = 1 " enable search wrapping around end of file
+
+let g:EasyMotion_startofline = 1 " Disable keep cursor colum when JK motion
+
+let g:EasyMotion_do_mapping = 0 " Disable default mappings
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => peekaboo command line hack
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+if !has("gui_running")
+  function! s:Peekaboo()
+    call peekaboo#peek(1, 'ctrl-r',  0)
+  endfunction
+
+  let g:Cmd2_cmd_mappings = {
+      \ 'Peekaboo': {'command': function('s:Peekaboo'), 'type': 'function'},
+      \ }
+
+  cmap <C-R> <Plug>(Cmd2)Peekaboo
+
+endif
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Autocomplete (YCM) settings
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Addition config for YouCompleteMe
+if has("unix")
+  if !v:shell_error && isLinux
+    nnoremap <silent> <F12> :YcmCompleter GoTo<CR>
+
+    let g:ycm_server_keep_logfiles = 1
+
+    let g:ycm_autoclose_preview_window_after_insertion = 1
+
+    let g:ycm_filetype_blacklist = {
+      \ 'tagbar' : 1,
+      \ 'qf' : 1,
+      \ 'notes' : 1,
+      \ 'markdown' : 1,
+      \ 'unite' : 1,
+      \ 'text' : 1,
+      \ 'vimwiki' : 1,
+      \ 'pandoc' : 1,
+      \ 'infolog' : 1,
+      \ 'mail' : 1
+      \}
+  endif
+endif
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => SimplyFold settings
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+let g:SimpylFold_docstring_preview = 1
+let g:SimpylFold_fold_docstring = 0
+" let g:SimpylFold_fold_import = 0
+
+autocmd BufWinLeave *.py setlocal foldexpr< foldmethod<
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Status line settings
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+"-------------------------
+"  Lightline settings
+  let g:lightline = {
+    \ 'enable': {
+      \     'statusline': 1,
+      \     'tabline': 1
+      \ },
+    \ 'active': {
+      \     'left': [ [ 'mode', 'paste' ],
+      \           [ 'readonly', 'filename', 'modified' ],
+      \           [ 'fugitive' ] ],
+      \     'right': [ [ 'lineinfo' ],
+      \            [ 'percent' ],
+      \            [ 'filetype' ] ]
+      \ },
+    \ 'inactive': {
+      \     'left': [ [ 'filename' ] ],
+      \     'right': [ [ 'lineinfo' ],
+      \            [ 'percent' ] ] },
+    \ 'tabline': {
+      \    'left': [ [ 'tabs' ] ],
+      \    'right': [ [ 'close' ] ],
+      \ },
+    \ 'colorscheme' : 'wombat',
+    \ 'component': {
+      \   'readonly': '%{&filetype=="help"?"":&readonly?"x":""}',
+      \   'modified': '%{&filetype=="help"?"":&modified?"+":&modifiable?"":"-"}',
+      \   'fileencoding': '',
+      \   'fileformat': ''
+      \ },
+    \ 'component_visible_condition' : {
+      \   'fileencoding': 0,
+      \   'fileformat': 0,
+      \ },
+    \ 'component_function': {
+      \   'fugitive': 'LightlineFugitive'
+      \ },
+    \ }
+
+  let g:lightline.mode_map = {
+      \ 'n' : 'N',
+      \ 'i' : 'I',
+      \ 'R' : 'R',
+      \ 'v' : 'v',
+      \ 'V' : 'V',
+      \ 'c' : 'C',
+      \ "\<C-v>": 'V',
+      \ 's' : 's',
+      \ 'S' : 'S',
+      \ "\<C-s>": 'S',
+      \ '?': ' ',
+      \ 't': 'T' }
+" Light line functions
+" --------------------
+
+function! LightlineFugitive() abort
+  if &filetype ==# 'help'
+    return ''
+  endif
+  if has_key(b:, 'lightline_fugitive') && reltimestr(reltime(b:lightline_fugitive_)) =~# '^\s*0\.[0-5]'
+    return b:lightline_fugitive
+  endif
+  try
+    if exists('*fugitive#head')
+      let head = fnamemodify(fugitive#head(), ":t")
+    else
+      return ''
+    endif
+    let b:lightline_fugitive = head
+    let b:lightline_fugitive_ = reltime()
+    return b:lightline_fugitive
+  catch
+  endtry
+  return ''
+endfunction
+

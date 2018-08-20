@@ -4,12 +4,18 @@
 
 alias findtsk='find . -name "*.tsk" -exec ls -l {} \;'
 alias ls='ls --group-directories-first --color=always -F -1'
-alias ll='ls --group-directories-first -lhrt'
+alias ll='ls --group-directories-first -lhrtF'
+alias la='ls --group-directories-first -A'
+alias l='ls --group-directories-first -CF'
 alias tree='tree -C'
 alias less='less -i -R'
 alias ssh='ssh -X'
 
 alias work='cd ~/workspace'
+
+# Add an "alert" alias for long running commands.  Use like so:
+#   sleep 10; alert
+alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
 
 alias vim='vim -v'
 alias gvim='gvim'
@@ -17,5 +23,4 @@ alias utc='date --utc'
 alias today='date +%F'
 alias utc_offset='date +%z'
 alias microstamp='MS=$(date --utc +%s%N) ; echo ${MS: : -3}'
-alias sublime='/home/mbuchmoyer/mbig/sublime/sublime_text_3/sublime_text'
 alias todo='${EDITOR} ${HOME}/todo.txt'

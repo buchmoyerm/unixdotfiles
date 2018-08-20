@@ -6,33 +6,18 @@
 # =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
 # =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+# If not running interactively, don't do anything
+case $- in
+    *i*) ;;
+      *) return;;
+esac
+
 # if chimera generated aliases exist, pull them into the current ENV
 [ -f ~/.bbalias ] && . ~/.bbalias
 [ -d /opt/bb ] && export IS_BBRG=1
 
 uname=`uname`
-#if [[ $uname == "AIX" ]] ; then
-#    alias vim="TERM=xterm-new vim"
-#    alias gvim="TERM=xterm-new gvim"
-#fi
-
-#[[ ${TERM} == "screen" ]] && export TERM="screen-256color"
-
-# if [ -d ${HOME}/.terminfo/${SYSTYPE} ]
-# then
-#     export TERMINFO=${HOME}/.terminfo/${SYSTYPE}
-#     # Override 'xterm' -> 'xterm-256color'
-#     if [ ${TERM} = xterm ]
-#     then
-#         export TERM=xterm-256color
-#     fi
-#     # Override 'rxvt-unicode' -> 'rxvt-unicode-256color'
-#     if [ ${TERM} = rxvt-unicode ]
-#     then
-#         export TERM=rxvt-unicode-256color
-#     fi
-# fi
-#
 
 # =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 # commandline editing
@@ -58,7 +43,7 @@ shopt -s extglob # extended pattern matching for bash completion
 shopt -s globstar # '**' matches all files and no directories
 shopt -s dirspell # typo tolerance when tab completing directories
 
-export PATH=${HOME}/bin:${PATH}
+# export PATH=${HOME}/bin:${PATH}
 
 # History fixes
 export HISTFILESIZE=5000                # Store 5000 commands in history
@@ -82,3 +67,6 @@ if [ $IS_BBRG ] ; then
   PATH="$HOME/workspace/git-ib:$PATH"
   source $HOME/workspace/git-ib/git-ib-autocomplete.sh
 fi
+
+# local overrides
+[ -f ${HOME}/.local/.bashrc ] && . ${HOME}/.local/.bashrc

@@ -1,23 +1,8 @@
 set nocompatible              " be iMproved, required
 
-" set the runtime path to include Vundle and initialize
-call plug#begin()
-
-  " Split navigation with tmux
-  " --------------------------
-  Plug 'christoomey/vim-tmux-navigator'
-
-  Plug 'tpope/vim-repeat'
-  Plug 'tpope/vim-unimpaired'
-  Plug 'tpope/vim-vinegar'
-  " peekaboo needs Cmd2 hack to work on commandline
-  Plug 'gelguy/Cmd2.vim' | Plug 'junegunn/vim-peekaboo'
-
-  " colorschemes
-  " -------------
-  Plug 'tomasr/molokai'
-" All of your Plugins must be added before the following line
-call plug#end()            " required
+if filereadable(expand("~/.vimrc.plugins"))
+    source ~/.vimrc.plugins
+endif
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Hack to get alt-alpha keys to work in terminal

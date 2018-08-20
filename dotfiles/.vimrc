@@ -9,107 +9,14 @@ endif
 let os = system("uname")
 let isLinux = (os == "Linux\n")
 let useLightLine = !isLinux || !has("gui_running")
+let full_vimrc = 1
 " let useLightLine = 0
 
 set nocompatible              " be iMproved, required
 
-" Bundle configuration (Vundle).
 if filereadable(expand("~/.vimrc.plugins"))
     source ~/.vimrc.plugins
 endif
-
-
-" set the runtime path to include Vundle and initialize
-call plug#begin()
-
-  " sensible default settings
-  " -------------------------
-  Plug 'tpope/vim-sensible'
-
-  " colorschemes
-  " -------------
-  Plug 'tomasr/molokai'
-
-  " file navigation
-  " ---------------
-  Plug 'kien/ctrlp.vim' | Plug 'FelikZ/ctrlp-py-matcher'
-  Plug 'benmills/vimux'
-
-  Plug 'tpope/vim-vinegar'
-  "Plug 'majutsushi/tagbar' " awesome, but not greate for large files
-  Plug 'mileszs/ack.vim'
-  Plug 'Lokaltog/vim-easymotion'
-  Plug 'kien/tabman.vim'
-  Plug 'vim-scripts/a.vim'
-  Plug 'tpope/vim-unimpaired'
-  Plug 'tmhedberg/SimpylFold' "folds
-
-  " snippets
-  Plug 'SirVer/ultisnips'
-  Plug 'honza/vim-snippets'
-
-  " Split navigation with tmux
-  " --------------------------
-  Plug 'christoomey/vim-tmux-navigator'
-
-  " syntax
-  " ------
-  Plug 'tpope/vim-git'
-  " Plug 'octol/vim-cpp-enhanced-highlight'
-  " Plug 'scrooloose/syntastic'
-  Plug 'rhysd/vim-clang-format', { 'for': [ 'cpp',
-                                          \ 'c',
-                                          \ 'java',
-                                          \ 'javascript',
-                                          \ 'typescript',
-                                          \ 'protobuf' ] }
-  Plug 'kana/vim-operator-user'
-
-  " Autocomplete
-  Plug 'vim-scripts/AutoComplPop'
-  " Plug 'vim-scripts/SuperTab'
-
-  " source control
-  " --------------
-  Plug 'tpope/vim-fugitive'
-  Plug 'vim-scripts/diffchanges.vim'
-  Plug 'buchmoyerm/vim-diff-enhanced'
-  Plug 'airblade/vim-gitgutter'
-
-  " other
-  " ----
-"   Plug 'closetag.vim'
-  Plug 'tpope/vim-dispatch'
-  Plug 'gorkunov/smartpairs.vim'
-  Plug 'nathanaelkane/vim-indent-guides'
-  Plug 'tpope/vim-repeat'
-
-  " UNIX helpers
-  " ------------
-  Plug 'tpope/vim-eunuch'
-  Plug 'tpope/vim-commentary'
-
-  " Bloomberg
-  " ---------
-  Plug 'ssh://bbgithub.dev.bloomberg.com/mbuchmoyer/vim-grok.git'
-  Plug 'ssh://bbgithub.dev.bloomberg.com/ib-dev-tools/bbprojmake.vim.git'
-  Plug 'ssh://bbgithub.dev.bloomberg.com/mbuchmoyer/plynk.vim.git'
-
-  " pkgcfg syntax highlighting
-  Plug 'ssh://bbgithub.dev.bloomberg.com/lkisskol/pkgcfg_plugin.git', {'for': ['pkgcfg'] }
-
-  " For building plugins
-  Plug 'tpope/vim-scriptease'
-
-  " peekaboo needs Cmd2 hack to work on commandline
-  Plug 'gelguy/Cmd2.vim' | Plug 'junegunn/vim-peekaboo'
-
-  " status bar
-  " -------------------------
-  Plug 'itchyny/lightline.vim'
-
-" All of your Plugins must be added before the following line
-call plug#end()            " required
 
 " let comma be used as map leader
 let mapleader=","
@@ -352,7 +259,8 @@ set noswapfile
 set ttyfast
 
 "how to display whitespace
-set listchars=tab:_\ ,trail:_,extends:>,precedes:<
+" set listchars=tab:_\ ,trail:_,extends:>,precedes:<
+set listchars=tab:_\ ,trail:_
 set nolist
 
 " disable alt for windows menu
@@ -927,6 +835,6 @@ function! ToggleRelative()
 endfunction
 
 " Source local override file if one exists.
-if filereadable(expand("~/.vimrc.local"))
-    source ~/.vimrc.local
+if filereadable(expand("~/.local/.vimrc"))
+    source ~/.local/.vimrc
 endif
