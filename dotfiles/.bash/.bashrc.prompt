@@ -73,10 +73,16 @@ function git_branch {
   fi
 }
 
+# set variable identifying the chroot you work in (used in the prompt below)
+if [ -z "${debian_chroot:-}" ] && [ -r /etc/debian_chroot ]; then
+    debian_chroot=$(cat /etc/debian_chroot)
+fi
+
 # set PS1
 function prompt {
   #PS1="\[$Yellow\][\t]\[$Color_Off\]\n"
   PS1=" "
+  PS1+="${debian_chroot:+($debian_chroot)}"
   PS1+="\[$IBlue\]\u\[$Color_Off\]"
   PS1+="@"
   PS1+="\[$Green\]\h\[$Color_Off\]"
@@ -87,19 +93,28 @@ function prompt {
 }
 prompt
 
-# put pwd in window title, but let tmux override it
-if [ -z $TMUX ]; then
-  HOST_COMMAND='echo -en "\033]0;$HOSTNAME: $(pwd -P)\a"'
-else
-  HOST_COMMAND='echo -en "\033]0;$HOSTNAME: \a"'
-  TMUX_NOTIFY='echo -en "\a"'
-fi
+# # put pwd in window title, but let tmux override it
+# if [ -z $TMUX ]; then
+#   HOST_COMMAND='echo -en "\033]0;$HOSTNAME: $(pwd -P)\a"'
+# else
+#   HOST_COMMAND='echo -en "\033]0;$HOSTNAME: \a"'
+#   TMUX_NOTIFY='echo -en "\a"'
+# fi
 
-if [[ -z ${PROMPT_COMMAND} ]] ; then
-  export PROMPT_COMMAND="${HOST_COMMAND} ; ${TMUX_NOTIFY}"
-else
-  export PROMPT_COMMAND="${PROMPT_COMMAND} ; ${HOST_COMMAND} ; ${TMUX_NOTIFY}"
-fi
+# if [[ -z ${PROMPT_COMMAND} ]] ; then
+#   export PROMPT_COMMAND="${HOST_COMMAND} ; ${TMUX_NOTIFY}"
+# else
+#   export PROMPT_COMMAND="${PROMPT_COMMAND} ; ${HOST_COMMAND} ; ${TMUX_NOTIFY}"
+# fi
+
+# If this is an xterm set the title to user@host:dir
+case "$TERM" in
+xterm*|rxvt*)
+    PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]$PS1"
+    ;;
+*)
+    ;;
+esac
 
 # tab completion help
 bind 'set completion-ignore-case On'

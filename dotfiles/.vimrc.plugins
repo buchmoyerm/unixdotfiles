@@ -1,5 +1,5 @@
 if !exists('full_vimrc')
-  full_vimrc = 0
+  let full_vimrc = 0
 endif
 
 call plug#begin()

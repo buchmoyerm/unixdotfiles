@@ -7,9 +7,15 @@ alias ls='ls --group-directories-first --color=always -F -1'
 alias ll='ls --group-directories-first -lhrtF'
 alias la='ls --group-directories-first -A'
 alias l='ls --group-directories-first -CF'
+alias dir='dir --color=auto'
+alias vdir='vdir --color=auto'
 alias tree='tree -C'
 alias less='less -i -R'
 alias ssh='ssh -X'
+
+alias grep='grep --color=auto'
+alias fgrep='fgrep --color=auto'
+alias egrep='egrep --color=auto'
 
 alias work='cd ~/workspace'
 

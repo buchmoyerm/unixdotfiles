@@ -52,7 +52,6 @@ export HISTIGNORE="&:[  ]*:exit:ls:bg:fg:history:clear" # ignore certain command
 
 export PROMPT_COMMAND="history -a"
 
-export GREP_OPTIONS="--color=auto"
 export VISUAL="vim -v -u ~/.vimrc_min"
 export EDITOR="$VISUAL"
 
