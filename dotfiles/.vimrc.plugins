@@ -63,7 +63,7 @@ call plug#begin()
   endif
 
   " Autocomplete
-  Plug 'vim-scripts/AutoComplPop'
+  " Plug 'vim-scripts/AutoComplPop'
   " Plug 'vim-scripts/SuperTab'
 
   " source control

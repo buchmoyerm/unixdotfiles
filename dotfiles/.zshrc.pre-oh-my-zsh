@@ -7,13 +7,12 @@ unsetopt beep
 bindkey -v
 # End of lines configured by zsh-newuser-install
 # The following lines were added by compinstall
-zstyle :compinstall filename '/home/mbuchmoyer/.zshrc'
+zstyle :compinstall filename "$HOME/.zshrc"
 
 autoload -Uz compinit
 compinit -u
 # End of lines added by compinstall
 
-export GREP_OPTIONS="--color=auto"
 export VISUAL="/opt/bb/bin/vim -v -u ~/.vimrc_min"
 export EDITOR="$VISUAL"
 
