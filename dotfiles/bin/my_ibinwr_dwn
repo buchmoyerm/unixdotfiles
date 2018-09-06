@@ -1,6 +1,0 @@
-#!/bin/ksh
-
-IBINWR_TASK=ibinwr
-export IBINWR_TASK
-
-/bb/bin/ibinwr_dwn -a

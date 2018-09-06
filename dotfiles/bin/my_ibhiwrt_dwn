@@ -1,6 +1,0 @@
-#!/bin/ksh
-
-IBHIWRITER_TASK=ibhiwrt
-export IBHIWRITER_TASK
-
-/bb/bin/ibhistwr_dwn -a
