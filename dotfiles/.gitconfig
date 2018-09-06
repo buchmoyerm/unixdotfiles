@@ -86,7 +86,7 @@
   default = tracking
 [core]
   pager = "less -i -R -S -# 4"
-  editor = "/opt/bb/bin/vim -v"
+  editor = "vim -v"
   excludesfile = /home/mbuchmoyer/.gitignore_global
 [log]
   date=local

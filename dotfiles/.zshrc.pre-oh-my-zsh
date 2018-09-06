@@ -3,6 +3,7 @@ HISTFILE=~/.histfile
 HISTSIZE=1000
 SAVEHIST=10000
 setopt appendhistory autocd extendedglob nomatch notify
+setopt transientrprompt
 unsetopt beep
 bindkey -v
 # End of lines configured by zsh-newuser-install
@@ -13,7 +14,15 @@ autoload -Uz compinit
 compinit -u
 # End of lines added by compinstall
 
-export VISUAL="/opt/bb/bin/vim -v -u ~/.vimrc_min"
+# try to get backspace working correctly
+bindkey "^?" backward-delete-char
+
+# set PATH so it includes user's private bin if it exists
+if [ -d "$HOME/bin" ] ; then
+    PATH="$HOME/bin:$PATH"
+fi
+
+export VISUAL="vim -v -u ~/.vimrc_min"
 export EDITOR="$VISUAL"
 
 source $HOME/.bash/.bashrc.colors
