@@ -12,58 +12,54 @@ try
 {
 	${1:${VISUAL}}
 }
-catch(${2:const bsl::exception &e})
+catch(${2:const std::exception &e})
 {
 	${3}
 }
 endsnippet
 
 snippet throw "throw exception"
-throw bsl::runtime_error("${1}");
+throw std::runtime_error("${1}");
 endsnippet
 
 snippet cout "cout"
-bsl::cout << ${1} << "\n";
+std::cout << ${1} << "\n";
 endsnippet
 
 snippet cerr "cerr"
-bsl::cerr << ${1} << "\n";
+std::cerr << ${1} << "\n";
 endsnippet
 
-snippet str "bsl::string" w
-bsl::string
+snippet str "std::string" w
+std::string
 endsnippet
 
-snippet vec "bsl::vector" w
-bsl::vector<${1:T}>
+snippet vec "std::vector" w
+std::vector<${1:T}>
 endsnippet
 
-snippet map "bsl::map" w
-bsl::map<${1:T1},${2:T2}>
+snippet map "std::map" w
+std::map<${1:T1},${2:T2}>
 endsnippet
 
-snippet set "bsl::set" w
-bsl::set<${1:T}>
+snippet set "std::set" w
+std::set<${1:T}>
 endsnippet
 
-snippet umap "bsl::unordered_map" w
-bsl::unordered_map<${1:T1},${2:T2}>
+snippet umap "std::unordered_map" w
+std::unordered_map<${1:T1},${2:T2}>
 endsnippet
 
-snippet uset "bsl::unordered_set" w
-bsl::unordered_set<${1:T}>
+snippet uset "std::unordered_set" w
+std::unordered_set<${1:T}>
 endsnippet
 
-snippet pair "bsl::pair" w
-bsl::pair<${1:T1},${2:T2}>
+snippet pair "std::pair" w
+std::pair<${1:T1},${2:T2}>
 endsnippet
 
 snippet sptr "shared pointer" w
-bsl::shared_ptr<${1:T}>
-endsnippet
-
-snippet date "bdlt::date" w
-bdlt::Date
+std::shared_ptr<${1:T}>
 endsnippet
 
 snippet dc "dynamic cast" w
@@ -80,12 +76,6 @@ endsnippet
 
 snippet inc "include"
 #include <${1}>
-endsnippet
-
-snippet binc "bloomberg include"
-#ifndef INCLUDED_`!p snip.rv = t[1].upper()`
-#include <${1}.h>
-#endif
 endsnippet
 
 snippet ns "namespace .. (namespace)"
@@ -107,11 +97,6 @@ guard = "INCLUDED_" + module.upper() + "_" + component.upper()
 `#ifndef ${4:`!p snip.rv = guard`}
 #define $4
 
-#include <sysutil_ident.h>
-SYSUTIL_IDENT_RCSID(`!p snip.rv = module`_`!p snip.rv = component.lower()`_h, "$Id$ $CSID$")
-SYSUTIL_PRAGMA_ONCE
-
-namespace BloombergLP {
 namespace ${3:`!p snip.rv = module`} {
 
 class ${1:`!p snip.rv = component`} {
@@ -124,7 +109,6 @@ private:
 };
 
 } /* $3 namespace */
-} /* BloombergLP namespace */
 
 #endif // $4
 endsnippet
@@ -141,13 +125,11 @@ else:
 header = module + "_" + component + ".h"
 `#include <${3:`!p snip.rv = header`}>
 
-namespace BloombergLP {
 namespace ${2:`!p snip.rv = module`} {
 
 ${1}
 
 } /* $2 namespace */
-} /* BloombergLP namespace */
 endsnippet
 
 snippet mem "member function"
@@ -160,11 +142,6 @@ component = filename.split('_')[-1].split('.')[0].capitalize()
 }
 endsnippet
 
-
 snippet todo "TODO comment"
 // TODO: ${1:Description} - `!v strftime("%Y-%m-%d %I:%M%P")`
-endsnippet
-
-snippet log "Log something"
-BAEL_LOG_${2:DEBUG} << "${1}" << BAEL_LOG_END;
 endsnippet

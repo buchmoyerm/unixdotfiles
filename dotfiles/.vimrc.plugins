@@ -60,6 +60,7 @@ call plug#begin()
                                             \ 'typescript',
                                             \ 'protobuf' ] }
     Plug 'kana/vim-operator-user'
+    Plug 'Valloric/MatchTagAlways'
   endif
 
   " Autocomplete
@@ -70,6 +71,7 @@ call plug#begin()
   " --------------
   if full_vimrc
     Plug 'tpope/vim-fugitive'
+    Plug 'vim-scripts/vcscommand.vim'
     Plug 'vim-scripts/diffchanges.vim'
     Plug 'buchmoyerm/vim-diff-enhanced'
     Plug 'airblade/vim-gitgutter'

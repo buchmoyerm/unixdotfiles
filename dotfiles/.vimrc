@@ -64,51 +64,40 @@ if !has("gui_running")
 endif
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => ultisnips settings
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" since the defautl trigger <tab> conflicts with YCM
+let g:UltiSnipsExpandTrigger = "<c-j>"
+let g:UltiSnipsJumpForwardTrigger = "<c-j>"
+let g:UltiSnipsJumpBackwardTrigger = "<c-k>"
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Autocomplete (YCM) settings
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Addition config for YouCompleteMe
-if has("unix")
-  if !v:shell_error && isLinux
-    nnoremap <silent> <F12> :YcmCompleter GoTo<CR>
-    "let g:ycm_global_ycm_extra_conf = '/bb/mbigd/mbig1265/.ycm_extra_conf.py'
-    let g:ycm_path_to_python_interpreter = '/opt/swt/bin/python2.7'
-    "let g:ycm_path_to_python_interpreter = '/bb/bin/bbpy2.7'
-    "
-    "let g:ycm_filetype_whitelist = { 'cpp': 0, 'py': 1, 'h': 0}
 
+let g:ycm_autoclose_preview_window_after_insertion = 1
 
-    let g:ycm_server_keep_logfiles = 1
-    "let g:ycm_server_log_level = 'debug'
-    "let g:ycm_key_list_select_completion = ['<Tab>', '<Down>']
-    "let g:ycm_confirm_extra_conf = 0
-    "let g:ycm_server_use_vim_stdout = 1
-    let g:ycm_global_ycm_extra_conf = '/home/mbuchmoyer/.vim/config/.config_extra_conf.py'
-
-    let g:ycm_autoclose_preview_window_after_insertion = 1
-
-    let g:ycm_filetype_blacklist = {
-      \ 'tagbar' : 1,
-      \ 'qf' : 1,
-      \ 'notes' : 1,
-      \ 'markdown' : 1,
-      \ 'unite' : 1,
-      \ 'text' : 1,
-      \ 'vimwiki' : 1,
-      \ 'pandoc' : 1,
-      \ 'infolog' : 1,
-      \ 'mail' : 1
-      \}
-  endif
-endif
+let g:ycm_filetype_blacklist = {
+  \ 'tagbar' : 1,
+  \ 'qf' : 1,
+  \ 'notes' : 1,
+  \ 'markdown' : 1,
+  \ 'unite' : 1,
+  \ 'text' : 1,
+  \ 'vimwiki' : 1,
+  \ 'pandoc' : 1,
+  \ 'infolog' : 1,
+  \ 'mail' : 1
+  \}
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => syntastic settings
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_cpp_check_header = 1
 let g:syntastic_cpp_checkers=['gcc']
-
-let g:syntastic_cpp_include_dirs = ['/bb/build/Linux-x86_64-64/release/robolibs/prod/lib/dpkgroot/opt/bb/include/', '/bb/build/Linux-x86_64-64/release/robolibs/weekly/share/include/00depbuild/', '/bb/build/Linux-x86_64-64/release/robolibs/weekly/share/include/00deployed/', '/bb/build/Linux-x86_64-64/release/robolibs/weekly/share/include/00offlonly/', '/bb/build/share/stp/include/00depbuild/', '/bb/build/share/stp/include/00deployed/', '/bb/build/share/stp/include/00offlonly/']
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Hack to get alt-alpha keys to work in terminal
@@ -421,69 +410,6 @@ cmap <F12> <Plug>(Cmd2Suggest)
 " Clang format
 " ------------
 nnoremap <leader>cf <Plug>(operator-clang-format)
-
-let g:clang_format#style_options = {
-                                   \ "AccessModifierOffset": -1,
-                                   \ "AlignAfterOpenBracket": "true",
-                                   \ "AlignEscapedNewlinesLeft": "true",
-                                   \ "AlignOperands":   "true",
-                                   \ "AlignTrailingComments": "true",
-                                   \ "AllowAllParametersOfDeclarationOnNextLine": "false",
-                                   \ "AllowShortBlocksOnASingleLine": "false",
-                                   \ "AllowShortCaseLabelsOnASingleLine": "false",
-                                   \ "AllowShortIfStatementsOnASingleLine": "false",
-                                   \ "AllowShortLoopsOnASingleLine": "false",
-                                   \ "AllowShortFunctionsOnASingleLine": "Empty",
-                                   \ "AlwaysBreakAfterDefinitionReturnType": "false",
-                                   \ "AlwaysBreakTemplateDeclarations": "true",
-                                   \ "AlwaysBreakBeforeMultilineStrings": "true",
-                                   \ "BreakBeforeBinaryOperators": "All",
-                                   \ "BreakBeforeTernaryOperators": "true",
-                                   \ "BreakConstructorInitializersBeforeComma": "false",
-                                   \ "BinPackParameters": "false",
-                                   \ "BinPackArguments": "false",
-                                   \ "ColumnLimit":     79,
-                                   \ "ConstructorInitializerAllOnOneLineOrOnePerLine": "true",
-                                   \ "ConstructorInitializerIndentWidth": 4,
-                                   \ "DerivePointerAlignment": "false",
-                                   \ "ExperimentalAutoDetectBinPacking": "false",
-                                   \ "IndentCaseLabels": "true",
-                                   \ "IndentWrappedFunctionNames": "true",
-                                   \ "IndentFunctionDeclarationAfterType": "true",
-                                   \ "MaxEmptyLinesToKeep": 1,
-                                   \ "KeepEmptyLinesAtTheStartOfBlocks": "false",
-                                   \ "NamespaceIndentation": "None",
-                                   \ "ObjCBlockIndentWidth": 2,
-                                   \ "ObjCSpaceAfterProperty": "false",
-                                   \ "ObjCSpaceBeforeProtocolList": "false",
-                                   \ "PenaltyBreakBeforeFirstCallParameter": 500,
-                                   \ "PenaltyBreakComment": 300,
-                                   \ "PenaltyBreakString": 1000,
-                                   \ "PenaltyBreakFirstLessLess": 120,
-                                   \ "PenaltyExcessCharacter": 1000000,
-                                   \ "PenaltyReturnTypeOnItsOwnLine": 200,
-                                   \ "PointerAlignment": "Left",
-                                   \ "SpacesBeforeTrailingComments": 2,
-                                   \ "Cpp11BracedListStyle": "true",
-                                   \ "Standard":        "Cpp03",
-                                   \ "IndentWidth":     2,
-                                   \ "TabWidth":        8,
-                                   \ "UseTab":          "Never",
-                                   \ "BreakBeforeBraces": "Allman",
-                                   \ "SpacesInParentheses": "false",
-                                   \ "SpacesInSquareBrackets": "false",
-                                   \ "SpacesInAngles":  "false",
-                                   \ "SpaceInEmptyParentheses": "false",
-                                   \ "SpacesInCStyleCastParentheses": "false",
-                                   \ "SpaceAfterCStyleCast": "false",
-                                   \ "SpacesInContainerLiterals": "true",
-                                   \ "SpaceBeforeAssignmentOperators": "true",
-                                   \ "ContinuationIndentWidth": 4,
-                                   \ "CommentPragmas":  '"^ IWYU pragma:"',
-                                   \ "ForEachMacros":   "[ foreach, Q_FOREACH, BOOST_FOREACH ]",
-                                   \ "SpaceBeforeParens": "ControlStatements",
-                                   \ "DisableFormat":   "false"
-                                   \ }
 
 " Cmd2 settings
 " -------------

@@ -22,6 +22,11 @@ if [ -d "$HOME/bin" ] ; then
     PATH="$HOME/bin:$PATH"
 fi
 
+# add local bin to path
+if [ -d "${HOME}/.local/bin" ] ; then
+    PATH="${HOME}/.local/bin:${PATH}"
+fi
+
 export VISUAL="vim -v -u ~/.vimrc_min"
 export EDITOR="$VISUAL"
 
