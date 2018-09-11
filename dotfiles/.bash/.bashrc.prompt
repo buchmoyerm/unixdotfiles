@@ -1,4 +1,4 @@
-# ~/.bashrc.prompt set up bash prompt
+# ~/.bash/.bashrc.prompt set up bash prompt
 # =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
 function __ps1_color {
