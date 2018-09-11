@@ -94,15 +94,6 @@ call plug#begin()
   endif
   Plug 'tpope/vim-commentary'
 
-  " Bloomberg
-  " ---------
-  " Plug 'ssh://bbgithub.dev.bloomberg.com/mbuchmoyer/vim-grok.git'
-  " Plug 'ssh://bbgithub.dev.bloomberg.com/ib-dev-tools/bbprojmake.vim.git'
-  " Plug 'ssh://bbgithub.dev.bloomberg.com/mbuchmoyer/plynk.vim.git'
-
-  " pkgcfg syntax highlighting
-  " Plug 'ssh://bbgithub.dev.bloomberg.com/lkisskol/pkgcfg_plugin.git', {'for': ['pkgcfg'] }
-
   " For building plugins
   if full_vimrc
     Plug 'tpope/vim-scriptease'
