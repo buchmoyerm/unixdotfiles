@@ -64,6 +64,8 @@ ZSH_THEME="robbyrussell"
 plugins=(
   git
   vi-mode
+  zsh-autosuggestions
+  zsh-syntax-highlighting
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -96,5 +98,7 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+
+bindkey '^ ' autosuggest-accept
 
 source $HOME/.zshrc.pre-oh-my-zsh

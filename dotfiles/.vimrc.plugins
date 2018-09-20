@@ -16,6 +16,7 @@ call plug#begin()
   " ---------------
   if full_vimrc 
     Plug 'kien/ctrlp.vim' | Plug 'FelikZ/ctrlp-py-matcher'
+    " Plug 'tmilloff/vim-address-bar'
   endif
 
   if full_vimrc 
@@ -74,7 +75,11 @@ call plug#begin()
     Plug 'vim-scripts/vcscommand.vim'
     Plug 'vim-scripts/diffchanges.vim'
     Plug 'buchmoyerm/vim-diff-enhanced'
-    Plug 'airblade/vim-gitgutter'
+    " Plug 'airblade/vim-gitgutter'
+    Plug 'mhinz/vim-signify'
+
+    " consider using splice for merge conflicts
+    " Plug 'vim-scripts/Splice'
   endif
 
   " other

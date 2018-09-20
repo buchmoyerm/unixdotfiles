@@ -322,14 +322,6 @@ tnoremap <silent> <M-k> <C-w>:TmuxNavigateUp<cr>
 tnoremap <silent> <M-l> <C-w>:TmuxNavigateRight<cr>
 tnoremap <silent> <M-\> <C-w>:TmuxNavigatePrevious<cr>
 
-" git gutter mappings
-let g:gitgutter_map_keys = 0
-nmap <leader>gs <Plug>GitGutterStageHunk
-nmap <leader>gu <Plug>GitGutterRevertHunk
-nmap <leader>gv <Plug>GitGutterPreviewHunk
-nmap ]c <Plug>GitGutterNextHunk
-nmap [c <Plug>GitGutterPrevHunk
-
 " Faster navigation wit ctrl
 noremap <C-up> 10gk
 noremap <C-down> 10gj
@@ -597,9 +589,9 @@ endif
 " => Auto commands
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-" Python pylint
-autocmd FileType python set makeprg=python3.6\ -m\ pylint\ --reports=n\ --msg-template=\"{path}:{line}:\ {msg_id}\ {symbol},\ {obj}\ {msg}\"\ %:p
-autocmd FileType python set errorformat=%f:%l:\ %m
+" " Python pylint
+" autocmd FileType python set makeprg=python3.6\ -m\ pylint\ --reports=n\ --msg-template=\"{path}:{line}:\ {msg_id}\ {symbol},\ {obj}\ {msg}\"\ %:p
+" autocmd FileType python set errorformat=%f:%l:\ %m
 
 " Highlight line
 augroup CursorLine
@@ -621,6 +613,8 @@ set viminfo^=%
 augroup reload_vimrc " {
     autocmd!
     autocmd BufWritePost $MYVIMRC nested source $MYVIMRC
+    autocmd BufWritePost ~/.vimrc.plugins nested source $MYVIMRC
+    autocmd BufWritePost ~/.local/.vimrc nested source $MYVIMRC
 augroup END " }
 
 " cleanup vim-fugitive buffers

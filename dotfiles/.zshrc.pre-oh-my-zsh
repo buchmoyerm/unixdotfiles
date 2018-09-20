@@ -4,6 +4,8 @@ HISTSIZE=1000
 SAVEHIST=10000
 setopt appendhistory autocd extendedglob nomatch notify
 setopt transientrprompt
+# setopt noautomenu
+setopt nomenucomplete
 unsetopt beep share_history
 bindkey -v
 # End of lines configured by zsh-newuser-install
@@ -17,6 +19,15 @@ compinit -u
 # try to get backspace working correctly
 bindkey "^?" backward-delete-char
 
+# Better searching in command mode
+bindkey -M vicmd '?' history-incremental-search-backward
+bindkey -M vicmd '/' history-incremental-search-forward
+# Beginning search with arrow keys
+# bindkey "^[OA" up-line-or-beginning-search
+# bindkey "^[OB" down-line-or-beginning-search
+bindkey -M vicmd "k" up-line-or-beginning-search
+bindkey -M vicmd "j" down-line-or-beginning-search
+
 # set PATH so it includes user's private bin if it exists
 if [ -d "$HOME/bin" ] ; then
     PATH="$HOME/bin:$PATH"
@@ -29,6 +40,9 @@ fi
 
 export VISUAL="vim -v -u ~/.vimrc_min"
 export EDITOR="$VISUAL"
+
+# Make Vi mode transitions faster (KEYTIMEOUT is in hundredths of a second)
+export KEYTIMEOUT=1
 
 source $HOME/.bash/.bashrc.colors
 source $HOME/.bash/.bashrc.aliases
