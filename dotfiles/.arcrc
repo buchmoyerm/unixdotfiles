@@ -1,8 +1,0 @@
-{
-  "hosts" : {
-    "https:\/\/ib.phab.dev.bloomberg.com\/api\/" : {
-      "user" : "mbuchmoyer",
-      "cert" : "i4llcaxqmnghmtfsgsvdm44lvsersuwr2yehm6ejqpkul36nsjgqip5acxtvi4qkmsm7ckgo2fim5ebrkssmcc57xcue36kekqltzbtkicgwddvdh2d7kx23mhvmwga5sjt2wyyosmgpp7yhe524ivee3ej5x7bkbj2e5dp7dxeoy46vnlgkp55pl6ycna4jrzosafdrm2uudl2du6qybbf5dn4qyxu3bahuyig5zbyoxxvkyaknlszlasfw6wj"
-    }
-  }
-}
