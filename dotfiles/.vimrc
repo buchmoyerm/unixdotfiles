@@ -29,22 +29,22 @@ map \ ,
 " => autocomplete hacks
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-" enter selects highlight in completion
-inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+" " enter selects highlight in completion
+" inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 
-" open completion and highlight first match
-inoremap <expr> <C-n> pumvisible() ? '<C-n>' :
-  \ '<C-n><C-r>=pumvisible() ? "\<lt>Down>" : ""<CR>'
-" open omnicomplete and highlight first match
-inoremap <expr> <M-,> pumvisible() ? '<C-n>' :
-  \ '<C-x><C-o><C-n><C-p><C-r>=pumvisible() ? "\<lt>Down>" : ""<CR>'
+" " open completion and highlight first match
+" inoremap <expr> <C-n> pumvisible() ? '<C-n>' :
+"   \ '<C-n><C-r>=pumvisible() ? "\<lt>Down>" : ""<CR>'
+" " open omnicomplete and highlight first match
+" inoremap <expr> <M-,> pumvisible() ? '<C-n>' :
+"   \ '<C-x><C-o><C-n><C-p><C-r>=pumvisible() ? "\<lt>Down>" : ""<CR>'
 
-" open omni completion menu closing previous if open and opening new menu without changing the text
-inoremap <expr> <C-Space> (pumvisible() ? (col('.') > 1 ? '<Esc>i<Right>' : '<Esc>i') : '') .
-            \ '<C-x><C-o><C-r>=pumvisible() ? "\<lt>C-n>\<lt>C-p>\<lt>Down>" : ""<CR>'
-" open user completion menu closing previous if open and opening new menu without changing the text
-inoremap <expr> <S-Space> (pumvisible() ? (col('.') > 1 ? '<Esc>i<Right>' : '<Esc>i') : '') .
-            \ '<C-x><C-u><C-r>=pumvisible() ? "\<lt>C-n>\<lt>C-p>\<lt>Down>" : ""<CR>'
+" " open omni completion menu closing previous if open and opening new menu without changing the text
+" inoremap <expr> <C-Space> (pumvisible() ? (col('.') > 1 ? '<Esc>i<Right>' : '<Esc>i') : '') .
+"             \ '<C-x><C-o><C-r>=pumvisible() ? "\<lt>C-n>\<lt>C-p>\<lt>Down>" : ""<CR>'
+" " open user completion menu closing previous if open and opening new menu without changing the text
+" inoremap <expr> <S-Space> (pumvisible() ? (col('.') > 1 ? '<Esc>i<Right>' : '<Esc>i') : '') .
+"             \ '<C-x><C-u><C-r>=pumvisible() ? "\<lt>C-n>\<lt>C-p>\<lt>Down>" : ""<CR>'
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => peekaboo command line hack
@@ -364,13 +364,20 @@ nnoremap * :keepjumps normal! mi*`i<CR>
 nnoremap j gj
 nnoremap k gk
 
+" ------------------------------
+"           TAB MODES
+" ------------------------------
+
 " switch between tab modes
 nnoremap <leader><leader>t :set expandtab tabstop=4 shiftwidth=4 softtabstop=4<CR>
 nnoremap <leader><leader>T :set expandtab tabstop=8 shiftwidth=8 softtabstop=4<CR>
 nnoremap <leader><leader>M :set noexpandtab tabstop=8 softtabstop=4 shiftwidth=4<CR>
 nnoremap <leader><leader>m :set expandtab tabstop=2 shiftwidth=2 softtabstop=2<CR>
+
+" tab modes for file types
 autocmd Filetype python setlocal ts=4 sts=4 sw=4
-autocmd Filetype make set noexpandtab
+autocmd Filetype go setlocal noexpandtab ts=4 sts=4 sw=4
+autocmd Filetype make setlocal noexpandtab
 
 " switch between paste modes (use unimpaired co* style)
 " event though tpope disagrees with paste mode having shortcut

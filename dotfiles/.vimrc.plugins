@@ -23,10 +23,11 @@ call plug#begin()
     Plug 'benmills/vimux'
   endif
 
+  Plug 'tpope/vim-abolish'
   Plug 'tpope/vim-vinegar'
-  "Plug 'majutsushi/tagbar' " awesome, but not greate for large endifles
   if full_vimrc
     Plug 'mileszs/ack.vim'
+    " Plug 'majutsushi/tagbar' " awesome, but not greate for large endifles
   endif
 
   if full_vimrc
@@ -42,6 +43,12 @@ call plug#begin()
   if full_vimrc
     Plug 'SirVer/ultisnips'
     Plug 'honza/vim-snippets'
+  endif
+
+  " vim language server protocall
+  if full_vimrc
+    Plug 'prabirshrestha/async.vim'
+    Plug 'prabirshrestha/vim-lsp'
   endif
 
   " Split navigation with tmux
