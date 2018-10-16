@@ -79,6 +79,7 @@ call plug#begin()
   " --------------
   if full_vimrc
     Plug 'tpope/vim-fugitive'
+    Plug 'ludovicchabant/vim-lawrencium'
     Plug 'vim-scripts/vcscommand.vim'
     Plug 'vim-scripts/diffchanges.vim'
     Plug 'buchmoyerm/vim-diff-enhanced'
