@@ -128,6 +128,18 @@ let g:SimpylFold_fold_docstring = 0
 autocmd BufWinLeave *.py setlocal foldexpr< foldmethod<
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Tagbar settigns
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+let g:tagbar_left=1
+let g:tagbar_autofocus=1
+
+nnoremap <silent> yot :TagbarOpen fj<CR>
+nnoremap <silent> cot :TagbarOpen fj<CR>
+nnoremap <silent> yoj :TagbarOpen fjc<CR>
+nnoremap <silent> coj :TagbarOpen fjc<CR>
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => VIM settings
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " if has("multi_byte")
@@ -159,6 +171,10 @@ if !has("gui_running")
 endif
 colorscheme molokai
 
+" molokai settings
+" let g:malokai_original = 1
+let g:rehash256 = 1
+
 " Highlight the column at 80 chars (all code should be inside the column)
 highlight ColorColumn ctermbg=235 guibg=#2c2d27
 " let &colorcolumn="80,".join(range(120,999),",")
@@ -180,7 +196,7 @@ set shiftwidth=2  "this is the level of autoindent, adjust to taste
 set ruler
 set relativenumber "displays the relative number on the side (Ctrl+n to toggle)
 set backspace=indent,eol,start
-set whichwrap+=<,>,h,l
+set whichwrap+=<,>,h,l,[,]
 "set visualbell
 " Uncomment below to make screen not flash on error
 set vb t_vb=""
@@ -190,9 +206,12 @@ set shortmess=atToOI
 set report=0
 set noerrorbells
 
+set scrolljump=10
+
 "My settings
 set guioptions-=TaA  "remove toolbar from gui
 set nowrap
+set linebreak "when wrap IS set don't wrap in the middle of words
 set mouse=a
 set ttymouse=xterm2
 set ignorecase
@@ -529,7 +548,7 @@ set laststatus=2
       \    'left': [ [ 'tabs' ] ],
       \    'right': [ [ 'close' ] ],
       \ },
-    \ 'colorscheme' : 'wombat',
+    \ 'colorscheme' : 'default',
     \ 'component': {
       \   'readonly': '%{&filetype=="help"?"":&readonly?"x":""}',
       \   'modified': '%{&filetype=="help"?"":&modified?"+":&modifiable?"":"-"}',
@@ -621,14 +640,14 @@ augroup reload_vimrc " {
     autocmd!
     autocmd BufWritePost $MYVIMRC nested source $MYVIMRC
     autocmd BufWritePost ~/.vimrc.plugins nested source $MYVIMRC
-    autocmd BufWritePost ~/.local/.vimrc nested source $MYVIMRC
+    " autocmd BufWritePost ~/.local/.vimrc nested source $MYVIMRC
 augroup END " }
 
 " cleanup vim-fugitive buffers
 autocmd BufReadPost fugitive://* set bufhidden=delete
 
 " cleanup whitespace when closing a file
-" autocmd BufWritePre * call StripTrailingWhitespace()
+autocmd BufWritePre * call StripTrailingWhitespace()
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Commands for command line

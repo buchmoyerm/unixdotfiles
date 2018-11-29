@@ -3,6 +3,7 @@ HISTFILE=~/.histfile
 HISTSIZE=1000
 SAVEHIST=10000
 setopt appendhistory autocd extendedglob nomatch notify
+setopt NO_NOMATCH
 setopt transientrprompt
 # setopt noautomenu
 setopt nomenucomplete
@@ -40,8 +41,7 @@ if [ -d "${HOME}/.local/bin" ] ; then
     PATH="${HOME}/.local/bin:${PATH}"
 fi
 
-export VISUAL="vim -v -u ~/.vimrc_min"
-export EDITOR="$VISUAL"
+source $HOME/.myenv
 
 # Make Vi mode transitions faster (KEYTIMEOUT is in hundredths of a second)
 export KEYTIMEOUT=1

@@ -9,7 +9,7 @@ function add_alias
   if [[ "$@" =~ "=" ]]; then
     c="${input[@]#*=}"
     a="${input[@]%=*}"
-  else;
+  else
     c="$2"
     a="$1"
   fi

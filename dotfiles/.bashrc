@@ -52,8 +52,7 @@ export HISTIGNORE="&:[  ]*:exit:ls:bg:fg:history:clear" # ignore certain command
 
 export PROMPT_COMMAND="history -a"
 
-export VISUAL="vim -v -u ~/.vimrc_min"
-export EDITOR="$VISUAL"
+source $HOME/.myenv
 
 source $HOME/.bash/.bashrc.colors
 source $HOME/.bash/.bashrc.aliases

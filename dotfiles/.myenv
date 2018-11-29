@@ -1,0 +1,8 @@
+
+# vim: set ft=sh ts=8 :
+  
+# export LESS="-RFX"
+
+export VISUAL="vim -v -u ~/.vimrc_min"
+export EDITOR="$VISUAL"
+

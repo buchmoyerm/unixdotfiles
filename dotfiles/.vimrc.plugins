@@ -14,12 +14,12 @@ call plug#begin()
 
   " file navigation
   " ---------------
-  if full_vimrc 
+  if full_vimrc
     Plug 'kien/ctrlp.vim' | Plug 'FelikZ/ctrlp-py-matcher'
     " Plug 'tmilloff/vim-address-bar'
   endif
 
-  if full_vimrc 
+  if full_vimrc
     Plug 'benmills/vimux'
   endif
 
@@ -27,11 +27,14 @@ call plug#begin()
   Plug 'tpope/vim-vinegar'
   if full_vimrc
     Plug 'mileszs/ack.vim'
-    " Plug 'majutsushi/tagbar' " awesome, but not greate for large endifles
+    " awesome, but not greate for large endifles hopefully python files
+    " stay small enough and this is mostly needed for python
+    Plug 'majutsushi/tagbar', { 'for': ['python']}
   endif
 
+  Plug 'Lokaltog/vim-easymotion'
+
   if full_vimrc
-    Plug 'Lokaltog/vim-easymotion'
     Plug 'kien/tabman.vim'
     Plug 'vim-scripts/a.vim'
     Plug 'tmhedberg/SimpylFold' "folds
@@ -85,6 +88,7 @@ call plug#begin()
     Plug 'buchmoyerm/vim-diff-enhanced'
     " Plug 'airblade/vim-gitgutter'
     Plug 'mhinz/vim-signify'
+    Plug 'powerman/vim-plugin-AnsiEsc'
 
     " consider using splice for merge conflicts
     " Plug 'vim-scripts/Splice'
@@ -104,7 +108,10 @@ call plug#begin()
   " ------------
   if full_vimrc
     Plug 'tpope/vim-eunuch'
+    Plug 'Shougo/unite.vim'
+    Plug 'Shougo/vimproc.vim', { 'do': 'make'}
   endif
+
   Plug 'tpope/vim-commentary'
 
   " For building plugins
@@ -115,9 +122,16 @@ call plug#begin()
   " peekaboo needs Cmd2 hack to work on commandline
   Plug 'gelguy/Cmd2.vim' | Plug 'junegunn/vim-peekaboo'
 
+  Plug 'terryma/vim-multiple-cursors'
+
   " status bar
   " -------------------------
   Plug 'itchyny/lightline.vim'
+
+  " Source local override file if one exists.
+  if filereadable(expand("~/.local/.vimrc.plugins"))
+      source ~/.local/.vimrc.plugins
+  endif
 
 " All of your Plugins must be added before the following line
 call plug#end()            " required

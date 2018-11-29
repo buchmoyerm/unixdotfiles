@@ -66,6 +66,9 @@ plugins=(
   vi-mode
   zsh-autosuggestions
   zsh-syntax-highlighting
+  tmux
+  fancy-ctrl-z
+  sudo
 )
 
 source $ZSH/oh-my-zsh.sh

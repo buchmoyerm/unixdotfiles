@@ -45,6 +45,7 @@ syntax on
 " => min settings
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 colorscheme molokai
+let g:rehash256 = 1
 
 " let comma be used as map leader
 let mapleader=","
@@ -108,6 +109,7 @@ set noswapfile
 set vb t_vb=""
 " removes 'press ENTER or type a command to continue'
 set shortmess=atI
+set linebreak
 
 " use mouse to select
 behave mswin
