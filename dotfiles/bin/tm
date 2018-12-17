@@ -12,7 +12,7 @@ if [[ $1 ]]; then
   else
     choice="$@"
     echo "new session $choice"
-    tmux new -s "$choice"
+    tmux -u new -s "$choice"
     exit
   fi
 else

@@ -14,5 +14,8 @@ pager = LESS='-FRX' less
 [extensions]
 pager =
 
-[trainingwheels]
-prevent-push-dirty = false
+# [ui]
+# # Enables customizing individual graph nodes.
+# graphnodetemplate = {label('graphnode.{graphnode}', graphnode)}
+
+%include ~/.local/.hgrc

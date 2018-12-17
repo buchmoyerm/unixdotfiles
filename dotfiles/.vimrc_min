@@ -56,6 +56,12 @@ inoremap fj <Esc>
 vnoremap fj <Esc>
 snoremap fj <Esc>
 
+" Faster navigation wit ctrl
+noremap <C-up> 10gk
+noremap <C-down> 10gj
+noremap <C-right> 5l
+noremap <C-left> 5h
+
 " more natural navigation of log lines with word wrap
 nnoremap j gj
 nnoremap k gk
