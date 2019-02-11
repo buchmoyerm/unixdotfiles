@@ -2,7 +2,7 @@
 HISTFILE=~/.histfile
 HISTSIZE=1000
 SAVEHIST=10000
-setopt appendhistory autocd extendedglob nomatch notify
+setopt appendhistory autocd extendedglob nomatch notify shwordsplit
 setopt NO_NOMATCH
 setopt transientrprompt
 # setopt noautomenu
@@ -52,8 +52,5 @@ source $HOME/.bash/.bashrc.aliases
 source $HOME/.bash/.bashrc.git
 # source $HOME/.bash/.bashrc.bbrg
 source $HOME/.bash/.bashrc.cmds
-
-# PATH="$HOME/workspace/git-ib:$PATH"
-# source $HOME/workspace/git-ib/git-ib-autocomplete.sh
 
 [ -f ${HOME}/.local/.zshrc ] && source ${HOME}/.local/.zshrc

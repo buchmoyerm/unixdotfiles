@@ -479,7 +479,7 @@ let g:EasyMotion_smartcase = 1
 
 let g:EasyMotion_wrapscan = 1 " enable search wrapping around end of file
 
-let g:EasyMotion_startofline = 1 " Disable keep cursor colum when JK motion
+let g:EasyMotion_startofline = 0 " Disable keep cursor colum when JK motion
 
 let g:EasyMotion_do_mapping = 0 " Disable default mappings
 
@@ -639,7 +639,6 @@ set viminfo^=%
 augroup reload_vimrc " {
     autocmd!
     autocmd BufWritePost $MYVIMRC nested source $MYVIMRC
-    autocmd BufWritePost ~/.vimrc.plugins nested source $MYVIMRC
     " autocmd BufWritePost ~/.local/.vimrc nested source $MYVIMRC
 augroup END " }
 

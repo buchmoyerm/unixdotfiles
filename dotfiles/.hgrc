@@ -13,6 +13,7 @@ pager = LESS='-FRX' less
 
 [extensions]
 pager =
+purge =
 
 # [ui]
 # # Enables customizing individual graph nodes.

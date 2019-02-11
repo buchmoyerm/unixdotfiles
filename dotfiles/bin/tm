@@ -2,8 +2,9 @@
 
 # present menu for user to choose which workspace to open
 PS3="Please choose your session: "
-[ "$TMUX" ] && options=($(tmux list-sessions -F "#S" 2> /dev/null)) \
-            || options=($(tmux list-sessions -F "#S" 2> /dev/null) "New Session")
+options=($(tmux list-sessions -F "#S" 2> /dev/null) "New Session")
+# [ "$TMUX" ] && options=($(tmux list-sessions -F "#S" 2> /dev/null)) \
+#             || options=($(tmux list-sessions -F "#S" 2> /dev/null) "New Session")
 
 if [[ $1 ]]; then
   if [[ " ${options[@]} " =~ "$@" ]]; then
@@ -12,7 +13,8 @@ if [[ $1 ]]; then
   else
     choice="$@"
     echo "new session $choice"
-    tmux -u new -s "$choice"
+    tmux -u new -d -s "$choice"
+    [ "$TMUX" == "" ] &&  tmux attach-session -t "$choice" ||  tmux switch -t "$choice"
     exit
   fi
 else
@@ -31,7 +33,8 @@ echo "$new"
 case "$choice" in
   "New Session")
     read -p "Enter new session name: " SESSION_NAME
-    tmux -u new -s "$SESSION_NAME"
+    tmux -u new -d -s "$SESSION_NAME"
+    [ "$TMUX" == "" ] &&  tmux attach-session -t "$SESSION_NAME" ||  tmux switch -t "$SESSION_NAME"
     ;;
   *)
     [ "$TMUX" == "" ] &&  tmux attach-session -t "$choice" ||  tmux switch -t "$choice"
