@@ -646,7 +646,7 @@ augroup END " }
 autocmd BufReadPost fugitive://* set bufhidden=delete
 
 " cleanup whitespace when closing a file
-autocmd BufWritePre * call StripTrailingWhitespace()
+autocmd BufWritePre * if &ft != "sh" | call StripTrailingWhitespace()
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Commands for command line

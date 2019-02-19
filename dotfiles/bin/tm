@@ -28,7 +28,6 @@ else
 fi
 
 echo "$choice"
-echo "$new"
 
 case "$choice" in
   "New Session")
