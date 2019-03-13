@@ -171,6 +171,13 @@ if !has("gui_running")
 endif
 colorscheme molokai
 
+" enable true color
+" if exists('+termguicolors')
+"   let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+"   let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+"   set termguicolors
+" endif
+
 " molokai settings
 " let g:malokai_original = 1
 let g:rehash256 = 1
@@ -279,6 +286,8 @@ set diffopt=filler,vertical
 
 " turn spell check on for git commit messages
 autocmd Filetype gitcommit setlocal spell
+autocmd Filetype hgcommit setlocal spell
+autocmd Filetype markdown setlocal spell
 
 "Set default diff
 let &diffexpr='EnhancedDiff#Diff("git diff", "--diff-algorithm=histogram")'
