@@ -8,6 +8,11 @@ call plug#begin()
   " -------------------------
   Plug 'tpope/vim-sensible'
 
+  " Cheat sheet
+  " -------------------------
+  Plug 'dbeniamine/cheat.sh-vim'
+
+
   " colorschemes
   " -------------
   Plug 'tomasr/molokai'
@@ -54,12 +59,12 @@ call plug#begin()
   if full_vimrc
     Plug 'prabirshrestha/async.vim'
     Plug 'prabirshrestha/vim-lsp'
+    " Plug 'neoclide/coc.nvim', {'tag': '*', 'do': { -> coc#util#install() }}
   endif
 
   " Split navigation with tmux
   " --------------------------
   Plug 'christoomey/vim-tmux-navigator'
-
   Plug 'tpope/vim-tbone'
 
   " syntax
@@ -76,6 +81,7 @@ call plug#begin()
                                             \ 'protobuf' ] }
     Plug 'kana/vim-operator-user'
     Plug 'Valloric/MatchTagAlways'
+    Plug 'thirtythreeforty/lessspace.vim'
   endif
 
   " Autocomplete
@@ -87,7 +93,7 @@ call plug#begin()
   if full_vimrc
     Plug 'tpope/vim-fugitive'
     Plug 'ludovicchabant/vim-lawrencium'
-    Plug 'jlfwong/vim-mercenary'
+    " Plug 'jlfwong/vim-mercenary'
     Plug 'vim-scripts/vcscommand.vim'
     Plug 'vim-scripts/diffchanges.vim'
     Plug 'buchmoyerm/vim-diff-enhanced'

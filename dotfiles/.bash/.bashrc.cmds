@@ -18,3 +18,11 @@ function add_alias
   alias "$a=$c"
   echo "alias $a='$c'" >> $HOME/.bash/.bashrc.aliases
 }
+
+wttr()
+{
+  # change Paris to your default location
+  local request="wttr.in/${1-NYC}"
+  [ "$COLUMNS" -lt 125  ] && request+='?n'
+  curl -H "Accept-Language: ${LANG%_*}" --compressed "$request"
+}

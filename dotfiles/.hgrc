@@ -2,10 +2,11 @@
 username = mbuchmoyer
 merge = vimdiff
 editor = vim -v
+mergemarkers = detailed
 
 [merge-tools]
 vimdiff.executable = vim
-vimdiff.args = -f -d $output -M $local $base $other -c "wincmd J" -c "set modifiable" -c "set write"
+vimdiff.args = -f -d -m $local $output $other -c "wincmd l" -c "set modifiable" -c "set write"
 vimdiff.premerge = keep
 
 [pager]

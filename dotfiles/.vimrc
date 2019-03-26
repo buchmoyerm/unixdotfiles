@@ -172,11 +172,11 @@ endif
 colorscheme molokai
 
 " enable true color
-" if exists('+termguicolors')
-"   let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
-"   let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
-"   set termguicolors
-" endif
+if exists('+termguicolors')
+  let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+  let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+  set termguicolors
+endif
 
 " molokai settings
 " let g:malokai_original = 1
@@ -648,14 +648,15 @@ set viminfo^=%
 augroup reload_vimrc " {
     autocmd!
     autocmd BufWritePost $MYVIMRC nested source $MYVIMRC
-    " autocmd BufWritePost ~/.local/.vimrc nested source $MYVIMRC
+    autocmd BufWritePost $MYVIMRC.plugins nested source $MYVIMRC
+    autocmd BufWritePost ~/.local/.vimrc nested source $MYVIMRC
 augroup END " }
 
 " cleanup vim-fugitive buffers
 autocmd BufReadPost fugitive://* set bufhidden=delete
 
 " cleanup whitespace when closing a file
-autocmd BufWritePre * if &ft != "sh" | call StripTrailingWhitespace()
+let g:lessspace_blacklist = ['sh']
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Commands for command line

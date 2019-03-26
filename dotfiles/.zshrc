@@ -11,6 +11,7 @@
 # ZSH_THEME="flazz"
 # ZSH_THEME="avit"
 # ZSH_THEME=random
+ZSH_THEME=powerlevel10k/powerlevel10k
 
 # Set list of themes to load
 # Setting this variable when ZSH_THEME=random
