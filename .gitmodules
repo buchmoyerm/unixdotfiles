@@ -7,13 +7,11 @@
   url = https://github.com/robbyrussell/oh-my-zsh
 
 [submodule "zsh-autosuggestions"]
-  path = dotfiles/.oh-my-zsh/custom/plugins/zsh-autosuggestions
-  url = https://github.com/zsh-users/zsh-autosuggestions
-
+	path = .oh-my-zsh/custom/plugins/zsh-autosuggestions
+	url = https://github.com/zsh-users/zsh-autosuggestions
 [submodule "zsh-syntax-highlighting"]
-  path = dotfiles/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
-  url = https://github.com/zsh-users/zsh-syntax-highlighting
-
+	path = .oh-my-zsh/custom/plugins/zsh-syntax-highlighting
+	url = https://github.com/zsh-users/zsh-syntax-highlighting
 [submodule "powerlevel10k"]
-  path = dotfiles/.oh-my-zsh/custom/themes/powerlevel10k
-  url = https://github.com/romkatv/powerlevel10k
+	path = .oh-my-zsh/custom/themes/powerlevel10k
+	url = https://github.com/romkatv/powerlevel10k
