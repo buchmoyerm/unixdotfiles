@@ -1,6 +1,6 @@
 [user]
   name = Mark Buchmoyer
-  email = mbuchmoyer@google.com
+  email = buchmoyerm@gmail.com
 
 [alias]
   # list all aliases
@@ -91,10 +91,14 @@
 [log]
   date=local
 [mailmap]
-  file=/home/mbuchmoyer/.gitmailmap
+  file=.gitmailmap
 [help]
   autocorrect=8
 [remote]
 	prune = true
 [merge]
 	summary = true
+
+[include]
+  path = ~/.local/.gitconfig
+
