@@ -78,9 +78,6 @@ plugins=(
 
 source $ZSH/oh-my-zsh.sh
 
-# this is cool, but needs some tweaking for my setup
-# source ${HOME}/.zsh/.purepower
-
 # User configuration
 
 # export MANPATH="/usr/local/man:$MANPATH"

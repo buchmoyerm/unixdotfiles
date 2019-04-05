@@ -30,6 +30,7 @@ call plug#begin()
 
   Plug 'tpope/vim-abolish'
   Plug 'tpope/vim-vinegar'
+  Plug 'junegunn/limelight.vim'
   if full_vimrc
     Plug 'mileszs/ack.vim'
     " awesome, but not greate for large endifles hopefully python files

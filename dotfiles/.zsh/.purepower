@@ -143,11 +143,12 @@ fi
     fancy)
       local vi_insert=$'\u276F'
       local vi_cmd=$'\u276E'
-      local lock=$'\uF023'
-      local incoming=$'\u21E3'
-      local outgoing=$'\u21E1'
-      local root=$'\uF09C'
-      local jobs=$'\uF013'
+      # local lock=$'\uF023'
+      # local incoming=$'\u21E3'
+      # local outgoing=$'\u21E1'
+      # local root=$'\uF09C'
+      # local jobs=$'\uF013'
+      # local jobs=$'\u2699'
       ;;
     *)
       if [[ $mode != portable ]]; then
@@ -156,11 +157,11 @@ fi
       fi
       local vi_insert='>'
       local vi_cmd='<'
-      local lock='X'
-      local incoming='<'
-      local outgoing='>'
-      local root='#'
-      local jobs='%%'
+      # local lock='X'
+      # local incoming='<'
+      # local outgoing='>'
+      # local root='#'
+      # local jobs='%%'
       ;;
   esac
 
@@ -180,7 +181,7 @@ fi
   typeset -g POWERLEVEL9K_MULTILINE_LAST_PROMPT_PREFIX="%(?.%F{002}${p}%f.%F{009}${p}%f) "
   typeset -g POWERLEVEL9K_MULTILINE_FIRST_PROMPT_PREFIX=$'\n'
   typeset -g POWERLEVEL9K_PROMPT_ON_NEWLINE=true
-  typeset -g POWERLEVEL9K_RPROMPT_ON_NEWLINE=false
+  typeset -g POWERLEVEL9K_RPROMPT_ON_NEWLINE=true
 
   typeset -g POWERLEVEL9K_{LEFT,RIGHT}_SEGMENT_SEPARATOR=
   typeset -g POWERLEVEL9K_{LEFT,RIGHT}_SUBSEGMENT_SEPARATOR=' '
@@ -188,7 +189,7 @@ fi
 
   typeset -g POWERLEVEL9K_DIR_WRITABLE_FORBIDDEN_BACKGROUND=none
   typeset -g POWERLEVEL9K_DIR_WRITABLE_FORBIDDEN_VISUAL_IDENTIFIER_COLOR=003
-  typeset -g POWERLEVEL9K_LOCK_ICON=$lock
+  # typeset -g POWERLEVEL9K_LOCK_ICON=$lock
 
   typeset -g POWERLEVEL9K_DIR_{ETC,HOME,HOME_SUBFOLDER,DEFAULT}_BACKGROUND=none
   typeset -g POWERLEVEL9K_DIR_{ETC,DEFAULT}_FOREGROUND=209
@@ -214,18 +215,18 @@ fi
   typeset -g POWERLEVEL9K_VCS_UNTRACKED_ICON=$'\b?'
   typeset -g POWERLEVEL9K_VCS_UNSTAGED_ICON=$'\b!'
   typeset -g POWERLEVEL9K_VCS_STAGED_ICON=$'\b+'
-  typeset -g POWERLEVEL9K_VCS_INCOMING_CHANGES_ICON=$incoming
-  typeset -g POWERLEVEL9K_VCS_OUTGOING_CHANGES_ICON=$outgoing
+  # typeset -g POWERLEVEL9K_VCS_INCOMING_CHANGES_ICON=$incoming
+  # typeset -g POWERLEVEL9K_VCS_OUTGOING_CHANGES_ICON=$outgoing
   typeset -g POWERLEVEL9K_VCS_STASH_ICON='*'
   typeset -g POWERLEVEL9K_VCS_TAG_ICON=$'\b#'
 
   typeset -g POWERLEVEL9K_ROOT_INDICATOR_BACKGROUND=none
-  typeset -g POWERLEVEL9K_ROOT_ICON=$root
+  # typeset -g POWERLEVEL9K_ROOT_ICON=$root
 
   typeset -g POWERLEVEL9K_BACKGROUND_JOBS_VERBOSE=false
   typeset -g POWERLEVEL9K_BACKGROUND_JOBS_BACKGROUND=none
   typeset -g POWERLEVEL9K_BACKGROUND_JOBS_VISUAL_IDENTIFIER_COLOR=002
-  typeset -g POWERLEVEL9K_BACKGROUND_JOBS_ICON=$jobs
+  # typeset -g POWERLEVEL9K_BACKGROUND_JOBS_ICON=$jobs
 
   typeset -g POWERLEVEL9K_COMMAND_EXECUTION_TIME_THRESHOLD=0
   typeset -g POWERLEVEL9K_COMMAND_EXECUTION_TIME_BACKGROUND=none
