@@ -10,7 +10,7 @@ call plug#begin()
 
   " Cheat sheet
   " -------------------------
-  Plug 'dbeniamine/cheat.sh-vim'
+  Plug 'buchmoyerm/cheat.sh-vim'
 
 
   " colorschemes
@@ -35,7 +35,7 @@ call plug#begin()
     Plug 'mileszs/ack.vim'
     " awesome, but not greate for large endifles hopefully python files
     " stay small enough and this is mostly needed for python
-    Plug 'majutsushi/tagbar', { 'for': ['python']}
+    Plug 'majutsushi/tagbar'
   endif
 
   Plug 'Lokaltog/vim-easymotion'
@@ -47,7 +47,7 @@ call plug#begin()
   endif
 
   Plug 'tpope/vim-unimpaired'
-  Plug 'jiangmiao/auto-pairs'
+  " Plug 'jiangmiao/auto-pairs'
   Plug 'tpope/vim-surround'
 
   " snippets
@@ -126,6 +126,7 @@ call plug#begin()
   endif
 
   Plug 'tpope/vim-commentary'
+  Plug 'haya14busa/vim-poweryank'
 
   " For building plugins
   if full_vimrc

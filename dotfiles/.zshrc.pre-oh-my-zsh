@@ -2,10 +2,10 @@
 HISTFILE=~/.histfile
 HISTSIZE=1000
 SAVEHIST=10000
-setopt appendhistory autocd extendedglob nomatch notify shwordsplit
+setopt appendhistory autocd extendedglob nomatch notify shwordsplit hist_ignore_all_dups
 setopt NO_NOMATCH
 setopt transientrprompt
-# setopt noautomenu
+setopt noautomenu
 setopt nomenucomplete
 unsetopt beep share_history
 # bindkey -v

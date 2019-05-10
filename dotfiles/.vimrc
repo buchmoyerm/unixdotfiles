@@ -125,7 +125,10 @@ let g:SimpylFold_docstring_preview = 1
 let g:SimpylFold_fold_docstring = 0
 " let g:SimpylFold_fold_import = 0
 
-autocmd BufWinLeave *.py setlocal foldexpr< foldmethod<
+augroup fold_group " {
+  autocmd!
+  autocmd BufWinLeave *.py setlocal foldexpr< foldmethod<
+augroup END " }
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Tagbar settigns
@@ -285,17 +288,23 @@ set winaltkeys=no
 set diffopt=filler,vertical
 
 " turn spell check on for git commit messages
-autocmd Filetype gitcommit setlocal spell
-autocmd Filetype hgcommit setlocal spell
-autocmd Filetype markdown setlocal spell
+augroup spell_group " {
+  autocmd!
+  autocmd Filetype gitcommit setlocal spell
+  autocmd Filetype hgcommit setlocal spell
+  autocmd Filetype markdown setlocal spell
+augroup END " }
 
 "Set default diff
 let &diffexpr='EnhancedDiff#Diff("git diff", "--diff-algorithm=histogram")'
 
 "set indent guide colors
 let g:indent_guides_auto_colors = 0
-hi IndentGuidesOdd  ctermbg=darkblue
-hi IndentGuidesEven ctermbg=lightgrey
+augroup indent_colors " {
+  autocmd!
+  autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=#3292FF ctermbg=blue
+  autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=lightgrey ctermbg=lightgrey
+augroup END " }
 
 " use mouse to select
 behave mswin
@@ -403,9 +412,12 @@ nnoremap <leader><leader>M :set noexpandtab tabstop=8 softtabstop=4 shiftwidth=4
 nnoremap <leader><leader>m :set expandtab tabstop=2 shiftwidth=2 softtabstop=2<CR>
 
 " tab modes for file types
-autocmd Filetype python setlocal ts=4 sts=4 sw=4
-autocmd Filetype go setlocal noexpandtab ts=4 sts=4 sw=4
-autocmd Filetype make setlocal noexpandtab
+augroup tab_modes " {
+  autocmd!
+  autocmd Filetype python setlocal ts=4 sts=4 sw=4
+  autocmd Filetype go setlocal noexpandtab ts=4 sts=4 sw=4
+  autocmd Filetype make setlocal noexpandtab
+augroup END " }
 
 " switch between paste modes (use unimpaired co* style)
 " event though tpope disagrees with paste mode having shortcut
@@ -636,10 +648,12 @@ augroup CursorLine
 augroup END
 
 " Return to last edit position when opening files (You want this!)
-autocmd BufReadPost *
-     \ if line("'\"") > 0 && line("'\"") <= line("$") |
-     \   exe "normal! g`\"" |
-     \ endif
+if has("autocmd")
+  augroup last_pos " {
+    autocmd!
+    au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+  augroup END " }
+endif
 " Remember info about open buffers on close
 set viminfo^=%
 
@@ -653,7 +667,10 @@ augroup reload_vimrc " {
 augroup END " }
 
 " cleanup vim-fugitive buffers
-autocmd BufReadPost fugitive://* set bufhidden=delete
+augroup fugitive " {
+  autocmd!
+  autocmd BufReadPost fugitive://* set bufhidden=delete
+augroup END " }
 
 " cleanup whitespace when closing a file
 let g:lessspace_blacklist = ['sh']
