@@ -69,8 +69,8 @@ endif
 
 " since the defautl trigger <tab> conflicts with YCM
 let g:UltiSnipsExpandTrigger = "<c-j>"
-let g:UltiSnipsJumpForwardTrigger = "<c-j>"
-let g:UltiSnipsJumpBackwardTrigger = "<c-k>"
+let g:UltiSnipsJumpForwardTrigger = "<c-n>"
+let g:UltiSnipsJumpBackwardTrigger = "<c-p>"
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Autocomplete (YCM) settings

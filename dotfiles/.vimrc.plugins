@@ -51,10 +51,8 @@ call plug#begin()
   Plug 'tpope/vim-surround'
 
   " snippets
-  if full_vimrc
-    Plug 'SirVer/ultisnips'
-    Plug 'honza/vim-snippets'
-  endif
+  Plug 'SirVer/ultisnips'
+  Plug 'honza/vim-snippets'
 
   " vim language server protocall
   if full_vimrc

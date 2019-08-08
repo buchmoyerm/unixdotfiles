@@ -4,6 +4,10 @@ if filereadable(expand("~/.vimrc.plugins"))
     source ~/.vimrc.plugins
 endif
 
+if filereadable(expand("~/.vimrc.common"))
+    source ~/.vimrc.common
+endif
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Hack to get alt-alpha keys to work in terminal
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""

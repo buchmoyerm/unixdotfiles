@@ -12,7 +12,7 @@ POWERLEVEL9K_VCS_BACKENDS=(git)
 
 if [[ "${USE_PURE_POWER:-false}" == "true" ]] ; then
     POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(virtualenv dir_writable dir vcs)
-else ;
+  else
   #POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(context dir vcs vi_mode)
   POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(host virtualenv dir_writable dir vcs vi_mode)
   POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status command_execution_time)
