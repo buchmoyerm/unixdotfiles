@@ -49,6 +49,7 @@ call plug#begin()
   Plug 'tpope/vim-unimpaired'
   " Plug 'jiangmiao/auto-pairs'
   Plug 'tpope/vim-surround'
+  Plug 'triglav/vim-visual-increment'
 
   " snippets
   Plug 'SirVer/ultisnips'

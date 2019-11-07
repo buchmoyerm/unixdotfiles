@@ -1,6 +1,7 @@
 [ui]
 username = mbuchmoyer
-merge = vimdiff
+# merge = vimdiff
+merge = internal:merge3
 editor = vim -v
 mergemarkers = detailed
 

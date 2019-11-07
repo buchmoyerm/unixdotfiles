@@ -400,6 +400,8 @@ nnoremap * :keepjumps normal! mi*`i<CR>
 " more natural navigation of log lines with word wrap
 nnoremap j gj
 nnoremap k gk
+vnoremap j gj
+vnoremap k gk
 
 " ------------------------------
 "           TAB MODES

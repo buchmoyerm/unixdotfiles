@@ -3,7 +3,7 @@
   
 # export LESS="-RFX"
 
-export VISUAL="vim -v -u ~/.vimrc_min"
+export VISUAL="vim -v -u ~/.vimrc_min -O"
 export EDITOR="$VISUAL"
 
 typeset -g USE_PURE_POWER='true'
