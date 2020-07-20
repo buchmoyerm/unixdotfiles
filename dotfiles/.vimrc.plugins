@@ -10,7 +10,7 @@ call plug#begin()
 
   " Cheat sheet
   " -------------------------
-  Plug 'buchmoyerm/cheat.sh-vim'
+  Plug 'dbeniamine/cheat.sh-vim'
 
 
   " colorschemes
@@ -39,6 +39,7 @@ call plug#begin()
   endif
 
   Plug 'Lokaltog/vim-easymotion'
+  Plug 'michaeljsmith/vim-indent-object'
 
   if full_vimrc
     Plug 'kien/tabman.vim'
@@ -101,8 +102,10 @@ call plug#begin()
     Plug 'mhinz/vim-signify'
     Plug 'powerman/vim-plugin-AnsiEsc'
 
+    Plug 'vimplugin/project.vim'
+
     " consider using splice for merge conflicts
-    " Plug 'vim-scripts/Splice'
+    Plug 'sjl/splice.vim'
   endif
 
   " other
@@ -112,7 +115,7 @@ call plug#begin()
     Plug 'tpope/vim-dispatch'
     Plug 'gorkunov/smartpairs.vim'
     Plug 'nathanaelkane/vim-indent-guides'
-    Plug 'tpope/vim-sleuth'
+    " Plug 'tpope/vim-sleuth'
   endif
   Plug 'tpope/vim-repeat'
 

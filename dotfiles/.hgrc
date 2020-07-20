@@ -1,7 +1,8 @@
 [ui]
 username = mbuchmoyer
 # merge = vimdiff
-merge = internal:merge3
+# merge = internal:merge3
+merge = splice
 editor = vim -v
 mergemarkers = detailed
 
@@ -9,6 +10,12 @@ mergemarkers = detailed
 vimdiff.executable = vim
 vimdiff.args = -f -d -m $local $output $other -c "wincmd l" -c "set modifiable" -c "set write"
 vimdiff.premerge = keep
+
+# https://github.com/sjl/splice.vim/blob/master/doc/splice.txt
+splice.executable = vim
+splice.args = -f $base $local $other $output -c 'SpliceInit'
+splice.premerge = keep
+splice.priority = 1
 
 [pager]
 pager = LESS='-FRX' less

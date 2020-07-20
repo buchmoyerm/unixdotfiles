@@ -140,3 +140,7 @@ augroup ShellEdit " {
   au!
   au BufEnter /bb/data/tmp/bash-fc* set ft=sh
 augroup END "}
+
+if filereadable(expand("~/.vimrc.settings"))
+    source ~/.vimrc.settings
+endif

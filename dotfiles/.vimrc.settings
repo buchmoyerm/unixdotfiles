@@ -1,7 +1,31 @@
+let os = system("uname")
+let isLinux = (os == "Linux\n")
 
 " let comma be used as map leader
 let mapleader=","
 map \ ,
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => splice settings
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+let g:splice_prefix = "<leader>s"
+
+" initial config views
+let splice_values = {}
+let splice_values.splice_initial_diff = 1
+let splice_values.splice_initial_scrollbind = 1
+
+" apply initial settings for all views
+" (exclude loupe because loupe is only one file at a time)
+for v in ['grid', 'path', 'compare']
+  for s in items(splice_values)
+    exec 'let g:'.s[0].'_'.v.' = '.s[1]
+  endfor
+endfor
+
+" cleanup
+unlet splice_values
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Hack to get alt-alpha keys to work in terminal
@@ -18,6 +42,7 @@ while c <= 'z'
   call Alt_hack_char(c)
   let c = nr2char(1+char2nr(c))
 endw
+unlet c
 
 call Alt_hack_char('\')
 
@@ -178,14 +203,8 @@ let g:gitgutter_map_keys = 0
 nmap <leader>gs <Plug>GitGutterStageHunk
 nmap <leader>gu <Plug>GitGutterRevertHunk
 nmap <leader>gv <Plug>GitGutterPreviewHunk
-nmap ]c <Plug>GitGutterNextHunk
-nmap [c <Plug>GitGutterPrevHunk
-
-" Faster navigation wit ctrl
-noremap <C-up> 10gk
-noremap <C-down> 10gj
-noremap <C-right> 5l
-noremap <C-left> 5h
+" nmap ]c <Plug>GitGutterNextHunk
+" nmap [c <Plug>GitGutterPrevHunk
 
 " Faster navigation witn ctrl
 noremap <C-k> 10gk
@@ -226,12 +245,9 @@ autocmd Filetype make set noexpandtab
 nnoremap cop :set paste!<CR>
 
 "more co-* commands
-nnoremap cog :IndentGuidesToggle<CR>
-nnoremap coe :call ToggleList("Quickfix List", 'c')<CR>
-nnoremap coll :call ToggleList("Location List", 'l')<CR>
-
-"Map F4 to toggle search results highlights
-nnoremap <silent> <F4> :set hlsearch!<CR>
+nnoremap yog :IndentGuidesToggle<CR>
+nnoremap yoe :call ToggleList("Quickfix List", 'c')<CR>
+nnoremap yoll :call ToggleList("Location List", 'l')<CR>
 
 " Toggle a diff view comparing unsaved changes to saved version
 nnoremap <silent> <S-F4> :DiffChangesDiffToggle<CR>
@@ -335,10 +351,21 @@ if has("unix")
       \ 'vimwiki' : 1,
       \ 'pandoc' : 1,
       \ 'infolog' : 1,
-      \ 'mail' : 1
+      \ 'mail' : 1,
+      \ 'peekaboo': 1,
       \}
   endif
 endif
+
+nmap <leader>gd :YcmCompleter GoToDeclaration<CR>
+nmap <leader>gr :YcmCompleter GoToReferences<CR>
+nmap <leader>gp :YcmCompleter GoToParent<CR>
+nmap <leader>gt :YcmCompleter GoToType<CR>
+nmap <leader>gc :YcmCompleter GetDoc<CR>
+nmap <leader>gi :YcmCompleter GoToInclude<CR>
+nmap <leader>yf :YcmCompleter FixIt<CR>
+
+let g:lsp_text_edit_enabled = v:false
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => SimplyFold settings
@@ -348,7 +375,19 @@ let g:SimpylFold_docstring_preview = 1
 let g:SimpylFold_fold_docstring = 0
 " let g:SimpylFold_fold_import = 0
 
-autocmd BufWinLeave *.py setlocal foldexpr< foldmethod<
+augroup fold_group " {
+  autocmd!
+  autocmd BufWinLeave *.py setlocal foldexpr< foldmethod<
+augroup END " }
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => ultisnips settings
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" since the defautl trigger <tab> conflicts with YCM
+let g:UltiSnipsExpandTrigger = "<c-j>"
+let g:UltiSnipsJumpForwardTrigger = "<c-n>"
+let g:UltiSnipsJumpBackwardTrigger = "<c-p>"
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Status line settings

@@ -63,34 +63,6 @@ if !has("gui_running")
 
 endif
 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => ultisnips settings
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-" since the defautl trigger <tab> conflicts with YCM
-let g:UltiSnipsExpandTrigger = "<c-j>"
-let g:UltiSnipsJumpForwardTrigger = "<c-n>"
-let g:UltiSnipsJumpBackwardTrigger = "<c-p>"
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Autocomplete (YCM) settings
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-let g:ycm_autoclose_preview_window_after_insertion = 1
-
-let g:ycm_filetype_blacklist = {
-  \ 'tagbar' : 1,
-  \ 'qf' : 1,
-  \ 'notes' : 1,
-  \ 'markdown' : 1,
-  \ 'unite' : 1,
-  \ 'text' : 1,
-  \ 'vimwiki' : 1,
-  \ 'pandoc' : 1,
-  \ 'infolog' : 1,
-  \ 'mail' : 1
-  \}
-
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => syntastic settings
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -98,37 +70,6 @@ let g:ycm_filetype_blacklist = {
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_cpp_check_header = 1
 let g:syntastic_cpp_checkers=['gcc']
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Hack to get alt-alpha keys to work in terminal
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-function! Alt_hack_char(ch) abort
-  exec "set <A-".a:ch.">=\e".a:ch
-  exec "imap \e".a:ch." <A-".a:ch.">"
-endfunction
-
-" alt+alpha
-let c='a'
-while c <= 'z'
-  call Alt_hack_char(c)
-  let c = nr2char(1+char2nr(c))
-endw
-
-call Alt_hack_char('\')
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => SimplyFold settings
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-let g:SimpylFold_docstring_preview = 1
-let g:SimpylFold_fold_docstring = 0
-" let g:SimpylFold_fold_import = 0
-
-augroup fold_group " {
-  autocmd!
-  autocmd BufWinLeave *.py setlocal foldexpr< foldmethod<
-augroup END " }
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Tagbar settigns
@@ -661,12 +602,10 @@ set viminfo^=%
 
 "auto reload vimrc when it changes
 "and reload airline
-augroup reload_vimrc " {
-    autocmd!
-    autocmd BufWritePost $MYVIMRC nested source $MYVIMRC
-    autocmd BufWritePost $MYVIMRC.plugins nested source $MYVIMRC
-    autocmd BufWritePost ~/.local/.vimrc nested source $MYVIMRC
-augroup END " }
+" augroup reload_vimrc " {
+"     autocmd!
+"     autocmd BufWritePost *.vimrc* nested source $MYVIMRC
+" augroup END " }
 
 " cleanup vim-fugitive buffers
 augroup fugitive " {
@@ -807,6 +746,10 @@ function! ToggleRelative()
         set rnu
     endif
 endfunction
+
+if filereadable(expand("~/.vimrc.settings"))
+    source ~/.vimrc.settings
+endif
 
 " Source local override file if one exists.
 if filereadable(expand("~/.local/.vimrc"))

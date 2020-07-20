@@ -20,9 +20,9 @@ function vi_mode {
   TEST=`bind -v | awk '/keymap/ {print $NF}'`
 
   if [ "$TEST" = 'vi-insert' ]; then
-    echo "(ins)"
+    echo ">"
   else
-    echo "(cmd)"
+    echo "<"
   fi
 }
 
