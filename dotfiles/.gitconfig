@@ -85,7 +85,7 @@
   #default = upstream
   default = tracking
 [core]
-  pager = "less -RFX -i $LESS -S -# 4"
+  pager = "less -RFX -i -S -# 4"
   editor = "vim -v"
   excludesfile = /home/mbuchmoyer/.gitignore_global
 [log]
