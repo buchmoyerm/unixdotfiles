@@ -39,7 +39,7 @@ shopt -s extglob # extended pattern matching for bash completion
 shopt -s globstar # '**' matches all files and no directories
 shopt -s dirspell # typo tolerance when tab completing directories
 
-export PATH=${HOME}/bin:${PATH}
+export PATH=${HOME}/bin:${HOME}/.local/bin:${PATH}
 
 # History fixes
 export HISTFILESIZE=5000                # Store 5000 commands in history

@@ -19,7 +19,7 @@ call plug#begin()
 
   " file navigation
   " ---------------
-  if full_vimrc
+  if full_vimrc && (has('python') || has('python3'))
     Plug 'kien/ctrlp.vim' | Plug 'FelikZ/ctrlp-py-matcher'
     " Plug 'tmilloff/vim-address-bar'
   endif
@@ -52,9 +52,12 @@ call plug#begin()
   Plug 'tpope/vim-surround'
   Plug 'triglav/vim-visual-increment'
 
-  " snippets
-  Plug 'SirVer/ultisnips'
-  Plug 'honza/vim-snippets'
+  if has('python') || has('python3')
+    " snippets
+    Plug 'SirVer/ultisnips'
+    Plug 'honza/vim-snippets'
+    Plug 'Valloric/MatchTagAlways'
+  endif
 
   " vim language server protocall
   if full_vimrc
@@ -81,7 +84,6 @@ call plug#begin()
                                             \ 'typescript',
                                             \ 'protobuf' ] }
     Plug 'kana/vim-operator-user'
-    Plug 'Valloric/MatchTagAlways'
     Plug 'thirtythreeforty/lessspace.vim'
   endif
 
