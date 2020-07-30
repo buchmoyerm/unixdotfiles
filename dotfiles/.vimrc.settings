@@ -335,7 +335,6 @@ endif
 " Addition config for YouCompleteMe
 if has("unix")
   if !v:shell_error && isLinux
-    nnoremap <silent> <F12> :YcmCompleter GoTo<CR>
 
     let g:ycm_server_keep_logfiles = 1
 
