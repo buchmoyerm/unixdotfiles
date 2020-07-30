@@ -6,6 +6,10 @@
 export VISUAL="vim -v -u ~/.vimrc_min -O"
 export EDITOR="$VISUAL"
 
+# Stop zsh-syntax-highlighting from highlighting path names
+# It is nice, but seems to be slow sometimes
+ZSH_HIGHLIGHT_STYLES[path]='none'
+
 typeset -g USE_PURE_POWER='true'
 
 POWERLEVEL9K_VCS_BACKENDS=(git)
