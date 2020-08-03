@@ -17,6 +17,12 @@ call plug#begin()
   " -------------
   Plug 'tomasr/molokai'
 
+  " Used for google plugins
+  " -----------------------
+  Plug 'google/vim-maktaba'
+  Plug 'google/vim-glaive'
+
+
   " file navigation
   " ---------------
   if full_vimrc && (has('python') || has('python3'))
@@ -86,6 +92,7 @@ call plug#begin()
                                             \ 'protobuf' ] }
     Plug 'kana/vim-operator-user'
     Plug 'thirtythreeforty/lessspace.vim'
+    Plug 'google/vim-codefmt'
   endif
 
   " Autocomplete
