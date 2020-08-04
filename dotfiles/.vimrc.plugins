@@ -2,7 +2,7 @@ if !exists('full_vimrc')
   let full_vimrc = 0
 endif
 
-call plug#begin()
+call plugwrap#begin()
 
   " sensible default settings
   " -------------------------
@@ -19,8 +19,9 @@ call plug#begin()
 
   " Used for google plugins
   " -----------------------
-  Plug 'google/vim-maktaba'
-  Plug 'google/vim-glaive'
+  PlugWrap 'google/vim-maktaba'
+  PlugWrap 'google/vim-glaive'
+  PlugWrap 'google/vim-codefmt'
 
 
   " file navigation
@@ -63,7 +64,7 @@ call plug#begin()
     Plug 'SirVer/ultisnips'
     Plug 'honza/vim-snippets'
     Plug 'Valloric/MatchTagAlways'
-    Plug 'ycm-core/YouCompleteMe'
+    PlugWrap 'ycm-core/YouCompleteMe'
   endif
 
   " vim language server protocall
@@ -92,7 +93,6 @@ call plug#begin()
                                             \ 'protobuf' ] }
     Plug 'kana/vim-operator-user'
     Plug 'thirtythreeforty/lessspace.vim'
-    Plug 'google/vim-codefmt'
   endif
 
   " Autocomplete
@@ -160,5 +160,5 @@ call plug#begin()
   endif
 
 " All of your Plugins must be added before the following line
-call plug#end()            " required
+call plugwrap#end()            " required
 

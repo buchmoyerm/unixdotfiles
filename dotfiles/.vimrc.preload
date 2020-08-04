@@ -1,0 +1,9 @@
+if !has_key(g:,'enable_plugins')
+  let g:enable_plugins = {}
+endif
+
+" Source local preload file if one exists.
+if filereadable(expand("~/.local/.vimrc.preload"))
+    source ~/.local/.vimrc.preload
+endif
+
