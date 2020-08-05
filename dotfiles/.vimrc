@@ -10,7 +10,20 @@ let os = system("uname")
 let isLinux = (os == "Linux\n")
 let full_vimrc = 1
 
+source ~/.vimrc.plugins
+
 " Source local preload file if one exists.
+if filereadable(expand("~/.vimrc.preload"))
+    source ~/.vimrc.preload
+endif
+
+if filereadable(expand("~/.vimrc.plugins"))
+    source ~/.vimrc.plugins
+endif
+
+if filereadable(expand("~/.vimrc.settings"))
+    source ~/.vimrc.settings
+endif
 " use command-line window for commands
 " nnoremap : q:i
 
@@ -650,5 +663,10 @@ endfunction
 
 " Source local override file if one exists.
 if filereadable(expand("~/.local/.vimrc"))
+    echoe "sourcing legacy ~/.local/.vimrc please move to ~/.local/.vimrc.overrides"
     source ~/.local/.vimrc
+endif
+
+if filereadable(expand("~/.local/.vimrc.overrides"))
+    source ~/.local/.vimrc.overrides
 endif
