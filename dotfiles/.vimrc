@@ -8,11 +8,14 @@ endif
 
 let os = system("uname")
 let isLinux = (os == "Linux\n")
-let useLightLine = !isLinux || !has("gui_running")
 let full_vimrc = 1
-" let useLightLine = 0
 
 set nocompatible              " be iMproved, required
+
+" Source local preload file if one exists.
+if filereadable(expand("~/.vimrc.preload"))
+    source ~/.vimrc.preload
+endif
 
 if filereadable(expand("~/.vimrc.plugins"))
     source ~/.vimrc.plugins
