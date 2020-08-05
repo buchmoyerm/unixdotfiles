@@ -1,0 +1,5 @@
+priority 1
+
+snippet flagflip "Flag flip template"
+stubby call --proto2 ${1:BNS ADDRESS} ServerStatus.SetFlag 'flag: {name: "${2}" value: "${3}"}'
+endsnippet

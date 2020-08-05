@@ -8,16 +8,16 @@ call plugwrap#begin()
 
   " sensible default settings
   " -------------------------
-  Plug 'tpope/vim-sensible'
+  PlugWrap 'tpope/vim-sensible'
 
   " Cheat sheet
   " -------------------------
-  Plug 'dbeniamine/cheat.sh-vim'
+  PlugWrap 'dbeniamine/cheat.sh-vim'
 
 
   " colorschemes
   " -------------
-  Plug 'tomasr/molokai'
+  PlugWrap 'tomasr/molokai'
 
   " Used for google plugins
   " -----------------------
@@ -29,133 +29,133 @@ call plugwrap#begin()
   " file navigation
   " ---------------
   if full_vimrc && (has('python') || has('python3'))
-    Plug 'kien/ctrlp.vim' | Plug 'FelikZ/ctrlp-py-matcher'
-    " Plug 'tmilloff/vim-address-bar'
+    PlugWrap 'kien/ctrlp.vim' | PlugWrap 'FelikZ/ctrlp-py-matcher'
+    " PlugWrap 'tmilloff/vim-address-bar'
   endif
 
   if full_vimrc
-    Plug 'benmills/vimux'
+    PlugWrap 'benmills/vimux'
   endif
 
-  Plug 'tpope/vim-abolish'
-  Plug 'tpope/vim-vinegar'
-  Plug 'junegunn/limelight.vim'
+  PlugWrap 'tpope/vim-abolish'
+  PlugWrap 'tpope/vim-vinegar'
+  PlugWrap 'junegunn/limelight.vim'
   if full_vimrc
-    Plug 'mileszs/ack.vim'
+    PlugWrap 'mileszs/ack.vim'
     " awesome, but not greate for large endifles hopefully python files
     " stay small enough and this is mostly needed for python
-    Plug 'majutsushi/tagbar'
+    PlugWrap 'majutsushi/tagbar'
   endif
 
-  Plug 'Lokaltog/vim-easymotion'
-  Plug 'michaeljsmith/vim-indent-object'
+  PlugWrap 'Lokaltog/vim-easymotion'
+  PlugWrap 'michaeljsmith/vim-indent-object'
 
   if full_vimrc
-    Plug 'kien/tabman.vim'
-    Plug 'vim-scripts/a.vim'
-    Plug 'tmhedberg/SimpylFold' "folds
+    PlugWrap 'kien/tabman.vim'
+    PlugWrap 'vim-scripts/a.vim'
+    PlugWrap 'tmhedberg/SimpylFold' "folds
   endif
 
-  Plug 'tpope/vim-unimpaired'
-  " Plug 'jiangmiao/auto-pairs'
-  Plug 'tpope/vim-surround'
-  Plug 'triglav/vim-visual-increment'
+  PlugWrap 'tpope/vim-unimpaired'
+  " PlugWrap 'jiangmiao/auto-pairs'
+  PlugWrap 'tpope/vim-surround'
+  PlugWrap 'triglav/vim-visual-increment'
 
   if has('python') || has('python3')
     " snippets
-    Plug 'SirVer/ultisnips'
-    Plug 'honza/vim-snippets'
-    Plug 'Valloric/MatchTagAlways'
+    PlugWrap 'SirVer/ultisnips'
+    PlugWrap 'honza/vim-snippets'
+    PlugWrap 'Valloric/MatchTagAlways'
     " make sure cmake is installed
     PlugWrap 'ycm-core/YouCompleteMe', {'do': 'python3 install.py --all'}
   endif
 
   " vim language server protocall
   if full_vimrc
-    Plug 'prabirshrestha/async.vim'
-    Plug 'prabirshrestha/vim-lsp'
-    " Plug 'neoclide/coc.nvim', {'tag': '*', 'do': { -> coc#util#install() }}
+    PlugWrap 'prabirshrestha/async.vim'
+    PlugWrap 'prabirshrestha/vim-lsp'
+    " PlugWrap 'neoclide/coc.nvim', {'tag': '*', 'do': { -> coc#util#install() }}
   endif
 
   " Split navigation with tmux
   " --------------------------
-  Plug 'christoomey/vim-tmux-navigator'
-  Plug 'tpope/vim-tbone'
+  PlugWrap 'christoomey/vim-tmux-navigator'
+  PlugWrap 'tpope/vim-tbone'
 
   " syntax
   " ------
   if full_vimrc
-    Plug 'tpope/vim-git'
-    " Plug 'octol/vim-cpp-enhanced-highlight'
-    " Plug 'scrooloose/syntastic'
-    Plug 'rhysd/vim-clang-format', { 'for': [ 'cpp',
+    PlugWrap 'tpope/vim-git'
+    " PlugWrap 'octol/vim-cpp-enhanced-highlight'
+    " PlugWrap 'scrooloose/syntastic'
+    PlugWrap 'rhysd/vim-clang-format', { 'for': [ 'cpp',
                                             \ 'c',
                                             \ 'java',
                                             \ 'javascript',
                                             \ 'typescript',
                                             \ 'protobuf' ] }
-    Plug 'kana/vim-operator-user'
-    Plug 'thirtythreeforty/lessspace.vim'
+    PlugWrap 'kana/vim-operator-user'
+    PlugWrap 'thirtythreeforty/lessspace.vim'
   endif
 
   " Autocomplete
-  " Plug 'vim-scripts/AutoComplPop'
-  " Plug 'vim-scripts/SuperTab'
+  " PlugWrap 'vim-scripts/AutoComplPop'
+  " PlugWrap 'vim-scripts/SuperTab'
 
   " source control
   " --------------
   if full_vimrc
-    Plug 'tpope/vim-fugitive'
-    Plug 'ludovicchabant/vim-lawrencium'
-    " Plug 'jlfwong/vim-mercenary'
-    Plug 'vim-scripts/vcscommand.vim'
-    Plug 'vim-scripts/diffchanges.vim'
-    Plug 'buchmoyerm/vim-diff-enhanced'
-    " Plug 'airblade/vim-gitgutter'
-    Plug 'mhinz/vim-signify'
-    Plug 'powerman/vim-plugin-AnsiEsc'
+    PlugWrap 'tpope/vim-fugitive'
+    PlugWrap 'ludovicchabant/vim-lawrencium'
+    " PlugWrap 'jlfwong/vim-mercenary'
+    PlugWrap 'vim-scripts/vcscommand.vim'
+    PlugWrap 'vim-scripts/diffchanges.vim'
+    PlugWrap 'buchmoyerm/vim-diff-enhanced'
+    " PlugWrap 'airblade/vim-gitgutter'
+    PlugWrap 'mhinz/vim-signify'
+    PlugWrap 'powerman/vim-plugin-AnsiEsc'
 
-    Plug 'vimplugin/project.vim'
+    PlugWrap 'vimplugin/project.vim'
 
     " consider using splice for merge conflicts
-    Plug 'sjl/splice.vim'
+    PlugWrap 'sjl/splice.vim'
   endif
 
   " other
   " ----
-"   Plug 'closetag.vim'
+"   PlugWrap 'closetag.vim'
   if full_vimrc
-    Plug 'tpope/vim-dispatch'
-    Plug 'gorkunov/smartpairs.vim'
-    Plug 'nathanaelkane/vim-indent-guides'
-    " Plug 'tpope/vim-sleuth'
+    PlugWrap 'tpope/vim-dispatch'
+    PlugWrap 'gorkunov/smartpairs.vim'
+    PlugWrap 'nathanaelkane/vim-indent-guides'
+    " PlugWrap 'tpope/vim-sleuth'
   endif
-  Plug 'tpope/vim-repeat'
+  PlugWrap 'tpope/vim-repeat'
 
   " UNIX helpers
   " ------------
   if full_vimrc
-    Plug 'tpope/vim-eunuch'
-    Plug 'Shougo/unite.vim'
-    Plug 'Shougo/vimproc.vim', { 'do': 'make'}
+    PlugWrap 'tpope/vim-eunuch'
+    PlugWrap 'Shougo/unite.vim'
+    PlugWrap 'Shougo/vimproc.vim', { 'do': 'make'}
   endif
 
-  Plug 'tpope/vim-commentary'
-  Plug 'haya14busa/vim-poweryank'
+  PlugWrap 'tpope/vim-commentary'
+  PlugWrap 'haya14busa/vim-poweryank'
 
   " For building plugins
   if full_vimrc
-    Plug 'tpope/vim-scriptease'
+    PlugWrap 'tpope/vim-scriptease'
   endif
 
   " peekaboo needs Cmd2 hack to work on commandline
-  Plug 'gelguy/Cmd2.vim' | Plug 'junegunn/vim-peekaboo'
+  PlugWrap 'gelguy/Cmd2.vim' | PlugWrap 'junegunn/vim-peekaboo'
 
-  Plug 'terryma/vim-multiple-cursors'
+  PlugWrap 'terryma/vim-multiple-cursors'
 
   " status bar
   " -------------------------
-  Plug 'itchyny/lightline.vim'
+  PlugWrap 'itchyny/lightline.vim'
 
   " Source local override file if one exists.
   if filereadable(expand("~/.local/.vimrc.plugins"))
