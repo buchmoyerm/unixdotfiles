@@ -10,21 +10,7 @@ let os = system("uname")
 let isLinux = (os == "Linux\n")
 let full_vimrc = 1
 
-set nocompatible              " be iMproved, required
-
 " Source local preload file if one exists.
-if filereadable(expand("~/.vimrc.preload"))
-    source ~/.vimrc.preload
-endif
-
-if filereadable(expand("~/.vimrc.plugins"))
-    source ~/.vimrc.plugins
-endif
-
-" let comma be used as map leader
-let mapleader=","
-map \ ,
-
 " use command-line window for commands
 " nnoremap : q:i
 
@@ -48,23 +34,6 @@ map \ ,
 " " open user completion menu closing previous if open and opening new menu without changing the text
 " inoremap <expr> <S-Space> (pumvisible() ? (col('.') > 1 ? '<Esc>i<Right>' : '<Esc>i') : '') .
 "             \ '<C-x><C-u><C-r>=pumvisible() ? "\<lt>C-n>\<lt>C-p>\<lt>Down>" : ""<CR>'
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => peekaboo command line hack
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-if !has("gui_running")
-  function! s:Peekaboo()
-    call peekaboo#peek(1, 'ctrl-r',  0)
-  endfunction
-
-  let g:Cmd2_cmd_mappings = {
-      \ 'Peekaboo': {'command': function('s:Peekaboo'), 'type': 'function'},
-      \ }
-
-  cmap <C-R> <Plug>(Cmd2)Peekaboo
-
-endif
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => syntastic settings
@@ -138,8 +107,6 @@ let &colorcolumn="80"
 "   autocmd BufEnter * highlight OverLength ctermbg=darkgrey guibg=#592929
 "   autocmd BufEnter * match OverLength /\%80v.*/
 " augroup END
-
-syntax on
 
 "Information on the following setting can be found with
 ":help set
@@ -281,71 +248,6 @@ nnoremap <silent> <C-n> :call ToggleRelative()<CR>
 " Super useful! From an idea by Michael Naumann
 vnoremap <silent> * :call VisualSelection('f')<CR>
 vnoremap <silent> # :call VisualSelection('b')<CR>
-
-" Pane navigation using Alt and arrow keys
-nnoremap <M-left> <C-w><Left>
-nnoremap <M-right> <C-w><right>
-nnoremap <M-up> <C-w><up>
-nnoremap <M-down> <C-w><down>
-
-let g:tmux_navigator_disable_when_zoomed = 1
-let g:tmux_navigator_no_mappings = 1
-let g:tmux_navigator_save_on_switch = 1
-noremap <silent> <M-h> :TmuxNavigateLeft<cr>
-noremap <silent> <M-j> :TmuxNavigateDown<cr>
-noremap <silent> <M-k> :TmuxNavigateUp<cr>
-noremap <silent> <M-l> :TmuxNavigateRight<cr>
-noremap <silent> <M-\> :TmuxNavigatePrevious<cr>
-
-tnoremap <silent> <M-h> <C-w>:TmuxNavigateLeft<cr>
-tnoremap <silent> <M-j> <C-w>:TmuxNavigateDown<cr>
-tnoremap <silent> <M-k> <C-w>:TmuxNavigateUp<cr>
-tnoremap <silent> <M-l> <C-w>:TmuxNavigateRight<cr>
-tnoremap <silent> <M-\> <C-w>:TmuxNavigatePrevious<cr>
-
-" Faster navigation wit ctrl
-noremap <C-up> 10gk
-noremap <C-down> 10gj
-noremap <C-right> 5l
-noremap <C-left> 5h
-
-" Faster navigation witn ctrl
-noremap <C-k> 10gk
-noremap <C-j> 10gj
-noremap <C-h> 5h
-noremap <C-l> 5l
-
-" 0 jumps to first non black char in line
-noremap 0 ^
-
-" Copy to clipboard
-" vnoremap <C-c> "*y
-
-" Cut to clipboard
-" vnoremap <C-x> "*c
-
-" Paste from the clipbaord
-" vnoremap <C-v> c<ESC>"*p
-" inoremap <C-v> <ESC>"*pa
-" nnoremap <C-v> "*p
-
-" Move to next resent and put it in the middle of the split
-noremap <silent> n nzz
-noremap <silent> N Nzz
-
-" quickly exit insert mode without esc
-inoremap fj <Esc>
-vnoremap fj <Esc>
-snoremap fj <Esc>
-
-" highlight all matched under cursor but don't jump to next match
-nnoremap * :keepjumps normal! mi*`i<CR>
-
-" more natural navigation of log lines with word wrap
-nnoremap j gj
-nnoremap k gk
-vnoremap j gj
-vnoremap k gk
 
 " ------------------------------
 "           TAB MODES
@@ -745,10 +647,6 @@ function! ToggleRelative()
         set rnu
     endif
 endfunction
-
-if filereadable(expand("~/.vimrc.settings"))
-    source ~/.vimrc.settings
-endif
 
 " Source local override file if one exists.
 if filereadable(expand("~/.local/.vimrc"))

@@ -219,11 +219,6 @@ noremap 0 ^
 noremap <silent> n nzz
 noremap <silent> N Nzz
 
-" quickly exit insert mode without esc
-inoremap fj <Esc>
-vnoremap fj <Esc>
-snoremap fj <Esc>
-
 " highlight all matched under cursor but don't jump to next match
 nnoremap * :keepjumps normal! mi*`i<CR>
 

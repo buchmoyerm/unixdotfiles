@@ -1,3 +1,5 @@
+set nocompatible              " be iMproved, required
+
 if !exists('full_vimrc')
   let full_vimrc = 0
 endif

@@ -1,97 +1,11 @@
-set nocompatible              " be iMproved, required
 
 if filereadable(expand("~/.vimrc.plugins"))
     source ~/.vimrc.plugins
 endif
 
-if filereadable(expand("~/.vimrc.common"))
-    source ~/.vimrc.common
-endif
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Hack to get alt-alpha keys to work in terminal
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-function! Alt_hack_char(ch) abort
-  exec "set <A-".a:ch.">=\e".a:ch
-  exec "imap \e".a:ch." <A-".a:ch.">"
-endfunction
-
-" alt+alpha
-let c='a'
-while c <= 'z'
-  call Alt_hack_char(c)
-  let c = nr2char(1+char2nr(c))
-endw
-
-call Alt_hack_char('\')
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => peekaboo command line hack
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-if !has("gui_running")
-  function! s:Peekaboo()
-    call peekaboo#peek(1, 'ctrl-r',  0)
-  endfunction
-
-  let g:Cmd2_cmd_mappings = {
-      \ 'Peekaboo': {'command': function('s:Peekaboo'), 'type': 'function'},
-      \ }
-
-  cmap <C-R> <Plug>(Cmd2)Peekaboo
-
-endif
-
-syntax on
-
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => min settings
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-colorscheme molokai
-let g:rehash256 = 1
-
-" let comma be used as map leader
-let mapleader=","
-map \ ,
-
-" quickly exit insert mode without esc
-inoremap fj <Esc>
-vnoremap fj <Esc>
-snoremap fj <Esc>
-
-" Faster navigation wit ctrl
-noremap <C-up> 10gk
-noremap <C-down> 10gj
-noremap <C-right> 5l
-noremap <C-left> 5h
-
-" more natural navigation of log lines with word wrap
-nnoremap j gj
-nnoremap k gk
-
-" highlight all matched under cursor but don't jump to next match
-nnoremap * :keepjumps normal! mi*`i<CR>
-
-" switch between paste modes (use unimpaired co* style)
-" event though tpope disagrees with paste mode having shortcut
-" tpope probably doesn't use putty like I am.
-nnoremap cop :set paste!<CR>
-
-let g:tmux_navigator_disable_when_zoomed = 1
-let g:tmux_navigator_no_mappings = 1
-let g:tmux_navigator_save_on_switch = 1
-noremap <silent> <M-h> :TmuxNavigateLeft<cr>
-noremap <silent> <M-j> :TmuxNavigateDown<cr>
-noremap <silent> <M-k> :TmuxNavigateUp<cr>
-noremap <silent> <M-l> :TmuxNavigateRight<cr>
-noremap <silent> <M-\> :TmuxNavigatePrevious<cr>
-
-tnoremap <silent> <M-h> <C-w>:TmuxNavigateLeft<cr>
-tnoremap <silent> <M-j> <C-w>:TmuxNavigateDown<cr>
-tnoremap <silent> <M-k> <C-w>:TmuxNavigateUp<cr>
-tnoremap <silent> <M-l> <C-w>:TmuxNavigateRight<cr>
-tnoremap <silent> <M-\> <C-w>:TmuxNavigatePrevious<cr>
 
 set showcmd
 set cmdheight=2
