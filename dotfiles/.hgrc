@@ -1,8 +1,8 @@
 [ui]
 username = mbuchmoyer
-# merge = vimdiff
+merge = vimdiff
 # merge = internal:merge3
-merge = splice
+# merge = splice
 editor = vim -v
 mergemarkers = detailed
 

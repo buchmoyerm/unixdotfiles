@@ -351,6 +351,11 @@ if has("unix")
   endif
 endif
 
+" don't automatically show diagnostics popup on hover
+" let g:ycm_auto_hover =
+" toggle diagnostics popup
+nmap <leader>yd <plug>(YCMHover)
+
 nmap <leader>gd :YcmCompleter GoToDeclaration<CR>
 nmap <leader>gr :YcmCompleter GoToReferences<CR>
 nmap <leader>gp :YcmCompleter GoToParent<CR>
@@ -358,6 +363,7 @@ nmap <leader>gt :YcmCompleter GoToType<CR>
 nmap <leader>gc :YcmCompleter GetDoc<CR>
 nmap <leader>gi :YcmCompleter GoToInclude<CR>
 nmap <leader>yf :YcmCompleter FixIt<CR>
+
 
 let g:lsp_text_edit_enabled = v:false
 
