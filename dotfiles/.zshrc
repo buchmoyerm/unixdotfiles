@@ -70,6 +70,7 @@ plugins=(
   vi-mode
   zsh-autosuggestions
   zsh-syntax-highlighting
+  async
   tmux
   fancy-ctrl-z
   sudo

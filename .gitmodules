@@ -1,11 +1,9 @@
 [submodule "pydotfileinstaller"]
 	path = pydotfileinstaller
 	url = https://github.com/buchmoyerm/pydotfileinstaller
-
 [submodule "oh-my-zsh"]
   path = dotfiles/.oh-my-zsh
   url = https://github.com/robbyrussell/oh-my-zsh
-
 [submodule "zsh-autosuggestions"]
 	path = .oh-my-zsh/custom/plugins/zsh-autosuggestions
 	url = https://github.com/zsh-users/zsh-autosuggestions
@@ -15,3 +13,6 @@
 [submodule "powerlevel10k"]
 	path = .oh-my-zsh/custom/themes/powerlevel10k
 	url = https://github.com/romkatv/powerlevel10k
+[submodule "zsh-async"]
+	path = .oh-my-zsh/custom/plugins/async
+	url = https://github.com/mafredri/zsh-async

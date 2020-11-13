@@ -8,7 +8,8 @@ realpath() {
 
 safe_link(){
   local src="$1"
-  local dest="$HOME/`basename $src`"
+  local dest=${src##${DOTFILES}}
+  dest="${HOME}${dest##"/dotfiles"}"
   if [ ! -e "$dest" ]; then
     ln -sf "$src" "$dest"
   fi
@@ -34,6 +35,8 @@ should_install() {
   if [ $file = "install.sh" ]; then
     return 1;
   elif [ $file = ".git" ]; then
+    return 1;
+  elif [ $file = "LOCAL_README.md" ]; then
     return 1;
   fi
   return 0;

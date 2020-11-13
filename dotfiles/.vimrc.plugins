@@ -30,7 +30,6 @@ call plugwrap#begin()
   " ---------------
   if full_vimrc && (has('python') || has('python3'))
     PlugWrap 'kien/ctrlp.vim' | PlugWrap 'FelikZ/ctrlp-py-matcher'
-    " PlugWrap 'tmilloff/vim-address-bar'
   endif
 
   if full_vimrc
@@ -42,10 +41,11 @@ call plugwrap#begin()
   PlugWrap 'junegunn/limelight.vim'
   if full_vimrc
     PlugWrap 'mileszs/ack.vim'
-    " awesome, but not greate for large endifles hopefully python files
-    " stay small enough and this is mostly needed for python
-    PlugWrap 'majutsushi/tagbar'
   endif
+
+  " awesome, but not greate for large endifles hopefully python files
+  " stay small enough and this is mostly needed for python
+  PlugWrap 'majutsushi/tagbar'
 
   PlugWrap 'Lokaltog/vim-easymotion'
   PlugWrap 'michaeljsmith/vim-indent-object'
@@ -134,11 +134,9 @@ call plugwrap#begin()
 
   " UNIX helpers
   " ------------
-  if full_vimrc
-    PlugWrap 'tpope/vim-eunuch'
-    PlugWrap 'Shougo/unite.vim'
-    PlugWrap 'Shougo/vimproc.vim', { 'do': 'make'}
-  endif
+  PlugWrap 'tpope/vim-eunuch'
+  PlugWrap 'Shougo/unite.vim'
+  PlugWrap 'Shougo/vimproc.vim', { 'do': 'make'}
 
   PlugWrap 'tpope/vim-commentary'
   PlugWrap 'haya14busa/vim-poweryank'
@@ -156,6 +154,12 @@ call plugwrap#begin()
   " status bar
   " -------------------------
   PlugWrap 'itchyny/lightline.vim'
+
+  " Notes, Tasks, Wiki
+  " -------------------------
+  PlugWrap 'vimwiki/vimwiki'
+  PlugWrap 'tools-life/taskwiki'
+  PlugWrap 'farseer90718/vim-taskwarrior'
 
   " Source local override file if one exists.
   if filereadable(expand("~/.local/.vimrc.plugins"))

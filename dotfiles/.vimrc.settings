@@ -169,6 +169,9 @@ let g:cpp_concepts_highlight = 1
 " => Keyboard settings/key bindings
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+" Quicker save & quit
+nnoremap <leader>qq :wqa<cr>
+
 " Toggle relative numbers
 nnoremap <silent> <C-n> :call ToggleRelative()<CR>
 
@@ -468,4 +471,14 @@ function! LightlineFugitive() abort
   endtry
   return ''
 endfunction
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => vimwiki settings
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" vim wiki maps - but I want - to work with vim-vinegar
+let g:vimwiki_key_mappings =
+  \ {
+  \ 'headers': 0,
+  \ }
 
