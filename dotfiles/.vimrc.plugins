@@ -1,9 +1,5 @@
 set nocompatible              " be iMproved, required
 
-if !exists('full_vimrc')
-  let full_vimrc = 0
-endif
-
 call plugwrap#begin()
 
   " sensible default settings
@@ -28,20 +24,14 @@ call plugwrap#begin()
 
   " file navigation
   " ---------------
-  if full_vimrc && (has('python') || has('python3'))
-    PlugWrap 'kien/ctrlp.vim' | PlugWrap 'FelikZ/ctrlp-py-matcher'
-  endif
+  PlugWrap 'kien/ctrlp.vim' | PlugWrap 'FelikZ/ctrlp-py-matcher'
 
-  if full_vimrc
-    PlugWrap 'benmills/vimux'
-  endif
+  PlugWrap 'benmills/vimux'
 
   PlugWrap 'tpope/vim-abolish'
   PlugWrap 'tpope/vim-vinegar'
   PlugWrap 'junegunn/limelight.vim'
-  if full_vimrc
-    PlugWrap 'mileszs/ack.vim'
-  endif
+  PlugWrap 'mileszs/ack.vim'
 
   " awesome, but not greate for large endifles hopefully python files
   " stay small enough and this is mostly needed for python
@@ -50,11 +40,9 @@ call plugwrap#begin()
   PlugWrap 'Lokaltog/vim-easymotion'
   PlugWrap 'michaeljsmith/vim-indent-object'
 
-  if full_vimrc
-    PlugWrap 'kien/tabman.vim'
-    PlugWrap 'vim-scripts/a.vim'
-    PlugWrap 'tmhedberg/SimpylFold' "folds
-  endif
+  PlugWrap 'kien/tabman.vim'
+  PlugWrap 'vim-scripts/a.vim'
+  PlugWrap 'tmhedberg/SimpylFold' "folds
 
   PlugWrap 'tpope/vim-unimpaired'
   " PlugWrap 'jiangmiao/auto-pairs'
@@ -71,11 +59,9 @@ call plugwrap#begin()
   endif
 
   " vim language server protocall
-  if full_vimrc
-    PlugWrap 'prabirshrestha/async.vim'
-    PlugWrap 'prabirshrestha/vim-lsp'
-    " PlugWrap 'neoclide/coc.nvim', {'tag': '*', 'do': { -> coc#util#install() }}
-  endif
+  PlugWrap 'prabirshrestha/async.vim'
+  PlugWrap 'prabirshrestha/vim-lsp'
+  " PlugWrap 'neoclide/coc.nvim', {'tag': '*', 'do': { -> coc#util#install() }}
 
   " Split navigation with tmux
   " --------------------------
@@ -84,19 +70,17 @@ call plugwrap#begin()
 
   " syntax
   " ------
-  if full_vimrc
-    PlugWrap 'tpope/vim-git'
-    " PlugWrap 'octol/vim-cpp-enhanced-highlight'
-    " PlugWrap 'scrooloose/syntastic'
-    PlugWrap 'rhysd/vim-clang-format', { 'for': [ 'cpp',
-                                            \ 'c',
-                                            \ 'java',
-                                            \ 'javascript',
-                                            \ 'typescript',
-                                            \ 'protobuf' ] }
-    PlugWrap 'kana/vim-operator-user'
-    PlugWrap 'thirtythreeforty/lessspace.vim'
-  endif
+  PlugWrap 'tpope/vim-git'
+  " PlugWrap 'octol/vim-cpp-enhanced-highlight'
+  " PlugWrap 'scrooloose/syntastic'
+  PlugWrap 'rhysd/vim-clang-format', { 'for': [ 'cpp',
+                                          \ 'c',
+                                          \ 'java',
+                                          \ 'javascript',
+                                          \ 'typescript',
+                                          \ 'protobuf' ] }
+  PlugWrap 'kana/vim-operator-user'
+  PlugWrap 'thirtythreeforty/lessspace.vim'
 
   " Autocomplete
   " PlugWrap 'vim-scripts/AutoComplPop'
@@ -104,32 +88,28 @@ call plugwrap#begin()
 
   " source control
   " --------------
-  if full_vimrc
-    PlugWrap 'tpope/vim-fugitive'
-    PlugWrap 'ludovicchabant/vim-lawrencium'
-    " PlugWrap 'jlfwong/vim-mercenary'
-    PlugWrap 'vim-scripts/vcscommand.vim'
-    PlugWrap 'vim-scripts/diffchanges.vim'
-    PlugWrap 'buchmoyerm/vim-diff-enhanced'
-    " PlugWrap 'airblade/vim-gitgutter'
-    PlugWrap 'mhinz/vim-signify'
-    PlugWrap 'powerman/vim-plugin-AnsiEsc'
+  PlugWrap 'tpope/vim-fugitive'
+  PlugWrap 'ludovicchabant/vim-lawrencium'
+  " PlugWrap 'jlfwong/vim-mercenary'
+  PlugWrap 'vim-scripts/vcscommand.vim'
+  PlugWrap 'vim-scripts/diffchanges.vim'
+  PlugWrap 'buchmoyerm/vim-diff-enhanced'
+  " PlugWrap 'airblade/vim-gitgutter'
+  PlugWrap 'mhinz/vim-signify'
+  PlugWrap 'powerman/vim-plugin-AnsiEsc'
 
-    PlugWrap 'vimplugin/project.vim'
+  PlugWrap 'vimplugin/project.vim'
 
-    " consider using splice for merge conflicts
-    PlugWrap 'sjl/splice.vim'
-  endif
+  " consider using splice for merge conflicts
+  PlugWrap 'sjl/splice.vim'
 
   " other
   " ----
-"   PlugWrap 'closetag.vim'
-  if full_vimrc
-    PlugWrap 'tpope/vim-dispatch'
-    PlugWrap 'gorkunov/smartpairs.vim'
-    PlugWrap 'nathanaelkane/vim-indent-guides'
-    " PlugWrap 'tpope/vim-sleuth'
-  endif
+  " PlugWrap 'closetag.vim'
+  PlugWrap 'tpope/vim-dispatch'
+  PlugWrap 'gorkunov/smartpairs.vim'
+  PlugWrap 'nathanaelkane/vim-indent-guides'
+  " PlugWrap 'tpope/vim-sleuth'
   PlugWrap 'tpope/vim-repeat'
 
   " UNIX helpers
@@ -142,9 +122,7 @@ call plugwrap#begin()
   PlugWrap 'haya14busa/vim-poweryank'
 
   " For building plugins
-  if full_vimrc
-    PlugWrap 'tpope/vim-scriptease'
-  endif
+  PlugWrap 'tpope/vim-scriptease'
 
   " peekaboo needs Cmd2 hack to work on commandline
   PlugWrap 'gelguy/Cmd2.vim' | PlugWrap 'junegunn/vim-peekaboo'

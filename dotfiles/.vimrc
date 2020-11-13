@@ -8,7 +8,6 @@ endif
 
 let os = system("uname")
 let isLinux = (os == "Linux\n")
-let full_vimrc = 1
 
 source ~/.vimrc.plugins
 

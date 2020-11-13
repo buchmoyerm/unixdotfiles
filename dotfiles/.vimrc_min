@@ -3,6 +3,19 @@ if filereadable(expand("~/.vimrc.preload"))
     source ~/.vimrc.preload
 endif
 
+" disable plugins in when using min rc
+let g:enable_plugins.ctrlp_vim = 0
+let g:enable_plugins.ctrlp_py_matcher = 0
+let g:enable_plugins.vim_git = 0
+let g:enable_plugins.lessspace = 0
+let g:enable_plugins.vim_fugitive = 0
+let g:enable_plugins.vim_lawrencium = 0
+let g:enable_plugins.vim_signify = 0
+let g:enable_plugins.project = 0
+let g:enable_plugins.splice = 0
+let g:enable_plugins.vim_dispatch = 0
+let g:enable_plugins.unite_codesearch = 0
+
 if filereadable(expand("~/.vimrc.plugins"))
     source ~/.vimrc.plugins
 endif
