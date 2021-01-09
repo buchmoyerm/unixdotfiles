@@ -23,6 +23,8 @@ link(){
   if [ -e "$dest" ]; then
     rm -rf "$dest"
   fi
+  dir=$(dirname "$dest")
+  mkdir --parents "$dir"
   ln -sf "$src" "$dest"
 }
 
