@@ -67,9 +67,9 @@ ZSH_THEME=powerlevel10k/powerlevel10k
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
   git
-  vi-mode
   zsh-autosuggestions
   zsh-syntax-highlighting
+  zsh-vim-mode
   async
   tmux
   fancy-ctrl-z

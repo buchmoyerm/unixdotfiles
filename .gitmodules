@@ -16,3 +16,6 @@
 [submodule "zsh-async"]
 	path = .oh-my-zsh/custom/plugins/async
 	url = https://github.com/mafredri/zsh-async
+[submodule "zsh-vim-mode"]
+	path = .oh-my-zsh/custom/plugins/zsh-vim-mode
+	url = https://github.com/softmoth/zsh-vim-mode.git

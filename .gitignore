@@ -5,3 +5,5 @@ multi-op1
 dotfiles/.vim/plugged
 dotfiles/.config/
 dotfiles/.vim/.netrwhist
+dotfiles/.vim/view/
+dotfiles/.zsh/cache/

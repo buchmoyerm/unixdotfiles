@@ -135,9 +135,9 @@ call plugwrap#begin()
 
   " Notes, Tasks, Wiki
   " -------------------------
-  PlugWrap 'vimwiki/vimwiki'
-  PlugWrap 'tools-life/taskwiki'
-  PlugWrap 'farseer90718/vim-taskwarrior'
+  " PlugWrap 'vimwiki/vimwiki'
+  " PlugWrap 'tools-life/taskwiki'
+  " PlugWrap 'farseer90718/vim-taskwarrior'
 
   " Source local override file if one exists.
   if filereadable(expand("~/.local/.vimrc.plugins"))
