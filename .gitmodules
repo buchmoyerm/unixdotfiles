@@ -1,18 +1,28 @@
 [submodule "pydotfileinstaller"]
 	path = pydotfileinstaller
 	url = https://github.com/buchmoyerm/pydotfileinstaller
+	branch = origin/master
 [submodule "oh-my-zsh"]
   path = dotfiles/.oh-my-zsh
   url = https://github.com/robbyrussell/oh-my-zsh
+	branch = origin/master
 [submodule "zsh-autosuggestions"]
 	path = .oh-my-zsh/custom/plugins/zsh-autosuggestions
 	url = https://github.com/zsh-users/zsh-autosuggestions
+	branch = origin/master
 [submodule "zsh-syntax-highlighting"]
 	path = .oh-my-zsh/custom/plugins/zsh-syntax-highlighting
 	url = https://github.com/zsh-users/zsh-syntax-highlighting
+	branch = origin/master
 [submodule "powerlevel10k"]
 	path = .oh-my-zsh/custom/themes/powerlevel10k
 	url = https://github.com/romkatv/powerlevel10k
+	branch = origin/master
 [submodule "zsh-async"]
 	path = .oh-my-zsh/custom/plugins/async
 	url = https://github.com/mafredri/zsh-async
+	branch = origin/master
+[submodule "zsh-vim-mode"]
+	path = .oh-my-zsh/custom/plugins/zsh-vim-mode
+	url = https://github.com/jeffreytse/zsh-vi-mode.git
+	branch = origin/master
