@@ -416,7 +416,8 @@ set laststatus=2
     \ 'active': {
       \     'left': [ [ 'mode', 'paste' ],
       \           [ 'readonly', 'filename', 'modified' ],
-      \           [ 'fugitive' ] ],
+      \           [ 'fugitive' ],
+      \           [ 'pythonctx' ] ],
       \     'right': [ [ 'lineinfo' ],
       \            [ 'percent' ],
       \            [ 'filetype' ] ]
@@ -441,7 +442,8 @@ set laststatus=2
       \   'fileformat': 0,
       \ },
     \ 'component_function': {
-      \   'fugitive': 'LightlineFugitive'
+      \   'fugitive': 'LightlineFugitive',
+      \   'pythonctx': 'python_ctx#statusline'
       \ },
     \ }
 

@@ -1,0 +1,65 @@
+python3 << EOF
+import vim
+def iter_back(buffer, start):
+  for ln_no in range(start, -1, -1):
+    yield buffer[ln_no]
+
+def get_indent(line):
+  indent = 0
+  while line[indent].isspace():
+    indent += 1
+  return indent
+
+def find_python_ctx(buffer, start):
+  func = None
+  cls = None
+  cur_indent = 10000000
+  for line in iter_back(buffer, start):
+    if line.strip() == "":
+      continue
+    line_indent = get_indent(line)
+    if line_indent < cur_indent:
+      cur_indent = line_indent
+      tokens = line.split()
+      try:
+        if tokens[0] in set(['class', 'def']):
+          name = tokens[1].split("(")[0]
+          if tokens[0] == 'def':
+            func = name
+            if line_indent == 0:
+              return (cls, func)
+          elif tokens[0] == 'class':
+            cls = name
+            if cls[-1] == ':':
+              cls = cls[:-1]
+            return (cls, func)
+      except Exception:
+        continue
+  return (cls, func)
+
+def get_cur_python_ctx():
+  row, col = vim.current.window.cursor
+  return find_python_ctx(vim.current.buffer, row-1)
+
+def get_python_ctx_statusline():
+  cls, func = get_cur_python_ctx()
+  if func and cls is None:
+    return f"def {func}"
+  elif cls and func is None:
+    return f"class {cls}"
+  elif cls and func:
+    return f"{cls}.{func}"
+  else:
+    return "<none>"
+EOF
+
+function! python_ctx#getcontext() abort "{{{
+  return py3eval('get_cur_python_ctx()')
+endfunction "}}}
+
+function! python_ctx#statusline() abort "{{{
+  if &filetype != 'python' && &filetype != 'vim'
+    return ''
+  endif
+  return py3eval('get_python_ctx_statusline()')
+endfunction "}}}
