@@ -22,7 +22,7 @@
 	path = .oh-my-zsh/custom/plugins/async
 	url = https://github.com/mafredri/zsh-async
 	branch = origin/master
-[submodule "zsh-vim-mode"]
-	path = .oh-my-zsh/custom/plugins/zsh-vim-mode
+[submodule ".oh-my-zsh/custom/plugins/zsh-vi-mode"]
+	path = .oh-my-zsh/custom/plugins/zsh-vi-mode
 	url = https://github.com/jeffreytse/zsh-vi-mode.git
 	branch = origin/master
