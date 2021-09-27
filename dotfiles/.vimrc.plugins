@@ -37,6 +37,9 @@ call plugwrap#begin()
   " stay small enough and this is mostly needed for python
   PlugWrap 'majutsushi/tagbar'
 
+  " Shows context of the current line (functions, loops, conditionals)
+  Plug 'wellle/context.vim'
+
   PlugWrap 'Lokaltog/vim-easymotion'
   PlugWrap 'michaeljsmith/vim-indent-object'
 
@@ -81,6 +84,7 @@ call plugwrap#begin()
                                           \ 'protobuf' ] }
   PlugWrap 'kana/vim-operator-user'
   PlugWrap 'thirtythreeforty/lessspace.vim'
+  PlugWrap 'bfrg/vim-cpp-modern'
 
   " Autocomplete
   " PlugWrap 'vim-scripts/AutoComplPop'

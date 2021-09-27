@@ -10,16 +10,16 @@ export EDITOR="$VISUAL"
 # It is nice, but seems to be slow sometimes
 ZSH_HIGHLIGHT_STYLES[path]='none'
 
-typeset -g USE_PURE_POWER='true'
-
 POWERLEVEL9K_VCS_BACKENDS=(git hg)
 
 if [[ "${USE_PURE_POWER:-false}" == "true" ]] ; then
     POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(virtualenv dir_writable dir vcs)
-  else
+    POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status)
+else
     #POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(context dir vcs vi_mode)
     POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(host virtualenv dir_writable dir vcs vi_mode)
-    POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status command_execution_time)
+    #POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status command_execution_time)
+    POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status)
     # POWERLEVEL9K_PROMPT_ON_NEWLINE=true
     POWERLEVEL9K_VI_INSERT_MODE_STRING="I"
     POWERLEVEL9K_VI_COMMAND_MODE_STRING="N"

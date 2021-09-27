@@ -28,10 +28,10 @@ compinit -u
 bindkey "^?" backward-delete-char
 
 # Better searching in command mode
-# bindkey -M vicmd '?' history-incremental-search-backward
-# bindkey -M vicmd '/' history-incremental-search-forward
-# bindkey -M viins '^k' history-incremental-pattern-search-backward
-# bindkey -M viins '^j' history-incremental-pattern-search-forward
+bindkey -M vicmd '?' history-incremental-search-backward
+bindkey -M vicmd '/' history-incremental-search-forward
+bindkey -M viins '^k' history-incremental-pattern-search-backward
+bindkey -M viins '^j' history-incremental-pattern-search-forward
 
 # # Beginning search with arrow keys
 # bindkey "^[OA" up-line-or-beginning-search
@@ -49,12 +49,14 @@ if [ -d "${HOME}/.local/bin" ] ; then
     PATH="${HOME}/.local/bin:${PATH}"
 fi
 
-source $HOME/.myenv
+typeset -g USE_PURE_POWER='true'
 
 if [[ "${USE_PURE_POWER:-false}" == "true" ]] ; then
     # this is cool, but needs some tweaking for my setup
     source ${HOME}/.zsh/.purepower
 fi
+
+source $HOME/.myenv
 
 # Make Vi mode transitions work (KEYTIMEOUT is in hundredths of a second)
 # A low keytimeout doesn't work with 'vv'
