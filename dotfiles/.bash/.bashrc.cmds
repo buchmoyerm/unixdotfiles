@@ -28,5 +28,5 @@ wttr()
 }
 
 to_date() {
-  tzwatch -d @$(($1 / 1000000)) +"%a %D %H:%M:%S %Z"}
+  tzwatch -d @$(($1 / 1000000)) +"%a %D %H:%M:%S %Z"
 }
