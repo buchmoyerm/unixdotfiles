@@ -60,7 +60,7 @@ source $HOME/.myenv
 
 # Make Vi mode transitions work (KEYTIMEOUT is in hundredths of a second)
 # A low keytimeout doesn't work with 'vv'
-export KEYTIMEOUT=1
+export KEYTIMEOUT=50
 
 source $HOME/.bash/.bashrc.colors
 source $HOME/.bash/.bashrc.aliases

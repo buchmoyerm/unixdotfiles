@@ -69,7 +69,8 @@ plugins=(
   git
   zsh-autosuggestions
   zsh-syntax-highlighting
-  zsh-vi-mode
+  # zsh-vi-mode
+  vi-mode
   async
   tmux
   fancy-ctrl-z
