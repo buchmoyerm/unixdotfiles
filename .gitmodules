@@ -4,7 +4,7 @@
 	branch = origin/master
 [submodule "oh-my-zsh"]
   path = dotfiles/.oh-my-zsh
-  url = https://github.com/robbyrussell/oh-my-zsh
+  url = https://github.com/ohmyzsh/ohmyzsh
 	branch = origin/master
 [submodule "zsh-autosuggestions"]
 	path = .oh-my-zsh/custom/plugins/zsh-autosuggestions
@@ -22,7 +22,10 @@
 	path = .oh-my-zsh/custom/plugins/async
 	url = https://github.com/mafredri/zsh-async
 	branch = origin/master
-[submodule ".oh-my-zsh/custom/plugins/zsh-vi-mode"]
+[submodule "zsh-vi-mode"]
 	path = .oh-my-zsh/custom/plugins/zsh-vi-mode
 	url = https://github.com/jeffreytse/zsh-vi-mode.git
 	branch = origin/master
+[submodule "fast-syntax-highlighting"]
+	path = .oh-my-zsh/custom/plugins/fast-syntax-highlighting
+	url = https://github.com/zdharma-continuum/fast-syntax-highlighting
