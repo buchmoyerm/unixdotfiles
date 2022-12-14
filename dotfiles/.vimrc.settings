@@ -161,10 +161,19 @@ hi IndentGuidesEven ctermbg=lightgrey
 " use mouse to select
 behave mswin
 
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Syntax settings
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
 " C syntax highlight settings
 let g:cpp_class_scope_highlight = 1
 let g:cpp_experimental_template_highlight = 1
 let g:cpp_concepts_highlight = 1
+
+augroup jsonnet " {
+  autocmd!
+  autocmd BufNewFile,BufRead *.libsonnet set filetype=jsonnet
+augroup END " }
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Keyboard settings/key bindings
@@ -201,6 +210,8 @@ tnoremap <silent> <M-j> <C-w>:TmuxNavigateDown<cr>
 tnoremap <silent> <M-k> <C-w>:TmuxNavigateUp<cr>
 tnoremap <silent> <M-l> <C-w>:TmuxNavigateRight<cr>
 tnoremap <silent> <M-\> <C-w>:TmuxNavigatePrevious<cr>
+
+tnoremap <leader> <C-[> <C-w>:TmuxNavigatePrevious<cr>
 
 " git gutter mappings
 let g:gitgutter_map_keys = 0
@@ -356,7 +367,7 @@ if has("unix")
 endif
 
 " don't automatically show diagnostics popup on hover
-" let g:ycm_auto_hover =
+let g:ycm_auto_hover = ""
 " toggle diagnostics popup
 nmap <leader>yd <plug>(YCMHover)
 
@@ -473,6 +484,11 @@ function! LightlineFugitive() abort
   return ''
 endfunction
 
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => signify settings
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+let g:signify_update_on_focusgained = 1
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => vimwiki settings
