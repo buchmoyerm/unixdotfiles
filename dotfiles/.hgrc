@@ -17,6 +17,9 @@ splice.args = -f $base $local $other $output -c 'SpliceInit'
 splice.premerge = keep
 splice.priority = 1
 
+[commands]
+status.relative=no
+
 [pager]
 pager = LESS='-FRX' less
 

@@ -8,7 +8,7 @@ export EDITOR="$VISUAL"
 
 # Stop zsh-syntax-highlighting from highlighting path names
 # It is nice, but seems to be slow sometimes
-ZSH_HIGHLIGHT_STYLES[path]='none'
+# ZSH_HIGHLIGHT_STYLES[path]='none'
 
 POWERLEVEL9K_VCS_BACKENDS=(git hg)
 

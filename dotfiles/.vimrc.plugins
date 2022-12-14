@@ -82,6 +82,7 @@ call plugwrap#begin()
                                           \ 'javascript',
                                           \ 'typescript',
                                           \ 'protobuf' ] }
+  PlugWrap 'google/vim-jsonnet', { 'for': ['jsonnet']}
   PlugWrap 'kana/vim-operator-user'
   PlugWrap 'thirtythreeforty/lessspace.vim'
   PlugWrap 'bfrg/vim-cpp-modern'
@@ -122,7 +123,8 @@ call plugwrap#begin()
   PlugWrap 'Shougo/unite.vim'
   PlugWrap 'Shougo/vimproc.vim', { 'do': 'make'}
 
-  PlugWrap 'tpope/vim-commentary'
+  "PlugWrap 'tpope/vim-commentary'
+  PlugWrap 'tomtom/tcomment_vim'
   PlugWrap 'haya14busa/vim-poweryank'
 
   " For building plugins
