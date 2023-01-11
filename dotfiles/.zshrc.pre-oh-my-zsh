@@ -49,12 +49,12 @@ if [ -d "${HOME}/.local/bin" ] ; then
     PATH="${HOME}/.local/bin:${PATH}"
 fi
 
-typeset -g USE_PURE_POWER='true'
-
-if [[ "${USE_PURE_POWER:-false}" == "true" ]] ; then
-    # this is cool, but needs some tweaking for my setup
-    source ${HOME}/.zsh/.purepower
-fi
+# typeset -g USE_PURE_POWER='false'
+#
+# if [[ "${USE_PURE_POWER:-false}" == "true" ]] ; then
+#     # this is cool, but needs some tweaking for my setup
+#     source ${HOME}/.zsh/.purepower
+# fi
 
 source $HOME/.myenv
 
