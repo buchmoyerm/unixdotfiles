@@ -282,6 +282,12 @@ let g:Cmd2_options = {
 
 set wildcharm=<Tab>
 
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => poweryank
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+map <Leader>y <Plug>(operator-poweryank-osc52)
+
 " Easy Motion settings
 " --------------------
 
