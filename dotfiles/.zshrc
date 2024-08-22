@@ -1,5 +1,5 @@
-if [[ -r "${HOME}/.local/.zshrc.preload" ]]; then
-  source "${HOME}/.local/.zshrc.preload"
+if [[ -r "${HOME}/.zshrc.preload" ]]; then
+  source "${HOME}/.zshrc.preload"
 fi
 
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.

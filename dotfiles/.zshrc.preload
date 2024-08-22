@@ -1,0 +1,6 @@
+# is_mosh is used by the local zshrc.preload
+source $HOME/.bash/.bashrc.mosh
+
+if [[ -r "${HOME}/.local/.zshrc.preload" ]]; then
+  source "${HOME}/.local/.zshrc.preload"
+fi
